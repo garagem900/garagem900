@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <title>GARAGEM 900</title>
+
+  <link rel="manifest" href="manifest.json">
+  <link rel="stylesheet" href="style.css">
+
+
+  <meta name="theme-color" content="#7b2cff">
+</head>
+<body>
+
+<header>
+  <h1>GARAGEM 900</h1>
+  <p>Rock Bar</p>
+</header>
+
+<nav>
+  <button onclick="mostrar('cardapio')">Cardápio</button>
+  <button onclick="mostrar('agenda')">Agenda</button>
+  <button onclick="mostrar('contato')">Contato</button>
+</nav>
+
+<main>
+  <section id="cardapio">
+    <h2>Cardápio</h2>
+    <h3>BEBIDAS</h3>
+
+<p><strong>Cervejas</strong></p>
+<p>Império lata</p>
+<p>Bohemia lata</p>
+<p>Skol lata</p>
+<p>Brahma lata</p>
+<p>Eisenbahn lata</p>
+<p>Heineken lata</p>
+<p>Chopp</p>
+
+<p><strong>Refrigerantes</strong></p>
+<p>Coca-Cola lata</p>
+<p>Guaraná lata</p>
+<p>Fanta lata</p>
+<p>Coca-Cola casulinha</p>
+<p>Água sem gás</p>
+<p>Água com gás</p>
+
+<p><strong>Batidas</strong></p>
+<p>Morango</p>
+<p>Kiwi</p>
+<p>Maracujá</p>
+<p>Limão</p>
+<p><em>Acréscimo de leite condensado</em></p>
+
+<hr>
+
+<h3>COMIDAS</h3>
+
+<p>Fritas</p>
+<p>Polenta</p>
+<p>Mandioquinha</p>
+<p>Isca de frango empanada</p>
+<p>Mini kibe</p>
+<p>Calabresa acebolada</p>
+
+<p><strong>Combos</strong></p>
+<p>PIT MOSH – Fritas + Calabresa</p>
+<p>STAGE DIVE – Fritas + Frango</p>
+<p>WALL OF DEATH – Fritas + Mini kibe</p>
+<p>COMBO GARAGEM – Fritas + Calabresa + Frango</p>
+
+  </section>
+
+  <section id="agenda" style="display:none;">
+    <h2>Agenda</h2>
+    <p>Shows e eventos</p>
+  </section>
+
+  <section id="contato" style="display:none;">
+    <h2>Contato</h2>
+    <p>WhatsApp e redes sociais</p>
+  </section>
+</main>
+
+<script>
+function mostrar(id) {
+  document.querySelectorAll("section").forEach(sec => {
+    sec.style.display = "none";
+  });
+  document.getElementById(id).style.display = "block";
+}
+</script>
+
+</body>
