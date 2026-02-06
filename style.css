@@ -88,4 +88,13 @@ header, nav {
   margin: 0 auto;
   text-align: center;
 }
+.topo {
+  text-align: center;
+  margin: 20px 0;
+}
+
+.topo img {
+  max-width: 180px;
+}
+
 
