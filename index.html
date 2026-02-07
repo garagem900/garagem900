@@ -3,95 +3,72 @@
 <head>
 <meta charset="UTF-8">
 <title>GARAGEM 900</title>
-
 <link rel="manifest" href="manifest.json">
+<link rel="stylesheet" href="style.css">
 
-<style>
-body{
-  margin:0;
-  background:#0b0b0b;
-  color:white;
-  font-family:Arial, Helvetica, sans-serif;
+<script>
+let carrinho = [];
+let total = 0;
+
+// ADICIONAR AO CARRINHO
+function addCarrinho(nome, preco){
+  carrinho.push({item: nome, valor: preco});
+  total += preco;
+  atualizarCarrinho();
+  mostrar('carrinho');
 }
 
-.topo{
-  text-align:center;
-  padding:10px;
+// MOSTRAR TELAS
+function mostrar(id){
+  document.querySelectorAll("section").forEach(sec=>{
+    sec.style.display="none";
+  });
+  document.getElementById(id).style.display="block";
 }
 
-.topo img{
-  width:140px;
+// ATUALIZAR TELA DO CARRINHO
+function atualizarCarrinho(){
+  let lista = document.getElementById("listaCarrinho");
+  lista.innerHTML = "";
+
+  carrinho.forEach((p, i)=>{
+    lista.innerHTML += `<li>${p.item} — R$ ${p.valor.toFixed(2)}</li>`;
+  });
+
+  document.getElementById("totalValor").innerText = total.toFixed(2);
 }
 
-header{
-  text-align:center;
-  padding:10px;
-  border-bottom:1px solid #7b2cff;
-}
+// ENVIAR PEDIDO (WHATSAPP + PLANILHA)
+function finalizarPedido(){
+  let mesa = document.getElementById("mesa").value;
+  if(!mesa){
+    alert("Digite o número da mesa!");
+    return;
+  }
 
-nav{
-  max-width:500px;
-  margin:10px auto;
-  text-align:center;
-}
+  let texto = `*Pedido Mesa ${mesa}*\n\n`;
+  carrinho.forEach(p=>{
+    texto += `• ${p.item} - R$ ${p.valor.toFixed(2)}\n`;
+  });
+  texto += `\nTOTAL: R$ ${total.toFixed(2)}`;
 
-nav button{
-  width:100%;
-  background:#7b2cff;
-  color:white;
-  border:none;
-  padding:12px;
-  margin:6px 0;
-  border-radius:10px;
-  font-size:16px;
-}
+  // Enviar para WhatsApp do caixa
+  let whatsapp = "https://wa.me/5517992585697?text=" + encodeURIComponent(texto);
+  window.open(whatsapp, "_blank");
 
-main{
-  max-width:500px;
-  margin:0 auto;
-  padding:15px;
-}
+  // Enviar para Planilha Google (depois você coloca sua URL aqui)
+  fetch("SUA_URL_DO_APPS_SCRIPT_AQUI", {
+    method: "POST",
+    body: JSON.stringify({
+      mesa: mesa,
+      pedido: texto,
+      total: total.toFixed(2)
+    })
+  });
 
-section{
-  background:#111;
-  padding:15px;
-  border-radius:10px;
-  margin-bottom:10px;
+  alert("Pedido enviado!");
 }
-
-.subbotao{
-  display:block;
-  width:100%;
-  background:#222;
-  color:white;
-  border:1px solid #7b2cff;
-  padding:12px;
-  margin:8px 0;
-  border-radius:8px;
-  font-size:16px;
-}
-
-.voltar{
-  background:#111;
-  color:white;
-  border:1px solid #7b2cff;
-  padding:6px 10px;
-  border-radius:6px;
-  margin-bottom:10px;
-}
-
-.pedir{
-  display:block;
-  background:#25D366;
-  color:black;
-  text-align:center;
-  padding:10px;
-  border-radius:8px;
-  text-decoration:none;
-  font-weight:bold;
-  margin-top:8px;
-}
-</style>
+</script>
 </head>
 
 <body>
@@ -108,18 +85,18 @@ section{
 <nav>
   <button onclick="mostrar('cardapio')">CARDÁPIO</button>
   <button onclick="mostrar('agenda')">AGENDA</button>
-  <button onclick="mostrar('pedidos')">PEDIDOS</button>
+  <button onclick="mostrar('carrinho')">🛒 CARRINHO</button>
 </nav>
 
 <main>
 
-<!-- TELA CARDÁPIO -->
+<!-- CARDÁPIO -->
 <section id="cardapio" style="display:block;">
   <h2>Cardápio</h2>
   <button class="subbotao" onclick="mostrar('bebidas')">🍻 Bebidas</button>
 </section>
 
-<!-- TELA BEBIDAS -->
+<!-- BEBIDAS -->
 <section id="bebidas" style="display:none;">
   <h2>Bebidas</h2>
   <button class="voltar" onclick="mostrar('cardapio')">⬅ Voltar</button>
@@ -134,19 +111,19 @@ section{
   <button class="voltar" onclick="mostrar('bebidas')">⬅ Voltar</button>
 
   <p>Império lata — R$ 5,00</p>
-  <a class="pedir" href="https://wa.me/55SEUNUMERO?text=Quero%20Imperio%20lata">Pedir</a>
+  <button class="subbotao" onclick="addCarrinho('Império lata',5)">+ Adicionar</button>
 
   <p>Bohemia lata — R$ 5,00</p>
-  <a class="pedir" href="https://wa.me/55SEUNUMERO?text=Quero%20Bohemia%20lata">Pedir</a>
+  <button class="subbotao" onclick="addCarrinho('Bohemia lata',5)">+ Adicionar</button>
 
   <p>Skol lata — R$ 5,00</p>
-  <a class="pedir" href="https://wa.me/55SEUNUMERO?text=Quero%20Skol%20lata">Pedir</a>
+  <button class="subbotao" onclick="addCarrinho('Skol lata',5)">+ Adicionar</button>
 
   <p>Eisenbahn lata — R$ 5,00</p>
-  <a class="pedir" href="https://wa.me/55SEUNUMERO?text=Quero%20Eisenbahn%20lata">Pedir</a>
+  <button class="subbotao" onclick="addCarrinho('Eisenbahn lata',5)">+ Adicionar</button>
 
   <p>Heineken lata — R$ 8,50</p>
-  <a class="pedir" href="https://wa.me/55SEUNUMERO?text=Quero%20Heineken%20lata">Pedir</a>
+  <button class="subbotao" onclick="addCarrinho('Heineken lata',8.5)">+ Adicionar</button>
 </section>
 
 <!-- REFRIGERANTES -->
@@ -155,48 +132,47 @@ section{
   <button class="voltar" onclick="mostrar('bebidas')">⬅ Voltar</button>
 
   <p>Coca-Cola lata — R$ 5,00</p>
-  <a class="pedir" href="https://wa.me/55SEUNUMERO?text=Quero%20Coca-Cola%20lata">Pedir</a>
+  <button class="subbotao" onclick="addCarrinho('Coca-Cola lata',5)">+ Adicionar</button>
 
   <p>Coca-Cola caçulinha — R$ 5,00</p>
-  <a class="pedir" href="https://wa.me/55SEUNUMERO?text=Quero%20Coca-Cola%20caculinha">Pedir</a>
+  <button class="subbotao" onclick="addCarrinho('Coca-Cola caçulinha',5)">+ Adicionar</button>
 
   <p>Guaraná lata — R$ 5,00</p>
-  <a class="pedir" href="https://wa.me/55SEUNUMERO?text=Quero%20Guarana%20lata">Pedir</a>
+  <button class="subbotao" onclick="addCarrinho('Guaraná lata',5)">+ Adicionar</button>
 
   <p>Fanta lata — R$ 5,00</p>
-  <a class="pedir" href="https://wa.me/55SEUNUMERO?text=Quero%20Fanta%20lata">Pedir</a>
+  <button class="subbotao" onclick="addCarrinho('Fanta lata',5)">+ Adicionar</button>
 
   <p>Água sem gás — R$ 3,00</p>
-  <a class="pedir" href="https://wa.me/55SEUNUMERO?text=Quero%20agua%20sem%20gas">Pedir</a>
+  <button class="subbotao" onclick="addCarrinho('Água sem gás',3)">+ Adicionar</button>
 
   <p>Água com gás — R$ 3,00</p>
-  <a class="pedir" href="https://wa.me/55SEUNUMERO?text=Quero%20agua%20com%20gas">Pedir</a>
+  <button class="subbotao" onclick="addCarrinho('Água com gás',3)">+ Adicionar</button>
 </section>
 
-<!-- AGENDA -->
+<!-- CARRINHO -->
+<section id="carrinho" style="display:none;">
+  <h2>🛒 Carrinho</h2>
+
+  <label>Mesa:</label><br>
+  <input type="number" id="mesa" placeholder="Ex: 7">
+
+  <ul id="listaCarrinho"></ul>
+
+  <h3>Total: R$ <span id="totalValor">0.00</span></h3>
+
+  <button class="subbotao" onclick="finalizarPedido()">FINALIZAR PEDIDO</button>
+</section>
+
 <section id="agenda" style="display:none;">
   <h2>Agenda</h2>
   <p>Shows e eventos em breve.</p>
 </section>
 
-<!-- PEDIDOS -->
-<section id="pedidos" style="display:none;">
-  <h2>Pedidos</h2>
-  <p>Escolha no cardápio e clique em “Pedir”.</p>
-</section>
-
 </main>
-
-<script>
-function mostrar(id){
-  document.querySelectorAll("section").forEach(sec=>{
-    sec.style.display="none";
-  });
-  document.getElementById(id).style.display="block";
-}
-</script>
-
 </body>
 </html>
+</html>
+
 
 
