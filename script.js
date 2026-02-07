@@ -5,12 +5,19 @@ document.addEventListener("DOMContentLoaded", () => {
   const cardapio = document.getElementById("cardapio");
   const agenda = document.getElementById("agenda");
   const carrinho = document.getElementById("carrinho");
+  const finalizar = document.getElementById("finalizar");
 
   // BOTÕES
   const btnCardapio = document.getElementById("btnCardapio");
   const btnAgenda = document.getElementById("btnAgenda");
   const btnCarrinho = document.getElementById("btnCarrinho");
   const btnFecharCarrinho = document.getElementById("btnFecharCarrinho");
+  const btnFinalizar = document.getElementById("btnFinalizar");
+
+  // CAMPOS FINALIZAR
+  const tipoPedido = document.getElementById("tipoPedido");
+  const campoMesa = document.getElementById("campoMesa");
+  const campoEndereco = document.getElementById("campoEndereco");
 
   // CARRINHO
   const listaCarrinho = document.getElementById("listaCarrinho");
@@ -48,6 +55,30 @@ document.addEventListener("DOMContentLoaded", () => {
     carrinho.classList.add("hidden");
   };
 
+  // ===== FINALIZAR =====
+  btnFinalizar.onclick = () => {
+    carrinho.classList.add("hidden");
+    finalizar.classList.remove("hidden");
+  };
+
+  window.voltarFinalizar = () => {
+    finalizar.classList.add("hidden");
+    carrinho.classList.remove("hidden");
+  };
+
+  tipoPedido.onchange = () => {
+    campoMesa.classList.add("hidden");
+    campoEndereco.classList.add("hidden");
+
+    if (tipoPedido.value === "Mesa") {
+      campoMesa.classList.remove("hidden");
+    }
+
+    if (tipoPedido.value === "Entrega") {
+      campoEndereco.classList.remove("hidden");
+    }
+  };
+
   // ===== CONTROLE DOS ITENS =====
   document.querySelectorAll(".item").forEach(item => {
 
@@ -76,7 +107,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
       const nome = item.dataset.nome;
       const preco = parseFloat(item.dataset.preco);
-
       const subtotal = preco * qtd;
 
       const li = document.createElement("li");
@@ -99,6 +129,7 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
 });
+
 
 
 
