@@ -192,6 +192,30 @@ footer span {
 .enviar:active {
   background: #2a0f4f;
 }
+/* TOAST / NOTIFICAÇÃO */
+.toast {
+  position: fixed;
+  bottom: 90px;
+  left: 50%;
+  transform: translateX(-50%) translateY(20px);
+  background: linear-gradient(135deg, #7b2cff, #a855f7);
+  color: #fff;
+  padding: 14px 22px;
+  border-radius: 14px;
+  font-size: 15px;
+  font-weight: bold;
+  box-shadow: 0 10px 25px rgba(123, 44, 255, 0.35);
+  opacity: 0;
+  transition: all 0.35s ease;
+  z-index: 9999;
+}
+
+/* VISÍVEL */
+.toast.show {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
+}
+
 
 
 
