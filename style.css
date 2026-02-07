@@ -3,7 +3,7 @@ body {
   color: #eee;
   font-family: Arial, Helvetica, sans-serif;
 
-  background-image: url("textura.jpg");
+  background-image: url("textura.png");
   background-size: cover;
   background-position: center;
   background-attachment: fixed;
@@ -110,4 +110,5 @@ footer span {
 .hidden {
   display: none;
 }
+
 
