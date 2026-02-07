@@ -2,124 +2,65 @@
 <html lang="pt-BR">
 <head>
   <meta charset="UTF-8">
-  <title>Garagem 900 Rock Bar</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
+  <title>Cardápio</title>
   <link rel="stylesheet" href="style.css">
 </head>
-
 <body>
 
-  <!-- TOPO -->
-  <div class="topo">
-    <img src="logo.png" alt="Garagem 900 Rock Bar">
+<header class="topo">
+  <img src="logo.png" class="logo">
+  <button id="btnCarrinho">🛒 Carrinho (<span id="cartCount">0</span>)</button>
+</header>
 
-    <!-- BOTÃO CARRINHO -->
-    <button class="btn-carrinho" onclick="mostrar('carrinho')">🛒</button>
+<main>
+
+  <h2>Cervejas</h2>
+
+  <div class="item" data-nome="Império Lata" data-preco="5">
+    <span>Império Lata - R$ 5,00</span>
+    <div class="controles">
+      <button class="menos">-</button>
+      <span class="qtd">1</span>
+      <button class="mais">+</button>
+      <button class="enviar">Enviar</button>
+    </div>
   </div>
 
-  <!-- MENU PRINCIPAL -->
-  <nav id="menuPrincipal">
-    <button onclick="mostrar('menuCardapio')">CARDÁPIO</button>
-    <button onclick="mostrar('agenda')">AGENDA</button>
-  </nav>
+  <div class="item" data-nome="Heineken Lata" data-preco="5">
+    <span>Heineken Lata - R$ 5,00</span>
+    <div class="controles">
+      <button class="menos">-</button>
+      <span class="qtd">1</span>
+      <button class="mais">+</button>
+      <button class="enviar">Enviar</button>
+    </div>
+  </div>
 
-  <main>
+  <h2>Refrigerantes</h2>
 
-    <!-- CARDÁPIO -->
-    <section id="menuCardapio" class="hidden">
-      <h2>Cardápio</h2>
-      <button class="subbotao" onclick="mostrar('bebidas')">Bebidas</button>
-    </section>
+  <div class="item" data-nome="Coca-Cola Lata" data-preco="4.5">
+    <span>Coca-Cola Lata - R$ 4,50</span>
+    <div class="controles">
+      <button class="menos">-</button>
+      <span class="qtd">1</span>
+      <button class="mais">+</button>
+      <button class="enviar">Enviar</button>
+    </div>
+  </div>
 
-    <!-- BEBIDAS -->
-    <section id="bebidas" class="hidden">
-      <h2>Bebidas</h2>
-      <button class="voltar" onclick="voltar()">⬅ Voltar</button>
+</main>
 
-      <h3>Cervejas</h3>
+<!-- CARRINHO -->
+<div id="carrinho" class="carrinho hidden">
+  <h2>Seu pedido</h2>
+  <ul id="listaCarrinho"></ul>
+  <strong>Total: R$ <span id="total">0.00</span></strong>
+  <br><br>
+  <button id="enviarPedido">Enviar Pedido</button>
+  <button id="fecharCarrinho">Fechar</button>
+</div>
 
-      <div class="item">
-        <span>Império lata — R$ 5,00</span>
-        <div class="controle">
-          <button onclick="alterarQtd('Imperio', -1)">−</button>
-          <span id="qtd-Imperio">0</span>
-          <button onclick="alterarQtd('Imperio', 1)">+</button>
-          <button onclick="enviarItem('Império lata', 5, 'Imperio')">ENVIAR</button>
-        </div>
-      </div>
-
-      <div class="item">
-        <span>Boa lata — R$ 5,00</span>
-        <div class="controle">
-          <button onclick="alterarQtd('Boa', -1)">−</button>
-          <span id="qtd-Boa">0</span>
-          <button onclick="alterarQtd('Boa', 1)">+</button>
-          <button onclick="enviarItem('Boa lata', 5, 'Boa')">ENVIAR</button>
-        </div>
-      </div>
-
-      <div class="item">
-        <span>Skol lata — R$ 5,00</span>
-        <div class="controle">
-          <button onclick="alterarQtd('Skol', -1)">−</button>
-          <span id="qtd-Skol">0</span>
-          <button onclick="alterarQtd('Skol', 1)">+</button>
-          <button onclick="enviarItem('Skol lata', 5, 'Skol')">ENVIAR</button>
-        </div>
-      </div>
-
-      <div class="item">
-        <span>Eisenbahn lata — R$ 5,00</span>
-        <div class="controle">
-          <button onclick="alterarQtd('Eisenbahn', -1)">−</button>
-          <span id="qtd-Eisenbahn">0</span>
-          <button onclick="alterarQtd('Eisenbahn', 1)">+</button>
-          <button onclick="enviarItem('Eisenbahn lata', 5, 'Eisenbahn')">ENVIAR</button>
-        </div>
-      </div>
-
-      <div class="item">
-        <span>Heineken lata — R$ 5,00</span>
-        <div class="controle">
-          <button onclick="alterarQtd('Heineken', -1)">−</button>
-          <span id="qtd-Heineken">0</span>
-          <button onclick="alterarQtd('Heineken', 1)">+</button>
-          <button onclick="enviarItem('Heineken lata', 5, 'Heineken')">ENVIAR</button>
-        </div>
-      </div>
-    </section>
-
-    <!-- CARRINHO -->
-    <section id="carrinho" class="hidden">
-      <h2>🛒 Carrinho</h2>
-      <button class="voltar" onclick="voltar()">⬅ Voltar</button>
-
-      <ul id="listaCarrinho"></ul>
-
-      <h3>Total: R$ <span id="total">0.00</span></h3>
-
-      <button class="subbotao" onclick="enviarPedido()">ENVIAR PEDIDO</button>
-    </section>
-
-    <!-- AGENDA -->
-    <section id="agenda" class="hidden">
-      <h2>Agenda</h2>
-      <button class="voltar" onclick="voltar()">⬅ Voltar</button>
-      <p>Shows e eventos em breve</p>
-    </section>
-
-  </main>
-
-  <footer>
-    <a href="https://wa.me/5517992585697" target="_blank">
-      WhatsApp: 17 99258-5697
-    </a>
-    <span>Av. dos Antunes, 900 – Bebedouro/SP</span>
-  </footer>
-
-  <script src="script.js"></script>
+<script src="script.js"></script>
 </body>
 </html>
-
 
