@@ -14,7 +14,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const btnFecharCarrinho = document.getElementById("btnFecharCarrinho");
   const btnFinalizar = document.getElementById("btnFinalizar");
 
-  // CAMPOS FINALIZAR
+  // FINALIZAR
   const tipoPedido = document.getElementById("tipoPedido");
   const campoMesa = document.getElementById("campoMesa");
   const campoEndereco = document.getElementById("campoEndereco");
@@ -28,7 +28,7 @@ document.addEventListener("DOMContentLoaded", () => {
   let total = 0;
   let itens = 0;
 
-  // ===== NAVEGAÇÃO =====
+  // ===== NAVEGAÇÃO HOME =====
   btnCardapio.onclick = () => {
     home.classList.add("hidden");
     cardapio.classList.remove("hidden");
@@ -39,14 +39,14 @@ document.addEventListener("DOMContentLoaded", () => {
     agenda.classList.remove("hidden");
   };
 
-  document.querySelectorAll(".voltar").forEach(btn => {
-    btn.onclick = () => {
-      cardapio.classList.add("hidden");
-      agenda.classList.add("hidden");
-      home.classList.remove("hidden");
-    };
-  });
+  // ===== VOLTAR DO CARDÁPIO / AGENDA =====
+  window.voltar = () => {
+    cardapio.classList.add("hidden");
+    agenda.classList.add("hidden");
+    home.classList.remove("hidden");
+  };
 
+  // ===== CARRINHO =====
   btnCarrinho.onclick = () => {
     carrinho.classList.remove("hidden");
   };
@@ -79,7 +79,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   };
 
-  // ===== CONTROLE DOS ITENS =====
+  // ===== ITENS =====
   document.querySelectorAll(".item").forEach(item => {
 
     let qtd = 0;
