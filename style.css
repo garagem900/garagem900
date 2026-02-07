@@ -143,6 +143,19 @@ footer a{
   pointer-events: auto; /* ✅ só o link clica */
 }
 
+footer{
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  background:#050505;
+  border-top:1px solid #6a1fff;
+  padding:10px;
+  text-align:center;
+  font-size:14px;
+
+  pointer-events: none; /* 🔴 ISSO AQUI RESOLVE */
+}
 
 
 footer span{
@@ -153,6 +166,7 @@ footer span{
 
   font-weight:bold;
 }
+
 
 
 
