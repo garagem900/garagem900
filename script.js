@@ -7,6 +7,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   const btnCardapio = document.getElementById("btnCardapio");
   const btnAgenda = document.getElementById("btnAgenda");
+  const btnCarrinho = document.getElementById("btnCarrinho");
 
   const listaCarrinho = document.getElementById("listaCarrinho");
   const totalSpan = document.getElementById("total");
@@ -21,6 +22,13 @@ document.addEventListener("DOMContentLoaded", () => {
   btnAgenda.addEventListener("click", () => {
     home.classList.add("hidden");
     agenda.classList.remove("hidden");
+  });
+
+  btnCarrinho.addEventListener("click", () => {
+    home.classList.add("hidden");
+    cardapio.classList.add("hidden");
+    agenda.classList.add("hidden");
+    carrinho.classList.remove("hidden");
   });
 
   window.voltar = function () {
@@ -51,19 +59,20 @@ document.addEventListener("DOMContentLoaded", () => {
       qtdSpan.textContent = qtd;
     });
 
-  enviar.addEventListener("click", () => {
-  const nome = item.dataset.nome;
-  const preco = parseFloat(item.dataset.preco);
-  const subtotal = preco * qtd;
+    enviar.addEventListener("click", () => {
+      const nome = item.dataset.nome;
+      const preco = parseFloat(item.dataset.preco);
+      const subtotal = preco * qtd;
 
-  const li = document.createElement("li");
-  li.textContent = `${qtd}x ${nome} - R$ ${subtotal.toFixed(2)}`;
-  listaCarrinho.appendChild(li);
+      const li = document.createElement("li");
+      li.textContent = `${qtd}x ${nome} - R$ ${subtotal.toFixed(2)}`;
+      listaCarrinho.appendChild(li);
 
-  total += subtotal;
-  totalSpan.textContent = total.toFixed(2);
+      total += subtotal;
+      totalSpan.textContent = total.toFixed(2);
 
-  // resetar quantidade
-  qtd = 1;
-  qtdSpan.textContent = 1;
+      // NÃO abre carrinho
+    });
+  });
+
 });
