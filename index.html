@@ -2,7 +2,7 @@
 <html lang="pt-br">
 <head>
   <meta charset="UTF-8">
-  <title>Garagem 900 - Cardápio</title>
+  <title>Garagem 900 Rock Bar</title>
   <link rel="stylesheet" href="style.css">
 </head>
 
@@ -10,88 +10,84 @@
 
   <!-- TOPO -->
   <div class="topo">
-    <img src="img/logo.png" class="logo">
-    <button class="btn-carrinho" onclick="mostrar('carrinho')">🛒</button>
+    <img src="logo.png" alt="Garagem 900" class="logo">
+
+    <button class="btn-carrinho" onclick="mostrar('carrinho')">
+      🛒
+    </button>
   </div>
 
-  <!-- MENU PRINCIPAL -->
-  <main id="home">
-    <button class="botao" onclick="mostrar('bebidas')">CARDÁPIO</button>
-    <button class="botao">AGENDA</button>
+  <!-- MENU -->
+  <nav id="menuPrincipal">
+    <button onclick="mostrar('menuCardapio')">CARDÁPIO</button>
+    <button onclick="mostrar('agenda')">AGENDA</button>
+  </nav>
+
+  <main>
+
+    <!-- CARDÁPIO -->
+    <section id="menuCardapio">
+      <button class="subbotao" onclick="mostrar('bebidas')">Bebidas</button>
+    </section>
+
+    <!-- BEBIDAS -->
+    <section id="bebidas" class="hidden">
+      <h2>Bebidas</h2>
+      <button class="voltar" onclick="voltar()">← Voltar</button>
+
+      <h3>Cervejas</h3>
+
+      <div class="item">
+        <span>Império lata – R$ 5,00</span>
+        <div class="controle">
+          <button onclick="alterar('imperio_lata', -1)">−</button>
+          <span id="qtd-imperio_lata">0</span>
+          <button onclick="alterar('imperio_lata', 1, 5)">+</button>
+        </div>
+      </div>
+
+      <div class="item">
+        <span>Boa lata – R$ 5,00</span>
+        <div class="controle">
+          <button onclick="alterar('boa_lata', -1)">−</button>
+          <span id="qtd-boa_lata">0</span>
+          <button onclick="alterar('boa_lata', 1, 5)">+</button>
+        </div>
+      </div>
+
+      <h3>Refrigerantes</h3>
+
+      <div class="item">
+        <span>Coca-Cola lata – R$ 4,50</span>
+        <div class="controle">
+          <button onclick="alterar('coca_lata', -1)">−</button>
+          <span id="qtd-coca_lata">0</span>
+          <button onclick="alterar('coca_lata', 1, 4.5)">+</button>
+        </div>
+      </div>
+
+    </section>
+
+    <!-- CARRINHO -->
+    <section id="carrinho" class="hidden">
+      <h2>Carrinho</h2>
+      <button class="voltar" onclick="voltar()">← Voltar</button>
+
+      <ul id="listaCarrinho"></ul>
+      <p>Total: R$ <span id="total">0.00</span></p>
+    </section>
+
+    <!-- AGENDA -->
+    <section id="agenda" class="hidden">
+      <h2>Agenda</h2>
+      <button class="voltar" onclick="voltar()">← Voltar</button>
+      <p>Shows em breve</p>
+    </section>
+
   </main>
-
-  <!-- BEBIDAS -->
-  <section id="bebidas" class="tela">
-    <h2>Bebidas</h2>
-    <button class="voltar" onclick="mostrar('home')">← Voltar</button>
-
-    <h3>Cervejas</h3>
-
-    <div class="item">
-      <div class="info">
-        <span class="nome">Império lata</span>
-        <span class="preco">R$ 5,00</span>
-      </div>
-      <div class="controle">
-        <button onclick="alterarQtd('Império lata', -1)">−</button>
-        <span id="qtd-Império lata">0</span>
-        <button onclick="alterarQtd('Império lata', 1, 5)">+</button>
-      </div>
-    </div>
-
-    <div class="item">
-      <div class="info">
-        <span class="nome">Boa lata</span>
-        <span class="preco">R$ 5,00</span>
-      </div>
-      <div class="controle">
-        <button onclick="alterarQtd('Boa lata', -1)">−</button>
-        <span id="qtd-Boa lata">0</span>
-        <button onclick="alterarQtd('Boa lata', 1, 5)">+</button>
-      </div>
-    </div>
-
-    <h3>Refrigerantes</h3>
-
-    <div class="item">
-      <div class="info">
-        <span class="nome">Coca-Cola lata</span>
-        <span class="preco">R$ 4,50</span>
-      </div>
-      <div class="controle">
-        <button onclick="alterarQtd('Coca-Cola lata', -1)">−</button>
-        <span id="qtd-Coca-Cola lata">0</span>
-        <button onclick="alterarQtd('Coca-Cola lata', 1, 4.5)">+</button>
-      </div>
-    </div>
-
-    <div class="item">
-      <div class="info">
-        <span class="nome">Água sem gás</span>
-        <span class="preco">R$ 3,00</span>
-      </div>
-      <div class="controle">
-        <button onclick="alterarQtd('Água sem gás', -1)">−</button>
-        <span id="qtd-Água sem gás">0</span>
-        <button onclick="alterarQtd('Água sem gás', 1, 3)">+</button>
-      </div>
-    </div>
-
-  </section>
-
-  <!-- CARRINHO -->
-  <section id="carrinho" class="tela">
-    <h2>🛒 Carrinho</h2>
-    <button class="voltar" onclick="mostrar('bebidas')">← Voltar</button>
-
-    <ul id="listaCarrinho"></ul>
-
-    <p class="total">Total: R$ <span id="total">0.00</span></p>
-
-    <button class="botao">ENVIAR PEDIDO</button>
-  </section>
 
   <script src="script.js"></script>
 </body>
 </html>
+
 
