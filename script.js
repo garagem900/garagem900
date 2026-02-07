@@ -11,20 +11,21 @@ document.addEventListener("DOMContentLoaded", () => {
 
   const listaCarrinho = document.getElementById("listaCarrinho");
   const totalSpan = document.getElementById("total");
+  const toast = document.getElementById("toast");
 
   let total = 0;
 
-  btnCardapio.addEventListener("click", () => {
+  btnCardapio?.addEventListener("click", () => {
     home.classList.add("hidden");
     cardapio.classList.remove("hidden");
   });
 
-  btnAgenda.addEventListener("click", () => {
+  btnAgenda?.addEventListener("click", () => {
     home.classList.add("hidden");
     agenda.classList.remove("hidden");
   });
 
-  btnCarrinho.addEventListener("click", () => {
+  btnCarrinho?.addEventListener("click", () => {
     home.classList.add("hidden");
     cardapio.classList.add("hidden");
     agenda.classList.add("hidden");
@@ -37,6 +38,15 @@ document.addEventListener("DOMContentLoaded", () => {
     carrinho.classList.add("hidden");
     home.classList.remove("hidden");
   };
+
+  function mostrarToast() {
+    toast.classList.remove("hidden");
+    toast.classList.add("show");
+
+    setTimeout(() => {
+      toast.classList.remove("show");
+    }, 1800);
+  }
 
   document.querySelectorAll(".item").forEach(item => {
 
@@ -71,8 +81,12 @@ document.addEventListener("DOMContentLoaded", () => {
       total += subtotal;
       totalSpan.textContent = total.toFixed(2);
 
-      // NÃO abre carrinho
+      mostrarToast();
+
+      qtd = 1;
+      qtdSpan.textContent = 1;
     });
   });
 
 });
+
