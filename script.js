@@ -1,27 +1,30 @@
 let carrinho = {};
-let total = 0;
+let historico = [];
 
 function mostrar(id) {
-  document.querySelectorAll("main, section").forEach(el => {
-    el.style.display = "none";
+  document.querySelectorAll("section").forEach(s => {
+    s.classList.add("hidden");
   });
 
-  document.getElementById(id).style.display = "block";
+  document.getElementById(id).classList.remove("hidden");
 }
 
-function alterarQtd(nome, delta, preco = 0) {
-  if (!carrinho[nome]) {
-    carrinho[nome] = { qtd: 0, preco };
+function voltar() {
+  mostrar("menuCardapio");
+}
+
+function alterar(item, qtd, preco = 0) {
+  if (!carrinho[item]) {
+    carrinho[item] = { qtd: 0, preco };
   }
 
-  carrinho[nome].qtd += delta;
+  carrinho[item].qtd += qtd;
 
-  if (carrinho[nome].qtd <= 0) {
-    delete carrinho[nome];
-    document.getElementById(`qtd-${nome}`).textContent = 0;
-  } else {
-    document.getElementById(`qtd-${nome}`).textContent = carrinho[nome].qtd;
+  if (carrinho[item].qtd <= 0) {
+    carrinho[item].qtd = 0;
   }
+
+  document.getElementById("qtd-" + item).innerText = carrinho[item].qtd;
 
   atualizarCarrinho();
 }
@@ -29,19 +32,19 @@ function alterarQtd(nome, delta, preco = 0) {
 function atualizarCarrinho() {
   const lista = document.getElementById("listaCarrinho");
   lista.innerHTML = "";
-  total = 0;
+
+  let total = 0;
 
   for (let item in carrinho) {
-    const subtotal = carrinho[item].qtd * carrinho[item].preco;
-    total += subtotal;
+    if (carrinho[item].qtd > 0) {
+      const subtotal = carrinho[item].qtd * carrinho[item].preco;
+      total += subtotal;
 
-    const li = document.createElement("li");
-    li.textContent = `${item} x${carrinho[item].qtd} — R$ ${subtotal.toFixed(2)}`;
-    lista.appendChild(li);
+      const li = document.createElement("li");
+      li.textContent = `${item.replace("_", " ")} x${carrinho[item].qtd} — R$ ${subtotal.toFixed(2)}`;
+      lista.appendChild(li);
+    }
   }
 
-  document.getElementById("total").textContent = total.toFixed(2);
+  document.getElementById("total").innerText = total.toFixed(2);
 }
-
-// inicia na home
-mostrar("home");
