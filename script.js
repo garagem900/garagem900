@@ -12,6 +12,8 @@ document.addEventListener("DOMContentLoaded", () => {
   const listaCarrinho = document.getElementById("listaCarrinho");
   const totalSpan = document.getElementById("total");
   const toast = document.getElementById("toast");
+  const btnEnviarPedido = document.getElementById("btnEnviarPedido");
+
 
   let total = 0;
 
