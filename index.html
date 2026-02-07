@@ -1,99 +1,111 @@
-document.addEventListener("DOMContentLoaded", () => {
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Garagem 900 Rock Bar</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="style.css">
+</head>
 
-  const home = document.getElementById("home");
-  const cardapio = document.getElementById("cardapio");
-  const agenda = document.getElementById("agenda");
-  const carrinho = document.getElementById("carrinho");
+<body>
 
-  const btnCardapio = document.getElementById("btnCardapio");
-  const btnAgenda = document.getElementById("btnAgenda");
-  const btnCarrinho = document.getElementById("btnCarrinho");
-  const btnFecharCarrinho = document.getElementById("btnFecharCarrinho");
+<header class="topo">
+  <img src="logo.png" alt="Garagem 900 Rock Bar">
 
-  const listaCarrinho = document.getElementById("listaCarrinho");
-  const totalSpan = document.getElementById("total");
-  const cartCount = document.getElementById("cartCount");
-  const toast = document.getElementById("toast");
+  <button id="btnCarrinho" class="btn-carrinho">
+    🛒 <span id="cartCount">0</span>
+  </button>
+</header>
 
-  let total = 0;
-  let itens = 0;
+<!-- HOME -->
+<nav id="home">
+  <button id="btnFazerPedido">🍔 FAZER PEDIDO</button>
+  <button id="btnAgenda">🎸 AGENDA</button>
+</nav>
 
-  btnCardapio.onclick = () => {
-    home.classList.add("hidden");
-    agenda.classList.add("hidden");
-    cardapio.classList.remove("hidden");
-  };
+<main>
 
-  btnAgenda.onclick = () => {
-    home.classList.add("hidden");
-    cardapio.classList.add("hidden");
-    agenda.classList.remove("hidden");
-  };
+<!-- CARDÁPIO -->
+<section id="cardapio" class="hidden">
+  <h2>🍺 Cervejas</h2>
 
-  document.querySelectorAll(".voltar").forEach(btn => {
-    btn.onclick = () => {
-      cardapio.classList.add("hidden");
-      agenda.classList.add("hidden");
-      home.classList.remove("hidden");
-    };
-  });
+  <div class="item" data-nome="Império Lata" data-preco="5">
+    <span>Império Lata</span>
+    <div class="controle">
+      <button class="menos">-</button>
+      <span class="qtd">0</span>
+      <button class="mais">+</button>
+    </div>
+  </div>
 
-  btnCarrinho.onclick = () => {
-    carrinho.classList.remove("hidden");
-  };
+  <div class="item" data-nome="Heineken Lata" data-preco="7">
+    <span>Heineken Lata</span>
+    <div class="controle">
+      <button class="menos">-</button>
+      <span class="qtd">0</span>
+      <button class="mais">+</button>
+    </div>
+  </div>
 
-  btnFecharCarrinho.onclick = () => {
-    carrinho.classList.add("hidden");
-  };
+  <h2>🍟 Porções</h2>
 
-  document.querySelectorAll(".item").forEach(item => {
-    let qtd = 0;
-    const qtdSpan = item.querySelector(".qtd");
+  <div class="item" data-nome="Combo Mosh Pit" data-preco="35">
+    <span>Combo Mosh Pit</span>
+    <div class="controle">
+      <button class="menos">-</button>
+      <span class="qtd">0</span>
+      <button class="mais">+</button>
+    </div>
+  </div>
 
-    item.querySelector(".mais").onclick = () => {
-      qtd++;
-      qtdSpan.textContent = qtd;
-    };
+  <button class="voltar">⬅ Voltar</button>
+</section>
 
-    item.querySelector(".menos").onclick = () => {
-      if (qtd > 0) {
-        qtd--;
-        qtdSpan.textContent = qtd;
-      }
-    };
+<!-- AGENDA -->
+<section id="agenda" class="hidden">
+  <h2>🎸 Agenda</h2>
+  <p>Sexta – Banda Surra</p>
+  <p>Sábado – Tributo Ratos de Porão</p>
+  <button class="voltar">⬅ Voltar</button>
+</section>
 
-    item.querySelector(".enviar").onclick = () => {
-      if (qtd === 0) return;
+<!-- IDENTIFICAÇÃO -->
+<section id="identificacao" class="hidden">
+  <h2>📝 Finalizar Pedido</h2>
 
-      const nome = item.dataset.nome;
-      const preco = parseFloat(item.dataset.preco);
-      const subtotal = preco * qtd;
+  <input id="nome" placeholder="Seu nome">
+  <input id="celular" placeholder="WhatsApp">
 
-      const li = document.createElement("li");
-      li.textContent = `${qtd}x ${nome} — R$ ${subtotal.toFixed(2)}`;
-      listaCarrinho.appendChild(li);
+  <select id="tipoPedido">
+    <option value="bar">Estou no bar</option>
+    <option value="delivery">Delivery</option>
+  </select>
 
-      total += subtotal;
-      itens += qtd;
+  <input id="mesa" placeholder="Mesa (opcional)">
+  <textarea id="obs" placeholder="Observações do pedido"></textarea>
 
-      totalSpan.textContent = total.toFixed(2);
-      cartCount.textContent = itens;
+  <button id="btnEnviarPedido">📲 ENVIAR PEDIDO</button>
+</section>
 
-      toast.classList.remove("hidden");
-      setTimeout(() => toast.classList.add("hidden"), 1200);
+</main>
 
-      qtd = 0;
-      qtdSpan.textContent = 0;
-    };
-  });
+<!-- CARRINHO -->
+<div id="carrinho" class="carrinho hidden">
+  <h2>🛒 Seu Pedido</h2>
+  <ul id="listaCarrinho"></ul>
+  <strong>Total: R$ <span id="total">0.00</span></strong>
+  <br><br>
+  <button id="btnFinalizar">Finalizar Pedido</button>
+  <button id="btnFecharCarrinho">Fechar</button>
+</div>
 
-});
+<footer>
+  <span>Garagem 900 Rock Bar</span>
+</footer>
 
-
-
-
-
-
+<script src="script.js"></script>
+</body>
+</html>
 
 
 
