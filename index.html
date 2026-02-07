@@ -2,17 +2,32 @@
 <html lang="pt-BR">
 <head>
   <meta charset="UTF-8">
-  <title>Cardápio</title>
+  <title>Garagem 900 - Cardápio</title>
   <link rel="stylesheet" href="style.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
+
 <body>
 
+<!-- TOPO FIXO -->
 <header class="topo">
-  <img src="logo.png" class="logo">
-  <button id="btnCarrinho">🛒 Carrinho (<span id="cartCount">0</span>)</button>
+  <img src="logo.png" class="logo" alt="Garagem 900">
+
+  <button id="btnCarrinho">
+    🛒 Carrinho (<span id="cartCount">0</span>)
+  </button>
 </header>
 
-<main>
+<!-- HOME -->
+<section id="home" class="tela">
+  <button id="btnCardapio" class="btnGrande">CARDÁPIO</button>
+  <button id="btnAgenda" class="btnGrande">AGENDA</button>
+</section>
+
+<!-- CARDÁPIO -->
+<section id="cardapio" class="tela hidden">
+
+  <button id="voltarHome" class="btnVoltar">← Voltar</button>
 
   <h2>Cervejas</h2>
 
@@ -48,14 +63,25 @@
     </div>
   </div>
 
-</main>
+</section>
+
+<!-- AGENDA -->
+<section id="agenda" class="tela hidden">
+  <button id="voltarHome2" class="btnVoltar">← Voltar</button>
+  <h2>Agenda de Shows</h2>
+  <p>Em breve 🔥</p>
+</section>
 
 <!-- CARRINHO -->
 <div id="carrinho" class="carrinho hidden">
   <h2>Seu pedido</h2>
+
   <ul id="listaCarrinho"></ul>
+
   <strong>Total: R$ <span id="total">0.00</span></strong>
+
   <br><br>
+
   <button id="enviarPedido">Enviar Pedido</button>
   <button id="fecharCarrinho">Fechar</button>
 </div>
