@@ -1,65 +1,64 @@
-document.addEventListener("DOMContentLoaded", () => {
+const home = document.getElementById("home");
+const cardapio = document.getElementById("cardapio");
+const agenda = document.getElementById("agenda");
+const carrinho = document.getElementById("carrinho");
 
-  let carrinho = [];
+const listaCarrinho = document.getElementById("listaCarrinho");
+const totalSpan = document.getElementById("total");
 
-  document.querySelectorAll(".item").forEach(item => {
-    const btnMais = item.querySelector(".mais");
-    const btnMenos = item.querySelector(".menos");
-    const qtd = item.querySelector(".qtd");
-    const btnEnviar = item.querySelector(".enviar");
+let total = 0;
 
-    if (!btnMais || !btnMenos || !qtd || !btnEnviar) return;
+document.getElementById("btnCardapio").onclick = () => {
+  home.classList.add("hidden");
+  cardapio.classList.remove("hidden");
+};
 
-    btnMais.onclick = () => {
-      qtd.innerText = parseInt(qtd.innerText) + 1;
-    };
+document.getElementById("btnAgenda").onclick = () => {
+  home.classList.add("hidden");
+  agenda.classList.remove("hidden");
+};
 
-    btnMenos.onclick = () => {
-      let valor = parseInt(qtd.innerText);
-      if (valor > 1) qtd.innerText = valor - 1;
-    };
+function voltar() {
+  cardapio.classList.add("hidden");
+  agenda.classList.add("hidden");
+  carrinho.classList.add("hidden");
+  home.classList.remove("hidden");
+}
 
-    btnEnviar.onclick = () => {
-      carrinho.push({
-        nome: item.dataset.nome,
-        preco: parseFloat(item.dataset.preco),
-        quantidade: parseInt(qtd.innerText)
-      });
+document.querySelectorAll(".item").forEach(item => {
+  const menos = item.querySelector(".menos");
+  const mais = item.querySelector(".mais");
+  const qtdSpan = item.querySelector(".qtd");
+  const enviar = item.querySelector(".enviar");
 
-      qtd.innerText = 1;
-      atualizarCarrinho();
-    };
-  });
+  let qtd = 1;
 
-  function atualizarCarrinho() {
-    const lista = document.getElementById("listaCarrinho");
-    const total = document.getElementById("total");
-    const contador = document.getElementById("cartCount");
+  menos.onclick = () => {
+    if (qtd > 1) {
+      qtd--;
+      qtdSpan.textContent = qtd;
+    }
+  };
 
-    if (!lista || !total || !contador) return;
+  mais.onclick = () => {
+    qtd++;
+    qtdSpan.textContent = qtd;
+  };
 
-    lista.innerHTML = "";
-    let soma = 0;
+  enviar.onclick = () => {
+    const nome = item.dataset.nome;
+    const preco = parseFloat(item.dataset.preco);
+    const subtotal = preco * qtd;
 
-    carrinho.forEach(i => {
-      soma += i.preco * i.quantidade;
-      const li = document.createElement("li");
-      li.textContent = `${i.quantidade}x ${i.nome}`;
-      lista.appendChild(li);
-    });
+    const li = document.createElement("li");
+    li.textContent = `${qtd}x ${nome} - R$ ${subtotal.toFixed(2)}`;
+    listaCarrinho.appendChild(li);
 
-    total.textContent = soma.toFixed(2);
-    contador.textContent = carrinho.length;
-  }
+    total += subtotal;
+    totalSpan.textContent = total.toFixed(2);
 
-  // carrinho
-  const abrir = document.getElementById("btnCarrinho");
-  const fechar = document.getElementById("fecharCarrinho");
-
-  if (abrir) abrir.onclick = () =>
-    document.getElementById("carrinho").classList.remove("hidden");
-
-  if (fechar) fechar.onclick = () =>
-    document.getElementById("carrinho").classList.add("hidden");
-
+    cardapio.classList.add("hidden");
+    carrinho.classList.remove("hidden");
+  };
 });
+;
