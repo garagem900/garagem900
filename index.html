@@ -1,148 +1,97 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="pt-br">
 <head>
   <meta charset="UTF-8">
-  <title>Garagem 900 Rock Bar</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Garagem 900 - Cardápio</title>
   <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 
-<!-- TOPO -->
-<div class="topo">
-  <img src="logo.png" alt="Garagem 900">
-  <button class="btn-carrinho" onclick="mostrar('carrinho')">🛒</button>
-</div>
+  <!-- TOPO -->
+  <div class="topo">
+    <img src="img/logo.png" class="logo">
+    <button class="btn-carrinho" onclick="mostrar('carrinho')">🛒</button>
+  </div>
 
-<!-- MENU PRINCIPAL -->
-<nav id="menuPrincipal">
-  <button onclick="mostrar('menuCardapio')">CARDÁPIO</button>
-  <button onclick="mostrar('agenda')">AGENDA</button>
-</nav>
+  <!-- MENU PRINCIPAL -->
+  <main id="home">
+    <button class="botao" onclick="mostrar('bebidas')">CARDÁPIO</button>
+    <button class="botao">AGENDA</button>
+  </main>
 
-<main>
+  <!-- BEBIDAS -->
+  <section id="bebidas" class="tela">
+    <h2>Bebidas</h2>
+    <button class="voltar" onclick="mostrar('home')">← Voltar</button>
 
-<!-- CARDÁPIO -->
-<section id="menuCardapio" class="hidden">
-  <h2>Cardápio</h2>
-  <button class="subbotao" onclick="mostrar('bebidas')">Bebidas</button>
-</section>
+    <h3>Cervejas</h3>
 
-<!-- BEBIDAS -->
-<section id="bebidas" class="hidden">
-  <h2>Bebidas</h2>
-  <button class="voltar" onclick="voltar()">⬅ Voltar</button>
-
-  <h3>Cervejas</h3>
-
-  <div class="item">
-    <span>Império lata</span>
-    <span>R$ 5,00</span>
-    <div class="qtd">
-      <button onclick="addCarrinho('Império lata',5)">+</button>
+    <div class="item">
+      <div class="info">
+        <span class="nome">Império lata</span>
+        <span class="preco">R$ 5,00</span>
+      </div>
+      <div class="controle">
+        <button onclick="alterarQtd('Império lata', -1)">−</button>
+        <span id="qtd-Império lata">0</span>
+        <button onclick="alterarQtd('Império lata', 1, 5)">+</button>
+      </div>
     </div>
-  </div>
 
-  <div class="item">
-    <span>Boa lata</span>
-    <span>R$ 5,00</span>
-    <div class="qtd">
-      <button onclick="addCarrinho('Boa lata',5)">+</button>
+    <div class="item">
+      <div class="info">
+        <span class="nome">Boa lata</span>
+        <span class="preco">R$ 5,00</span>
+      </div>
+      <div class="controle">
+        <button onclick="alterarQtd('Boa lata', -1)">−</button>
+        <span id="qtd-Boa lata">0</span>
+        <button onclick="alterarQtd('Boa lata', 1, 5)">+</button>
+      </div>
     </div>
-  </div>
 
-  <div class="item">
-    <span>Skol lata</span>
-    <span>R$ 5,00</span>
-    <div class="qtd">
-      <button onclick="addCarrinho('Skol lata',5)">+</button>
+    <h3>Refrigerantes</h3>
+
+    <div class="item">
+      <div class="info">
+        <span class="nome">Coca-Cola lata</span>
+        <span class="preco">R$ 4,50</span>
+      </div>
+      <div class="controle">
+        <button onclick="alterarQtd('Coca-Cola lata', -1)">−</button>
+        <span id="qtd-Coca-Cola lata">0</span>
+        <button onclick="alterarQtd('Coca-Cola lata', 1, 4.5)">+</button>
+      </div>
     </div>
-  </div>
 
-  <div class="item">
-    <span>Eisenbahn lata</span>
-    <span>R$ 5,00</span>
-    <div class="qtd">
-      <button onclick="addCarrinho('Eisenbahn lata',5)">+</button>
+    <div class="item">
+      <div class="info">
+        <span class="nome">Água sem gás</span>
+        <span class="preco">R$ 3,00</span>
+      </div>
+      <div class="controle">
+        <button onclick="alterarQtd('Água sem gás', -1)">−</button>
+        <span id="qtd-Água sem gás">0</span>
+        <button onclick="alterarQtd('Água sem gás', 1, 3)">+</button>
+      </div>
     </div>
-  </div>
 
-  <div class="item">
-    <span>Heineken lata</span>
-    <span>R$ 5,00</span>
-    <div class="qtd">
-      <button onclick="addCarrinho('Heineken lata',5)">+</button>
-    </div>
-  </div>
+  </section>
 
-  <h3>Refrigerantes / Água</h3>
+  <!-- CARRINHO -->
+  <section id="carrinho" class="tela">
+    <h2>🛒 Carrinho</h2>
+    <button class="voltar" onclick="mostrar('bebidas')">← Voltar</button>
 
-  <div class="item">
-    <span>Coca-Cola lata</span>
-    <span>R$ 4,50</span>
-    <button onclick="addCarrinho('Coca-Cola lata',4.5)">+</button>
-  </div>
+    <ul id="listaCarrinho"></ul>
 
-  <div class="item">
-    <span>Coca-Cola caçulinha</span>
-    <span>R$ 3,50</span>
-    <button onclick="addCarrinho('Coca-Cola caçulinha',3.5)">+</button>
-  </div>
+    <p class="total">Total: R$ <span id="total">0.00</span></p>
 
-  <div class="item">
-    <span>Guaraná lata</span>
-    <span>R$ 4,50</span>
-    <button onclick="addCarrinho('Guaraná lata',4.5)">+</button>
-  </div>
+    <button class="botao">ENVIAR PEDIDO</button>
+  </section>
 
-  <div class="item">
-    <span>Fanta lata</span>
-    <span>R$ 4,50</span>
-    <button onclick="addCarrinho('Fanta lata',4.5)">+</button>
-  </div>
-
-  <div class="item">
-    <span>Água sem gás</span>
-    <span>R$ 3,00</span>
-    <button onclick="addCarrinho('Água sem gás',3)">+</button>
-  </div>
-
-  <div class="item">
-    <span>Água com gás</span>
-    <span>R$ 3,00</span>
-    <button onclick="addCarrinho('Água com gás',3)">+</button>
-  </div>
-
-</section>
-
-<!-- CARRINHO -->
-<section id="carrinho" class="hidden">
-  <h2>Carrinho</h2>
-  <button class="voltar" onclick="voltar()">⬅ Voltar</button>
-
-  <ul id="listaCarrinho"></ul>
-
-  <h3>Total: R$ <span id="total">0.00</span></h3>
-
-  <button class="subbotao" onclick="enviarPedido()">Enviar Pedido</button>
-</section>
-
-<!-- AGENDA -->
-<section id="agenda" class="hidden">
-  <h2>Agenda</h2>
-  <button class="voltar" onclick="voltar()">⬅ Voltar</button>
-  <p>Shows e eventos em breve</p>
-</section>
-
-</main>
-
-<footer>
-  <a href="https://wa.me/5517992585697" target="_blank">WhatsApp: 17 99258-5697</a>
-  <span>Av. dos Antunes, 900 – Bebedouro/SP</span>
-</footer>
-
-<script src="script.js"></script>
+  <script src="script.js"></script>
 </body>
 </html>
 
