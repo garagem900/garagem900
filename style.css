@@ -228,6 +228,18 @@ footer span {
 #carrinho {
   display: none;
 }
+/* GARANTE QUE O TOPO FIQUE CLICÁVEL */
+.topo {
+  position: relative;
+  z-index: 1000;
+}
+
+/* GARANTE QUE O BOTÃO DO CARRINHO RECEBA CLIQUE */
+.btn-carrinho {
+  z-index: 1100;
+  cursor: pointer;
+}
+
 
 
 
