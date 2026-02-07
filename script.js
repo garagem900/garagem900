@@ -14,6 +14,8 @@ document.addEventListener("DOMContentLoaded", () => {
   const cartCount = document.getElementById("cartCount");
   const toast = document.getElementById("toast");
 
+  const btnEnviarPedido = document.getElementById("btnEnviarPedido");
+
   let total = 0;
   let itens = 0;
 
@@ -68,7 +70,7 @@ document.addEventListener("DOMContentLoaded", () => {
     };
 
     btnEnviar.onclick = () => {
-      if (qtd === 0) return; // impede enviar com zero
+      if (qtd === 0) return;
 
       const nome = item.dataset.nome;
       const preco = parseFloat(item.dataset.preco);
@@ -84,18 +86,32 @@ document.addEventListener("DOMContentLoaded", () => {
       totalSpan.textContent = total.toFixed(2);
       cartCount.textContent = itens;
 
-      // reseta quantidade após enviar
       qtd = 0;
       qtdSpan.textContent = qtd;
 
-      // toast
       toast.classList.remove("hidden");
       setTimeout(() => toast.classList.add("hidden"), 1500);
     };
   });
 
-});
+  /* ===== ENVIAR PARA WHATSAPP ===== */
 
+  btnEnviarPedido.onclick = () => {
+    if (itens === 0) return;
+
+    let mensagem = "🛒 Pedido - Garagem 900\n\n";
+
+    document.querySelectorAll("#listaCarrinho li").forEach(li => {
+      mensagem += "• " + li.textContent + "\n";
+    });
+
+    mensagem += "\n💰 Total: R$ " + total.toFixed(2);
+
+    const telefone = "5517992585697";
+    const url = "https://wa.me/" + telefone + "?text=" + encodeURIComponent(mensagem);
+
+    window.open(url, "_blank");
+  };
 
 });
 
