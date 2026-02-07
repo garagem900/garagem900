@@ -17,6 +17,8 @@ document.addEventListener("DOMContentLoaded", () => {
   let total = 0;
   let itens = 0;
 
+  /* ===== NAVEGAÇÃO ===== */
+
   btnCardapio.onclick = () => {
     home.classList.add("hidden");
     cardapio.classList.remove("hidden");
@@ -41,24 +43,33 @@ document.addEventListener("DOMContentLoaded", () => {
     carrinho.classList.add("hidden");
   };
 
+  /* ===== ITENS DO CARDÁPIO ===== */
+
   document.querySelectorAll(".item").forEach(item => {
 
-    let qtd = 1;
+    let qtd = 0;
     const qtdSpan = item.querySelector(".qtd");
+    qtdSpan.textContent = qtd;
 
-    item.querySelector(".mais").onclick = () => {
+    const btnMais = item.querySelector(".mais");
+    const btnMenos = item.querySelector(".menos");
+    const btnEnviar = item.querySelector(".enviar");
+
+    btnMais.onclick = () => {
       qtd++;
       qtdSpan.textContent = qtd;
     };
 
-    item.querySelector(".menos").onclick = () => {
-      if (qtd > 1) {
+    btnMenos.onclick = () => {
+      if (qtd > 0) {
         qtd--;
         qtdSpan.textContent = qtd;
       }
     };
 
-    item.querySelector(".enviar").onclick = () => {
+    btnEnviar.onclick = () => {
+      if (qtd === 0) return; // impede enviar com zero
+
       const nome = item.dataset.nome;
       const preco = parseFloat(item.dataset.preco);
       const subtotal = preco * qtd;
@@ -73,10 +84,18 @@ document.addEventListener("DOMContentLoaded", () => {
       totalSpan.textContent = total.toFixed(2);
       cartCount.textContent = itens;
 
+      // reseta quantidade após enviar
+      qtd = 0;
+      qtdSpan.textContent = qtd;
+
+      // toast
       toast.classList.remove("hidden");
       setTimeout(() => toast.classList.add("hidden"), 1500);
     };
   });
+
+});
+
 
 });
 
