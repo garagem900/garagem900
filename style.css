@@ -1,13 +1,17 @@
-/* ===== BASE DO APP ===== */
+/* ===== RESET / BASE ===== */
+*{
+  box-sizing: border-box;
+}
+
 body{
   margin:0;
   background:#0a0a0a;
   color:#fff;
   font-family: Arial, Helvetica, sans-serif;
-  padding-bottom:90px;
+  padding-bottom:100px; /* espaço pro rodapé */
 }
 
-/* TOPO */
+/* ===== TOPO / LOGO ===== */
 .topo{
   text-align:center;
   padding:25px 10px;
@@ -19,11 +23,13 @@ body{
   width:260px;
 }
 
-/* MENU PRINCIPAL */
+/* ===== MENU PRINCIPAL ===== */
 nav{
   max-width:520px;
   margin:20px auto;
   padding:0 15px;
+  position: relative;
+  z-index: 10;
 }
 
 nav button{
@@ -36,6 +42,8 @@ nav button{
   border:none;
   border-radius:16px;
   text-transform:uppercase;
+
+  /* textura underground */
   background:
     repeating-linear-gradient(
       45deg,
@@ -44,18 +52,17 @@ nav button{
       #0f0f0f 10px,
       #0f0f0f 20px
     );
+
   box-shadow:0 0 12px #6a1fff;
-nav button{
-  position: relative;
-  z-index: 5;
 }
 
-
-/* CONTEÚDO */
+/* ===== CONTEÚDO ===== */
 main{
   max-width:520px;
   margin:auto;
   padding:15px;
+  position: relative;
+  z-index: 5;
 }
 
 section{
@@ -75,7 +82,7 @@ h2{
   font-size:26px;
 }
 
-/* SUBBOTÕES */
+/* ===== SUBBOTÕES ===== */
 .subbotao{
   width:100%;
   padding:20px;
@@ -87,7 +94,7 @@ h2{
   color:#fff;
 }
 
-/* ITENS */
+/* ===== ITENS ===== */
 .itemBtn{
   width:100%;
   padding:14px;
@@ -99,7 +106,7 @@ h2{
   color:#fff;
 }
 
-/* VOLTAR */
+/* ===== VOLTAR ===== */
 .voltar{
   background:none;
   color:#6a1fff;
@@ -108,19 +115,7 @@ h2{
   margin-bottom:10px;
 }
 
-/* RODAPÉ */
-footer{
-  position:fixed;
-  bottom:0;
-  left:0;
-  width:100%;
-  background:#050505;
-  border-top:1px solid #6a1fff;
-  padding:10px;
-  text-align:center;
-  font-size:14px;
-}
-
+/* ===== RODAPÉ FIXO ===== */
 footer{
   position: fixed;
   bottom: 0;
@@ -132,43 +127,23 @@ footer{
   text-align:center;
   font-size:14px;
 
-  pointer-events: none; /* 🔴 ISSO AQUI RESOLVE */
+  pointer-events: none; /* 🔥 não bloqueia cliques */
 }
+
 footer a{
   color:#25D366;
   text-decoration:none;
   display:block;
   font-weight:bold;
 
-  pointer-events: auto; /* ✅ só o link clica */
+  pointer-events: auto; /* só o link clica */
 }
-
-footer{
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  width: 100%;
-  background:#050505;
-  border-top:1px solid #6a1fff;
-  padding:10px;
-  text-align:center;
-  font-size:14px;
-
-  pointer-events: none; /* 🔴 ISSO AQUI RESOLVE */
-}
-
 
 footer span{
   display:block;
   margin-top:4px;
   color:#ccc;
 }
-
-  font-weight:bold;
-}
-
-
-
 
 
 
