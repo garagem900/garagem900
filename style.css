@@ -210,6 +210,25 @@ footer span {
   color: #fff;
   margin-bottom: 10px;
 }
+/* FORÇA ESCONDER ELEMENTOS */
+.hidden {
+  display: none !important;
+}
+
+/* GARANTE QUE O CARRINHO NÃO NASÇA VISÍVEL */
+#carrinho {
+  display: none;
+}
+/* FORÇA ESCONDER ELEMENTOS */
+.hidden {
+  display: none !important;
+}
+
+/* GARANTE QUE O CARRINHO NÃO NASÇA VISÍVEL */
+#carrinho {
+  display: none;
+}
+
 
 
 
