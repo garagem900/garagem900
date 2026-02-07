@@ -1,100 +1,133 @@
-body {
-  margin: 0;
-  background: #0b0b0b;
-  color: white;
-  font-family: Arial, Helvetica, sans-serif;
+/* ===== BASE DO APP ===== */
+body{
+  margin:0;
+  background:#0a0a0a;
+  color:#eaeaea;
+  font-family: "Arial Black", Arial, sans-serif;
 }
 
-header, nav, main {
-  padding: 15px;
+/* ===== TOPO E LOGO ===== */
+.topo{
+  text-align:center;
+  padding:12px;
+  background:#070707;
+  box-shadow: 0 0 10px #7b2cff;
 }
 
-header {
-  padding: 20px;
-  border-bottom: 1px solid #7b2cff;
+.topo img{
+  width:160px;
 }
 
-h1 {
-  margin: 0;
-  font-size: 28px;
+/* ===== TÍTULO ===== */
+header{
+  text-align:center;
+  padding:12px;
+  border-bottom:2px solid #7b2cff;
 }
 
-p {
-  margin: 5px 0 0;
-  font-size: 14px;
-  color: #ccc;
-}
-nav {
-  margin: 10px 0;
+header h1{
+  font-size: 26px;
+  letter-spacing: 1px;
+  text-shadow: 0 0 6px #7b2cff;
 }
 
-nav button {
-  background: #7b2cff;
-  color: white;
-  border: none;
-  padding: 10px 15px;
-  margin: 5px;
-  border-radius: 4px;
-  font-size: 14px;
+/* ===== MENU PRINCIPAL ===== */
+nav{
+  max-width:520px;
+  margin:12px auto;
+  text-align:center;
 }
 
-main {
-  padding: 20px;
-}
-h2 {
-  margin-top: 20px;
-  font-size: 22px;
-  border-bottom: 1px solid #7b2cff;
-  padding-bottom: 5px;
-}
-
-h3 {
-  margin-top: 25px;
-  font-size: 18px;
-  color: #7b2cff;
-}
-
-p {
-  margin: 6px 0;
-  font-size: 15px;
+nav button{
+  width:100%;
+  background:#6a1fff;
+  color:white;
+  border:2px solid #9d6bff;
+  padding:14px;
+  margin:8px 0;
+  border-radius:14px;
+  font-size:18px;
+  font-weight:bold;
+  text-transform:uppercase;
+  box-shadow: 0 0 8px #7b2cff;
+  transition: all 0.2s ease;
 }
 
-strong {
-  display: block;
-  margin-top: 15px;
-  font-size: 16px;
-  color: #ffffff;
+nav button:active{
+  background:#8a3cff;
+  box-shadow: 0 0 15px #9d6bff;
+  transform: scale(0.98);
 }
 
-em {
-  font-size: 13px;
-  color: #aaaaaa;
+/* ===== CONTEÚDO ===== */
+main{
+  max-width:520px;
+  margin:0 auto;
+  padding:15px;
 }
 
-hr {
-  border: none;
-  height: 1px;
-  background: #333;
-  margin: 20px 0;
-}
-main {
-  max-width: 500px;
-  margin: 0 auto;
-  text-align: left;
+/* ===== TELAS (SEÇÕES) ===== */
+section{
+  background:#111;
+  padding:16px;
+  border-radius:14px;
+  margin-bottom:12px;
+  border:1px solid #7b2cff;
+  box-shadow: 0 0 8px #7b2cff33;
 }
 
-header, nav {
-  max-width: 500px;
-  margin: 0 auto;
-  text-align: center;
-}
-.topo {
-  text-align: center;
-  margin: 20px 0;
+/* ===== BOTÕES INTERNOS ===== */
+.subbotao{
+  display:block;
+  width:100%;
+  background:#1a1a1a;
+  color:white;
+  border:2px solid #7b2cff;
+  padding:14px;
+  margin:10px 0;
+  border-radius:12px;
+  font-size:17px;
+  text-align:left;
+  box-shadow: 0 0 6px #7b2cff;
+  transition: all 0.2s ease;
 }
 
-.topo img {
-  max-width: 180px;
+.subbotao:active{
+  background:#2a0f4f;
+  box-shadow: 0 0 12px #9d6bff;
 }
+
+/* ===== BOTÃO VOLTAR ===== */
+.voltar{
+  background:#090909;
+  color:white;
+  border:1px solid #7b2cff;
+  padding:7px 12px;
+  border-radius:8px;
+  margin-bottom:10px;
+  font-size:14px;
+}
+
+/* ===== BOTÃO PEDIR (WHATSAPP) ===== */
+.pedir{
+  display:block;
+  background:#25D366;
+  color:black;
+  text-align:center;
+  padding:10px;
+  border-radius:10px;
+  text-decoration:none;
+  font-weight:bold;
+  margin-top:8px;
+  box-shadow: 0 0 6px #25D366;
+}
+
+/* ===== TEXTOS DO CARDÁPIO ===== */
+p{
+  font-size:16px;
+  margin:6px 0;
+}
+}
+
 
 
