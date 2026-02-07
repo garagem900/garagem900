@@ -158,6 +158,27 @@ footer span {
   min-width: 20px;
   text-align: center;
 }
+#btnCarrinho {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  background: #1a1a1a;
+  color: #fff;
+  border: 2px solid #7b2cff;
+  border-radius: 50%;
+  width: 52px;
+  height: 52px;
+  font-size: 22px;
+  box-shadow: 0 0 10px #7b2cff;
+  cursor: pointer;
+  z-index: 20;
+}
+
+#btnCarrinho:active {
+  background: #2a0f4f;
+  box-shadow: 0 0 18px #9d6bff;
+}
+
 
 
 
