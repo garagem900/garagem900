@@ -33,11 +33,25 @@
 
 
     <!-- BEBIDAS -->
-    <section id="bebidas" class="hidden">
-      <h2>Bebidas</h2>
-      <button class="voltar" onclick="voltar()">⬅ Voltar</button>
-      <p>Cervejas, refrigerantes e drinks</p>
-    </section>
+  <section id="bebidas" class="hidden">
+  <h2>Bebidas</h2>
+  <button class="voltar" onclick="voltar()">⬅ Voltar</button>
+
+  <div class="item">
+    <span>Império lata</span>
+    <span>R$ 5,00</span>
+    <button onclick="addCarrinho('Império lata', 5)">Adicionar</button>
+  </div>
+
+  <div class="item">
+    <span>Heineken lata</span>
+    <span>R$ 8,50</span>
+    <button onclick="addCarrinho('Heineken lata', 8.5)">Adicionar</button>
+  </div>
+
+  <button class="subbotao" onclick="mostrar('carrinho')">🛒 Ver Carrinho</button>
+</section>
+
 
     <!-- PORÇÕES -->
     <section id="porcoes" class="hidden">
@@ -68,4 +82,5 @@
 
 </body>
 </html>
+
 
