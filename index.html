@@ -1,14 +1,99 @@
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
-  <meta charset="UTF-8">
-  <title>GARAGEM 900</title>
+<meta charset="UTF-8">
+<title>GARAGEM 900</title>
 
-  <link rel="manifest" href="manifest.json">
-  <link rel="stylesheet" href="style.css">
+<link rel="manifest" href="manifest.json">
 
-  <meta name="theme-color" content="#7b2cff">
+<style>
+body{
+  margin:0;
+  background:#0b0b0b;
+  color:white;
+  font-family:Arial, Helvetica, sans-serif;
+}
+
+.topo{
+  text-align:center;
+  padding:10px;
+}
+
+.topo img{
+  width:140px;
+}
+
+header{
+  text-align:center;
+  padding:10px;
+  border-bottom:1px solid #7b2cff;
+}
+
+nav{
+  max-width:500px;
+  margin:10px auto;
+  text-align:center;
+}
+
+nav button{
+  width:100%;
+  background:#7b2cff;
+  color:white;
+  border:none;
+  padding:12px;
+  margin:6px 0;
+  border-radius:10px;
+  font-size:16px;
+}
+
+main{
+  max-width:500px;
+  margin:0 auto;
+  padding:15px;
+}
+
+section{
+  background:#111;
+  padding:15px;
+  border-radius:10px;
+  margin-bottom:10px;
+}
+
+.subbotao{
+  display:block;
+  width:100%;
+  background:#222;
+  color:white;
+  border:1px solid #7b2cff;
+  padding:12px;
+  margin:8px 0;
+  border-radius:8px;
+  font-size:16px;
+}
+
+.voltar{
+  background:#111;
+  color:white;
+  border:1px solid #7b2cff;
+  padding:6px 10px;
+  border-radius:6px;
+  margin-bottom:10px;
+}
+
+.pedir{
+  display:block;
+  background:#25D366;
+  color:black;
+  text-align:center;
+  padding:10px;
+  border-radius:8px;
+  text-decoration:none;
+  font-weight:bold;
+  margin-top:8px;
+}
+</style>
 </head>
+
 <body>
 
 <div class="topo">
@@ -21,20 +106,17 @@
 </header>
 
 <nav>
-  <button onclick="mostrar('cardapio')">Cardápio</button>
-  <button onclick="mostrar('agenda')">Agenda</button>
-  <button onclick="mostrar('contato')">Contato</button>
+  <button onclick="mostrar('cardapio')">CARDÁPIO</button>
+  <button onclick="mostrar('agenda')">AGENDA</button>
+  <button onclick="mostrar('pedidos')">PEDIDOS</button>
 </nav>
 
 <main>
 
-<!-- TELA PRINCIPAL DO CARDÁPIO -->
+<!-- TELA CARDÁPIO -->
 <section id="cardapio" style="display:block;">
   <h2>Cardápio</h2>
-
-  <button class="subbotao" onclick="mostrar('bebidas')">
-    🍻 Bebidas
-  </button>
+  <button class="subbotao" onclick="mostrar('bebidas')">🍻 Bebidas</button>
 </section>
 
 <!-- TELA BEBIDAS -->
@@ -42,24 +124,79 @@
   <h2>Bebidas</h2>
   <button class="voltar" onclick="mostrar('cardapio')">⬅ Voltar</button>
 
-  <button class="subbotao" onclick="mostrar('cervejas')">
-    Cervejas
-  </button>
+  <button class="subbotao" onclick="mostrar('cervejas')">Cervejas</button>
+  <button class="subbotao" onclick="mostrar('refri')">Refrigerantes</button>
+</section>
 
-  <button class="subbotao" onclick="mostrar('refri')">
-    Refrigerantes
-  </button>
+<!-- CERVEJAS -->
+<section id="cervejas" style="display:none;">
+  <h2>Cervejas</h2>
+  <button class="voltar" onclick="mostrar('bebidas')">⬅ Voltar</button>
 
-  <button class="subbotao" onclick="mostrar('batidas')">
-    Batidas
-  </button>
+  <p>Império lata — R$ 5,00</p>
+  <a class="pedir" href="https://wa.me/55SEUNUMERO?text=Quero%20Imperio%20lata">Pedir</a>
 
-  <button class="subbotao"
+  <p>Bohemia lata — R$ 5,00</p>
+  <a class="pedir" href="https://wa.me/55SEUNUMERO?text=Quero%20Bohemia%20lata">Pedir</a>
 
+  <p>Skol lata — R$ 5,00</p>
+  <a class="pedir" href="https://wa.me/55SEUNUMERO?text=Quero%20Skol%20lata">Pedir</a>
 
+  <p>Eisenbahn lata — R$ 5,00</p>
+  <a class="pedir" href="https://wa.me/55SEUNUMERO?text=Quero%20Eisenbahn%20lata">Pedir</a>
 
+  <p>Heineken lata — R$ 8,50</p>
+  <a class="pedir" href="https://wa.me/55SEUNUMERO?text=Quero%20Heineken%20lata">Pedir</a>
+</section>
 
+<!-- REFRIGERANTES -->
+<section id="refri" style="display:none;">
+  <h2>Refrigerantes</h2>
+  <button class="voltar" onclick="mostrar('bebidas')">⬅ Voltar</button>
 
+  <p>Coca-Cola lata — R$ 5,00</p>
+  <a class="pedir" href="https://wa.me/55SEUNUMERO?text=Quero%20Coca-Cola%20lata">Pedir</a>
 
+  <p>Coca-Cola caçulinha — R$ 5,00</p>
+  <a class="pedir" href="https://wa.me/55SEUNUMERO?text=Quero%20Coca-Cola%20caculinha">Pedir</a>
+
+  <p>Guaraná lata — R$ 5,00</p>
+  <a class="pedir" href="https://wa.me/55SEUNUMERO?text=Quero%20Guarana%20lata">Pedir</a>
+
+  <p>Fanta lata — R$ 5,00</p>
+  <a class="pedir" href="https://wa.me/55SEUNUMERO?text=Quero%20Fanta%20lata">Pedir</a>
+
+  <p>Água sem gás — R$ 3,00</p>
+  <a class="pedir" href="https://wa.me/55SEUNUMERO?text=Quero%20agua%20sem%20gas">Pedir</a>
+
+  <p>Água com gás — R$ 3,00</p>
+  <a class="pedir" href="https://wa.me/55SEUNUMERO?text=Quero%20agua%20com%20gas">Pedir</a>
+</section>
+
+<!-- AGENDA -->
+<section id="agenda" style="display:none;">
+  <h2>Agenda</h2>
+  <p>Shows e eventos em breve.</p>
+</section>
+
+<!-- PEDIDOS -->
+<section id="pedidos" style="display:none;">
+  <h2>Pedidos</h2>
+  <p>Escolha no cardápio e clique em “Pedir”.</p>
+</section>
+
+</main>
+
+<script>
+function mostrar(id){
+  document.querySelectorAll("section").forEach(sec=>{
+    sec.style.display="none";
+  });
+  document.getElementById(id).style.display="block";
+}
+</script>
+
+</body>
+</html>
 
 
