@@ -19,6 +19,9 @@ document.addEventListener("DOMContentLoaded", () => {
   let total = 0;
   let itens = 0;
 
+  // garante que o carrinho comece fechado
+  carrinho.classList.add("hidden");
+
   /* ===== NAVEGAÇÃO ===== */
 
   btnCardapio.onclick = () => {
@@ -94,24 +97,29 @@ document.addEventListener("DOMContentLoaded", () => {
     };
   });
 
-  /* ===== ENVIAR PARA WHATSAPP ===== */
+  /* ===== WHATSAPP (PROTEGIDO) ===== */
 
-  btnEnviarPedido.onclick = () => {
-    if (itens === 0) return;
+  if (btnEnviarPedido) {
+    btnEnviarPedido.onclick = () => {
+      if (itens === 0) return;
 
-    let mensagem = "🛒 Pedido - Garagem 900\n\n";
+      let mensagem = "🛒 Pedido - Garagem 900\n\n";
 
-    document.querySelectorAll("#listaCarrinho li").forEach(li => {
-      mensagem += "• " + li.textContent + "\n";
-    });
+      document.querySelectorAll("#listaCarrinho li").forEach(li => {
+        mensagem += "• " + li.textContent + "\n";
+      });
 
-    mensagem += "\n💰 Total: R$ " + total.toFixed(2);
+      mensagem += "\n💰 Total: R$ " + total.toFixed(2);
 
-    const telefone = "5517992585697";
-    const url = "https://wa.me/" + telefone + "?text=" + encodeURIComponent(mensagem);
+      const telefone = "5517992585697";
+      const url = "https://wa.me/" + telefone + "?text=" + encodeURIComponent(mensagem);
 
-    window.open(url, "_blank");
-  };
+      window.open(url, "_blank");
+    };
+  }
+
+});
+
 
 });
 
