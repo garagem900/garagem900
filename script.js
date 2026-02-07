@@ -1,3 +1,5 @@
+console.log("SCRIPT NOVO CARREGADO");
+
 let carrinho = {};
 let historico = [];
 
