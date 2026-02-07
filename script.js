@@ -1,4 +1,14 @@
 document.addEventListener("DOMContentLoaded", () => {
+const params = new URLSearchParams(window.location.search);
+let mesaAtual = params.get("mesa");
+
+// se não vier mesa no link, pede
+if (!mesaAtual) {
+  mesaAtual = prompt("Digite o número da mesa:");
+}
+
+// salva a mesa
+localStorage.setItem("mesaAtual", mesaAtual);
 
   const home = document.getElementById("home");
   const cardapio = document.getElementById("cardapio");
