@@ -1,40 +1,18 @@
 <!DOCTYPE html>
-<header class="topo">
-  <img src="logo.png" alt="Garagem 900 Rock Bar">
-
-  <button id="btnCarrinho" class="btn-carrinho">
-    🛒 <span id="cartCount">0</span>
-  </button>
-</header>
-
 <html lang="pt-BR">
 <head>
   <meta charset="UTF-8">
   <title>Garagem 900 Rock Bar</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
   <link rel="stylesheet" href="style.css">
 </head>
-
 <body>
-<!-- LOGIN MESA -->
-<section id="loginMesa">
-  <h2>Digite o número da mesa</h2>
-
-  <input
-    type="number"
-    id="mesaInput"
-    placeholder="Ex: 12"
-    class="input-mesa"
-  >
-
-  <button id="btnEntrarMesa">Entrar</button>
-</section>
 
 <!-- TOPO -->
 <header class="topo">
   <img src="logo.png" alt="Garagem 900 Rock Bar">
 
-  <!-- BOTÃO CARRINHO -->
   <button id="btnCarrinho" class="btn-carrinho">
     🛒 <span id="cartCount">0</span>
   </button>
@@ -50,7 +28,6 @@
 
   <!-- CARDÁPIO -->
   <section id="cardapio" class="hidden">
-
     <h2>Cervejas</h2>
 
     <div class="item" data-nome="Império Lata" data-preco="5">
@@ -58,39 +35,79 @@
         <span class="nome">Império Lata</span>
         <span class="preco">R$ 5,00</span>
       </div>
-
       <div class="controle">
-        <button class="menos">−</button>
+        <button class="menos">-</button>
         <span class="qtd">1</span>
         <button class="mais">+</button>
         <button class="enviar">ENVIAR</button>
       </div>
     </div>
 
+    <div class="item" data-nome="Heineken Lata" data-preco="5">
+      <div class="info">
+        <span class="nome">Heineken Lata</span>
+        <span class="preco">R$ 5,00</span>
+      </div>
+      <div class="controle">
+        <button class="menos">-</button>
+        <span class="qtd">1</span>
+        <button class="mais">+</button>
+        <button class="enviar">ENVIAR</button>
+      </div>
+    </div>
+
+    <h2>Refrigerantes</h2>
+
+    <div class="item" data-nome="Coca-Cola Lata" data-preco="4.5">
+      <div class="info">
+        <span class="nome">Coca-Cola Lata</span>
+        <span class="preco">R$ 4,50</span>
+      </div>
+      <div class="controle">
+        <button class="menos">-</button>
+        <span class="qtd">1</span>
+        <button class="mais">+</button>
+        <button class="enviar">ENVIAR</button>
+      </div>
+    </div>
+
+    <button class="voltar" onclick="voltar()">⬅ Voltar</button>
   </section>
 
   <!-- AGENDA -->
   <section id="agenda" class="hidden">
     <h2>Agenda</h2>
-    <p>Shows em breve</p>
+    <p>Shows e eventos em breve.</p>
+    <button class="voltar" onclick="voltar()">⬅ Voltar</button>
   </section>
 
 </main>
 
 <!-- CARRINHO -->
-<section id="carrinho" class="hidden">
-  <h2>Seu pedido</h2>
+<div id="carrinho" class="carrinho hidden">
+  <h2>🛒 Seu pedido</h2>
   <ul id="listaCarrinho"></ul>
   <strong>Total: R$ <span id="total">0.00</span></strong>
-
   <br><br>
-  <button id="btnEnviarPedido">Enviar Pedido</button>
-  <button onclick="voltar()">Voltar</button>
-</section>
+  <button id="btnEnviarPedido">ENVIAR PEDIDO</button>
+  <button onclick="fecharCarrinho()">Fechar</button>
+</div>
+
+<!-- TOAST -->
+<div id="toast" class="toast hidden">Adicionado ao carrinho ✔</div>
+
+<!-- RODAPÉ -->
+<footer>
+  <a href="https://wa.me/5517992585697" target="_blank">
+    WhatsApp: 17 99258-5697
+  </a>
+  <span>Av. dos Antunes, 900 – Bebedouro/SP</span>
+</footer>
 
 <script src="script.js"></script>
 </body>
 </html>
+
 
 
 
