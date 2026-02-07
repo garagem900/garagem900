@@ -52,6 +52,16 @@
   <button class="subbotao" onclick="mostrar('carrinho')">🛒 Ver Carrinho</button>
 </section>
 
+<section id="carrinho" class="hidden">
+  <h2>Carrinho</h2>
+  <button class="voltar" onclick="voltar()">⬅ Voltar</button>
+
+  <ul id="listaCarrinho"></ul>
+
+  <h3>Total: R$ <span id="total">0.00</span></h3>
+
+  <button class="subbotao" onclick="enviarPedido()">Enviar Pedido</button>
+</section>
 
     <!-- PORÇÕES -->
     <section id="porcoes" class="hidden">
@@ -82,5 +92,6 @@
 
 </body>
 </html>
+
 
 
