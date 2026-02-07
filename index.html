@@ -1,111 +1,105 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8">
+  <meta charset="UTF-8" />
   <title>Garagem 900 Rock Bar</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="style.css">
-</head>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
+  <!-- PWA -->
+  <link rel="manifest" href="manifest.json" />
+  <meta name="theme-color" content="#000000">
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="style.css" />
+</head>
 <body>
 
-<header class="topo">
-  <img src="logo.png" alt="Garagem 900 Rock Bar">
+  <!-- TOPO -->
+  <header class="topo">
+    <img src="logo.png" alt="Garagem 900 Rock Bar">
 
-  <button id="btnCarrinho" class="btn-carrinho">
-    🛒 <span id="cartCount">0</span>
-  </button>
-</header>
+    <button id="btnCarrinho" class="btn-carrinho">
+      🛒 <span id="cartCount">0</span>
+    </button>
+  </header>
 
-<!-- HOME -->
-<nav id="home">
-  <button id="btnFazerPedido">🍔 FAZER PEDIDO</button>
-  <button id="btnAgenda">🎸 AGENDA</button>
-</nav>
+  <!-- HOME -->
+  <nav id="home">
+    <button id="btnCardapio">CARDÁPIO</button>
+    <button id="btnAgenda">AGENDA</button>
+  </nav>
 
-<main>
+  <main>
 
-<!-- CARDÁPIO -->
-<section id="cardapio" class="hidden">
-  <h2>🍺 Cervejas</h2>
+    <!-- CARDÁPIO -->
+    <section id="cardapio" class="hidden">
+      <h2>Cervejas</h2>
 
-  <div class="item" data-nome="Império Lata" data-preco="5">
-    <span>Império Lata</span>
-    <div class="controle">
-      <button class="menos">-</button>
-      <span class="qtd">0</span>
-      <button class="mais">+</button>
-    </div>
+      <div class="item" data-nome="Império Lata" data-preco="5">
+        <div class="info">
+          <span class="nome">Império Lata</span>
+          <span class="preco">R$ 5,00</span>
+        </div>
+        <div class="controle">
+          <button class="menos">-</button>
+          <span class="qtd">0</span>
+          <button class="mais">+</button>
+          <button class="enviar">ENVIAR</button>
+        </div>
+      </div>
+
+      <div class="item" data-nome="Heineken Lata" data-preco="7">
+        <div class="info">
+          <span class="nome">Heineken Lata</span>
+          <span class="preco">R$ 7,00</span>
+        </div>
+        <div class="controle">
+          <button class="menos">-</button>
+          <span class="qtd">0</span>
+          <button class="mais">+</button>
+          <button class="enviar">ENVIAR</button>
+        </div>
+      </div>
+
+      <button class="voltar">⬅ Voltar</button>
+    </section>
+
+    <!-- AGENDA -->
+    <section id="agenda" class="hidden">
+      <h2>Agenda</h2>
+      <p>Shows e eventos em breve.</p>
+      <button class="voltar">⬅ Voltar</button>
+    </section>
+
+  </main>
+
+  <!-- CARRINHO -->
+  <div id="carrinho" class="carrinho hidden">
+    <h2>🛒 Seu pedido</h2>
+
+    <ul id="listaCarrinho"></ul>
+
+    <p><strong>Total:</strong> R$ <span id="total">0.00</span></p>
+
+    <button id="btnFecharCarrinho">Fechar</button>
   </div>
 
-  <div class="item" data-nome="Heineken Lata" data-preco="7">
-    <span>Heineken Lata</span>
-    <div class="controle">
-      <button class="menos">-</button>
-      <span class="qtd">0</span>
-      <button class="mais">+</button>
-    </div>
-  </div>
+  <!-- TOAST -->
+  <div id="toast" class="toast hidden">Adicionado ao carrinho ✔</div>
 
-  <h2>🍟 Porções</h2>
+  <!-- RODAPÉ -->
+  <footer>
+    <a href="https://wa.me/5517992585697" target="_blank">
+      WhatsApp: 17 99258-5697
+    </a>
+    <span>Av. dos Antunes, 900 – Bebedouro/SP</span>
+  </footer>
 
-  <div class="item" data-nome="Combo Mosh Pit" data-preco="35">
-    <span>Combo Mosh Pit</span>
-    <div class="controle">
-      <button class="menos">-</button>
-      <span class="qtd">0</span>
-      <button class="mais">+</button>
-    </div>
-  </div>
-
-  <button class="voltar">⬅ Voltar</button>
-</section>
-
-<!-- AGENDA -->
-<section id="agenda" class="hidden">
-  <h2>🎸 Agenda</h2>
-  <p>Sexta – Banda Surra</p>
-  <p>Sábado – Tributo Ratos de Porão</p>
-  <button class="voltar">⬅ Voltar</button>
-</section>
-
-<!-- IDENTIFICAÇÃO -->
-<section id="identificacao" class="hidden">
-  <h2>📝 Finalizar Pedido</h2>
-
-  <input id="nome" placeholder="Seu nome">
-  <input id="celular" placeholder="WhatsApp">
-
-  <select id="tipoPedido">
-    <option value="bar">Estou no bar</option>
-    <option value="delivery">Delivery</option>
-  </select>
-
-  <input id="mesa" placeholder="Mesa (opcional)">
-  <textarea id="obs" placeholder="Observações do pedido"></textarea>
-
-  <button id="btnEnviarPedido">📲 ENVIAR PEDIDO</button>
-</section>
-
-</main>
-
-<!-- CARRINHO -->
-<div id="carrinho" class="carrinho hidden">
-  <h2>🛒 Seu Pedido</h2>
-  <ul id="listaCarrinho"></ul>
-  <strong>Total: R$ <span id="total">0.00</span></strong>
-  <br><br>
-  <button id="btnFinalizar">Finalizar Pedido</button>
-  <button id="btnFecharCarrinho">Fechar</button>
-</div>
-
-<footer>
-  <span>Garagem 900 Rock Bar</span>
-</footer>
-
-<script src="script.js"></script>
+  <!-- JS -->
+  <script src="script.js"></script>
 </body>
 </html>
+
 
 
 
