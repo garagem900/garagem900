@@ -1,15 +1,18 @@
 document.addEventListener("DOMContentLoaded", () => {
 
+  // TELAS
   const home = document.getElementById("home");
   const cardapio = document.getElementById("cardapio");
   const agenda = document.getElementById("agenda");
   const carrinho = document.getElementById("carrinho");
 
+  // BOTÕES
   const btnCardapio = document.getElementById("btnCardapio");
   const btnAgenda = document.getElementById("btnAgenda");
   const btnCarrinho = document.getElementById("btnCarrinho");
   const btnFecharCarrinho = document.getElementById("btnFecharCarrinho");
 
+  // CARRINHO
   const listaCarrinho = document.getElementById("listaCarrinho");
   const totalSpan = document.getElementById("total");
   const cartCount = document.getElementById("cartCount");
@@ -18,15 +21,14 @@ document.addEventListener("DOMContentLoaded", () => {
   let total = 0;
   let itens = 0;
 
+  // ===== NAVEGAÇÃO =====
   btnCardapio.onclick = () => {
     home.classList.add("hidden");
-    agenda.classList.add("hidden");
     cardapio.classList.remove("hidden");
   };
 
   btnAgenda.onclick = () => {
     home.classList.add("hidden");
-    cardapio.classList.add("hidden");
     agenda.classList.remove("hidden");
   };
 
@@ -46,31 +48,39 @@ document.addEventListener("DOMContentLoaded", () => {
     carrinho.classList.add("hidden");
   };
 
+  // ===== CONTROLE DOS ITENS =====
   document.querySelectorAll(".item").forEach(item => {
-    let qtd = 0;
-    const qtdSpan = item.querySelector(".qtd");
 
-    item.querySelector(".mais").onclick = () => {
+    let qtd = 0;
+
+    const qtdSpan = item.querySelector(".qtd");
+    const btnMais = item.querySelector(".mais");
+    const btnMenos = item.querySelector(".menos");
+    const btnEnviar = item.querySelector(".enviar");
+
+    btnMais.onclick = () => {
       qtd++;
       qtdSpan.textContent = qtd;
     };
 
-    item.querySelector(".menos").onclick = () => {
+    btnMenos.onclick = () => {
       if (qtd > 0) {
         qtd--;
         qtdSpan.textContent = qtd;
       }
     };
 
-    item.querySelector(".enviar").onclick = () => {
+    btnEnviar.onclick = () => {
+
       if (qtd === 0) return;
 
       const nome = item.dataset.nome;
       const preco = parseFloat(item.dataset.preco);
+
       const subtotal = preco * qtd;
 
       const li = document.createElement("li");
-      li.textContent = `${qtd}x ${nome} — R$ ${subtotal.toFixed(2)}`;
+      li.textContent = `${qtd}x ${nome} - R$ ${subtotal.toFixed(2)}`;
       listaCarrinho.appendChild(li);
 
       total += subtotal;
@@ -85,6 +95,7 @@ document.addEventListener("DOMContentLoaded", () => {
       qtd = 0;
       qtdSpan.textContent = 0;
     };
+
   });
 
 });
