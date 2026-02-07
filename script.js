@@ -1,43 +1,77 @@
 document.addEventListener("DOMContentLoaded", () => {
-  const btnCarrinho = document.querySelector(".btn-carrinho");
+
+  // TELAS
+  const home = document.getElementById("home");
+  const cardapio = document.getElementById("cardapio");
+  const agenda = document.getElementById("agenda");
   const carrinho = document.getElementById("carrinho");
 
-  // ABRIR CARRINHO
+  // BOTÕES
+  const btnCardapio = document.getElementById("btnCardapio");
+  const btnAgenda = document.getElementById("btnAgenda");
+  const btnCarrinho = document.querySelector(".btn-carrinho");
+
+  /* ========= NAVEGAÇÃO ========= */
+
+  btnCardapio.onclick = () => {
+    home.classList.add("hidden");
+    agenda.classList.add("hidden");
+    cardapio.classList.remove("hidden");
+  };
+
+  btnAgenda.onclick = () => {
+    home.classList.add("hidden");
+    cardapio.classList.add("hidden");
+    agenda.classList.remove("hidden");
+  };
+
+  window.voltar = () => {
+    cardapio.classList.add("hidden");
+    agenda.classList.add("hidden");
+    home.classList.remove("hidden");
+  };
+
+  /* ========= CARRINHO ========= */
+
   btnCarrinho.onclick = () => {
     carrinho.classList.remove("hidden");
-    carrinho.style.display = "flex";
+    carrinho.style.display = "block";
   };
 
-  // FECHAR CARRINHO
   window.fecharCarrinho = () => {
-    carrinho.style.display = "none";
     carrinho.classList.add("hidden");
+    carrinho.style.display = "none";
   };
 
-  // CONTROLE DE QUANTIDADE
-  window.alterarQtd = (botao, valor) => {
-    const span = botao.parentElement.querySelector(".qtd");
-    let qtd = parseInt(span.innerText);
+  /* ========= QUANTIDADE ========= */
 
-    qtd += valor;
-    if (qtd < 0) qtd = 0;
+  document.querySelectorAll(".item").forEach(item => {
+    let qtd = 0;
+    const qtdSpan = item.querySelector(".qtd");
 
-    span.innerText = qtd;
-  };
+    item.querySelector(".mais").onclick = () => {
+      qtd++;
+      qtdSpan.innerText = qtd;
+    };
 
-  // ADICIONAR ITEM
-  window.adicionarItem = (nome, preco, botao) => {
-    const qtdSpan = botao.parentElement.querySelector(".qtd");
-    const qtd = parseInt(qtdSpan.innerText);
+    item.querySelector(".menos").onclick = () => {
+      if (qtd > 0) {
+        qtd--;
+        qtdSpan.innerText = qtd;
+      }
+    };
 
-    if (qtd === 0) return;
+    item.querySelector(".enviar").onclick = () => {
+      if (qtd === 0) return;
 
-    alert(`${qtd}x ${nome} adicionado(s)`);
+      alert(`${qtd} item(ns) adicionado(s)`);
+      qtd = 0;
+      qtdSpan.innerText = 0;
+    };
+  });
 
-    // reseta para zero
-    qtdSpan.innerText = 0;
-  };
 });
+
 
 
 
