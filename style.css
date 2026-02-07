@@ -134,6 +134,14 @@ footer{
 
   pointer-events: none; /* 🔴 ISSO AQUI RESOLVE */
 }
+footer a{
+  color:#25D366;
+  text-decoration:none;
+  display:block;
+  font-weight:bold;
+
+  pointer-events: auto; /* ✅ só o link clica */
+}
 
 
 
@@ -145,6 +153,7 @@ footer span{
 
   font-weight:bold;
 }
+
 
 
 
