@@ -1,61 +1,63 @@
-let historico = [];
 let carrinho = [];
-let quantidades = {};
 
-function mostrar(id) {
-  document.querySelectorAll("main section").forEach(sec => {
-    sec.classList.add("hidden");
+document.querySelectorAll(".item").forEach(item => {
+  const btnMais = item.querySelector(".mais");
+  const btnMenos = item.querySelector(".menos");
+  const qtdSpan = item.querySelector(".qtd");
+  const btnEnviar = item.querySelector(".enviar");
+
+  btnMais.addEventListener("click", () => {
+    qtdSpan.innerText = parseInt(qtdSpan.innerText) + 1;
   });
-  document.getElementById(id).classList.remove("hidden");
-  historico.push(id);
-}
 
-function voltar() {
-  historico.pop();
-  const anterior = historico.pop();
-  if (anterior) mostrar(anterior);
-}
+  btnMenos.addEventListener("click", () => {
+    let qtd = parseInt(qtdSpan.innerText);
+    if (qtd > 1) qtdSpan.innerText = qtd - 1;
+  });
 
-function alterarQtd(id, valor) {
-  quantidades[id] = (quantidades[id] || 0) + valor;
-  if (quantidades[id] < 0) quantidades[id] = 0;
-  document.getElementById("qtd-" + id).innerText = quantidades[id];
-}
+  btnEnviar.addEventListener("click", () => {
+    const nome = item.dataset.nome;
+    const preco = parseFloat(item.dataset.preco);
+    const quantidade = parseInt(qtdSpan.innerText);
 
-function enviarItem(nome, preco, id) {
-  const qtd = quantidades[id] || 0;
-  if (qtd === 0) return alert("Escolha a quantidade");
-
-  carrinho.push({ nome, preco, qtd });
-  quantidades[id] = 0;
-  document.getElementById("qtd-" + id).innerText = 0;
-  atualizarCarrinho();
-}
+    carrinho.push({ nome, preco, quantidade });
+    atualizarCarrinho();
+    qtdSpan.innerText = 1;
+  });
+});
 
 function atualizarCarrinho() {
   const lista = document.getElementById("listaCarrinho");
+  const totalSpan = document.getElementById("total");
+  const cartCount = document.getElementById("cartCount");
+
   lista.innerHTML = "";
   let total = 0;
 
   carrinho.forEach(item => {
+    total += item.preco * item.quantidade;
     const li = document.createElement("li");
-    li.textContent = `${item.qtd}x ${item.nome} — R$ ${(item.qtd * item.preco).toFixed(2)}`;
+    li.innerText = `${item.quantidade}x ${item.nome} - R$ ${(item.preco * item.quantidade).toFixed(2)}`;
     lista.appendChild(li);
-    total += item.qtd * item.preco;
   });
 
-  document.getElementById("total").innerText = total.toFixed(2);
+  totalSpan.innerText = total.toFixed(2);
+  cartCount.innerText = carrinho.length;
 }
 
-function enviarPedido() {
-  if (carrinho.length === 0) return alert("Carrinho vazio");
+// Abrir / fechar carrinho
+document.getElementById("btnCarrinho").onclick = () => {
+  document.getElementById("carrinho").classList.remove("hidden");
+};
 
-  let msg = "📋 Pedido Garagem 900:%0A";
-  carrinho.forEach(item => {
-    msg += `${item.qtd}x ${item.nome}%0A`;
-  });
+document.getElementById("fecharCarrinho").onclick = () => {
+  document.getElementById("carrinho").classList.add("hidden");
+};
 
-  msg += `%0ATotal: R$ ${document.getElementById("total").innerText}`;
-
-  window.open(`https://wa.me/5517992585697?text=${msg}`, "_blank");
-}
+// Enviar pedido
+document.getElementById("enviarPedido").onclick = () => {
+  alert("Pedido enviado com sucesso!");
+  carrinho = [];
+  atualizarCarrinho();
+  document.getElementById("carrinho").classList.add("hidden");
+};
