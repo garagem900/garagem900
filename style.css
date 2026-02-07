@@ -215,6 +215,24 @@ footer span {
   opacity: 1;
   transform: translateX(-50%) translateY(0);
 }
+.btn-enviar-pedido {
+  width: 100%;
+  padding: 18px;
+  font-size: 20px;
+  font-weight: bold;
+  background: linear-gradient(135deg, #7b2cff, #a855f7);
+  color: #fff;
+  border: none;
+  border-radius: 16px;
+  box-shadow: 0 8px 20px rgba(123, 44, 255, 0.4);
+  cursor: pointer;
+  margin-top: 10px;
+}
+
+.btn-enviar-pedido:active {
+  transform: scale(0.97);
+}
+
 
 
 
