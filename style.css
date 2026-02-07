@@ -328,6 +328,26 @@ footer span {
   border: none;
   text-align: center;
 }
+.btn-carrinho {
+  position: absolute;
+  right: 16px;
+  top: 16px;
+  background: #1a1a1a;
+  border: 2px solid #7b2cff;
+  color: white;
+  padding: 8px 12px;
+  border-radius: 10px;
+  font-size: 16px;
+  box-shadow: 0 0 8px #7b2cff;
+}
+
+.btn-carrinho span {
+  background: #7b2cff;
+  padding: 2px 6px;
+  border-radius: 8px;
+  margin-left: 4px;
+}
+
 
 
 
