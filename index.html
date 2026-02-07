@@ -4,54 +4,119 @@
   <meta charset="UTF-8">
   <title>Garagem 900 Rock Bar</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
   <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 
-  <!-- TOPO / LOGO -->
-  <div class="topo">
-    <img src="logo.png" alt="Garagem 900 Rock Bar">
-  </div>
+<!-- TOPO -->
+<div class="topo">
+  <img src="logo.png" alt="Garagem 900">
+  <button class="btn-carrinho" onclick="mostrar('carrinho')">🛒</button>
+</div>
 
-  <!-- MENU PRINCIPAL -->
-  <nav id="menuPrincipal">
-    <button onclick="mostrar('menuCardapio')">CARDÁPIO</button>
-    <button onclick="mostrar('agenda')">AGENDA</button>
-  </nav>
+<!-- MENU PRINCIPAL -->
+<nav id="menuPrincipal">
+  <button onclick="mostrar('menuCardapio')">CARDÁPIO</button>
+  <button onclick="mostrar('agenda')">AGENDA</button>
+</nav>
 
-  <main>
+<main>
 
-    <!-- CARDÁPIO -->
-   <section id="menuCardapio" class="hidden">
+<!-- CARDÁPIO -->
+<section id="menuCardapio" class="hidden">
   <h2>Cardápio</h2>
-
   <button class="subbotao" onclick="mostrar('bebidas')">Bebidas</button>
-  <button class="subbotao" onclick="mostrar('porcoes')">Porções</button>
 </section>
 
-
-    <!-- BEBIDAS -->
-  <section id="bebidas" class="hidden">
+<!-- BEBIDAS -->
+<section id="bebidas" class="hidden">
   <h2>Bebidas</h2>
   <button class="voltar" onclick="voltar()">⬅ Voltar</button>
+
+  <h3>Cervejas</h3>
 
   <div class="item">
     <span>Império lata</span>
     <span>R$ 5,00</span>
-    <button onclick="addCarrinho('Império lata', 5)">Adicionar</button>
+    <div class="qtd">
+      <button onclick="addCarrinho('Império lata',5)">+</button>
+    </div>
+  </div>
+
+  <div class="item">
+    <span>Boa lata</span>
+    <span>R$ 5,00</span>
+    <div class="qtd">
+      <button onclick="addCarrinho('Boa lata',5)">+</button>
+    </div>
+  </div>
+
+  <div class="item">
+    <span>Skol lata</span>
+    <span>R$ 5,00</span>
+    <div class="qtd">
+      <button onclick="addCarrinho('Skol lata',5)">+</button>
+    </div>
+  </div>
+
+  <div class="item">
+    <span>Eisenbahn lata</span>
+    <span>R$ 5,00</span>
+    <div class="qtd">
+      <button onclick="addCarrinho('Eisenbahn lata',5)">+</button>
+    </div>
   </div>
 
   <div class="item">
     <span>Heineken lata</span>
-    <span>R$ 8,50</span>
-    <button onclick="addCarrinho('Heineken lata', 8.5)">Adicionar</button>
+    <span>R$ 5,00</span>
+    <div class="qtd">
+      <button onclick="addCarrinho('Heineken lata',5)">+</button>
+    </div>
   </div>
 
-  <button class="subbotao" onclick="mostrar('carrinho')">🛒 Ver Carrinho</button>
+  <h3>Refrigerantes / Água</h3>
+
+  <div class="item">
+    <span>Coca-Cola lata</span>
+    <span>R$ 4,50</span>
+    <button onclick="addCarrinho('Coca-Cola lata',4.5)">+</button>
+  </div>
+
+  <div class="item">
+    <span>Coca-Cola caçulinha</span>
+    <span>R$ 3,50</span>
+    <button onclick="addCarrinho('Coca-Cola caçulinha',3.5)">+</button>
+  </div>
+
+  <div class="item">
+    <span>Guaraná lata</span>
+    <span>R$ 4,50</span>
+    <button onclick="addCarrinho('Guaraná lata',4.5)">+</button>
+  </div>
+
+  <div class="item">
+    <span>Fanta lata</span>
+    <span>R$ 4,50</span>
+    <button onclick="addCarrinho('Fanta lata',4.5)">+</button>
+  </div>
+
+  <div class="item">
+    <span>Água sem gás</span>
+    <span>R$ 3,00</span>
+    <button onclick="addCarrinho('Água sem gás',3)">+</button>
+  </div>
+
+  <div class="item">
+    <span>Água com gás</span>
+    <span>R$ 3,00</span>
+    <button onclick="addCarrinho('Água com gás',3)">+</button>
+  </div>
+
 </section>
 
+<!-- CARRINHO -->
 <section id="carrinho" class="hidden">
   <h2>Carrinho</h2>
   <button class="voltar" onclick="voltar()">⬅ Voltar</button>
@@ -63,35 +128,21 @@
   <button class="subbotao" onclick="enviarPedido()">Enviar Pedido</button>
 </section>
 
-    <!-- PORÇÕES -->
-    <section id="porcoes" class="hidden">
-      <h2>Porções</h2>
-      <button class="voltar" onclick="voltar()">⬅ Voltar</button>
-      <p>Porções em breve</p>
-    </section>
+<!-- AGENDA -->
+<section id="agenda" class="hidden">
+  <h2>Agenda</h2>
+  <button class="voltar" onclick="voltar()">⬅ Voltar</button>
+  <p>Shows e eventos em breve</p>
+</section>
 
-    <!-- AGENDA -->
-    <section id="agenda" class="hidden">
-      <h2>Agenda</h2>
-      <button class="voltar" onclick="voltar()">⬅ Voltar</button>
-      <p>Shows e eventos em breve</p>
-    </section>
+</main>
 
-  </main>
+<footer>
+  <a href="https://wa.me/5517992585697" target="_blank">WhatsApp: 17 99258-5697</a>
+  <span>Av. dos Antunes, 900 – Bebedouro/SP</span>
+</footer>
 
-  <!-- RODAPÉ FIXO -->
-  <footer>
-    <a href="https://wa.me/5517992585697" target="_blank">
-      WhatsApp: 17 99258-5697
-    </a>
-    <span>Av. dos Antunes, 900 – Bebedouro/SP</span>
-  </footer>
-
-  <!-- SCRIPT -->
-  <script src="script.js"></script>
-
+<script src="script.js"></script>
 </body>
 </html>
-
-
 
