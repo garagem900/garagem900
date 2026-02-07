@@ -1,178 +1,109 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt-BR">
 <head>
-<meta charset="UTF-8">
-<title>GARAGEM 900</title>
-<link rel="manifest" href="manifest.json">
-<link rel="stylesheet" href="style.css">
-
-<script>
-let carrinho = [];
-let total = 0;
-
-// ADICIONAR AO CARRINHO
-function addCarrinho(nome, preco){
-  carrinho.push({item: nome, valor: preco});
-  total += preco;
-  atualizarCarrinho();
-  mostrar('carrinho');
-}
-
-// MOSTRAR TELAS
-function mostrar(id){
-  document.querySelectorAll("section").forEach(sec=>{
-    sec.style.display="none";
-  });
-  document.getElementById(id).style.display="block";
-}
-
-// ATUALIZAR TELA DO CARRINHO
-function atualizarCarrinho(){
-  let lista = document.getElementById("listaCarrinho");
-  lista.innerHTML = "";
-
-  carrinho.forEach((p, i)=>{
-    lista.innerHTML += `<li>${p.item} — R$ ${p.valor.toFixed(2)}</li>`;
-  });
-
-  document.getElementById("totalValor").innerText = total.toFixed(2);
-}
-
-// ENVIAR PEDIDO (WHATSAPP + PLANILHA)
-function finalizarPedido(){
-  let mesa = document.getElementById("mesa").value;
-  if(!mesa){
-    alert("Digite o número da mesa!");
-    return;
-  }
-
-  let texto = `*Pedido Mesa ${mesa}*\n\n`;
-  carrinho.forEach(p=>{
-    texto += `• ${p.item} - R$ ${p.valor.toFixed(2)}\n`;
-  });
-  texto += `\nTOTAL: R$ ${total.toFixed(2)}`;
-
-  // Enviar para WhatsApp do caixa
-  let whatsapp = "https://wa.me/5517992585697?text=" + encodeURIComponent(texto);
-  window.open(whatsapp, "_blank");
-
-  // Enviar para Planilha Google (depois você coloca sua URL aqui)
-  fetch("SUA_URL_DO_APPS_SCRIPT_AQUI", {
-    method: "POST",
-    body: JSON.stringify({
-      mesa: mesa,
-      pedido: texto,
-      total: total.toFixed(2)
-    })
-  });
-
-  alert("Pedido enviado!");
-}
-</script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Garagem 900</title>
+  <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 
+<!-- TOPO COM LOGO -->
 <div class="topo">
-  <img src="logo.png" alt="Garagem 900">
+  <img src="logo.png" alt="Garagem 900 Rock Bar">
 </div>
 
-<header>
-  <h1>GARAGEM 900</h1>
-  <p>Rock Bar</p>
-</header>
-
+<!-- MENU PRINCIPAL -->
 <nav>
-  <button onclick="mostrar('cardapio')">CARDÁPIO</button>
-  <button onclick="mostrar('agenda')">AGENDA</button>
-  <button onclick="mostrar('carrinho')">🛒 CARRINHO</button>
+  <button onclick="mostrar('cardapio')">🍔 Cardápio</button>
+  <button onclick="mostrar('agenda')">📅 Agenda</button>
+  <button onclick="mostrar('carrinho')">🛒 Carrinho</button>
 </nav>
 
 <main>
 
 <!-- CARDÁPIO -->
-<section id="cardapio" style="display:block;">
+<section id="cardapio">
   <h2>Cardápio</h2>
   <button class="subbotao" onclick="mostrar('bebidas')">🍻 Bebidas</button>
 </section>
 
 <!-- BEBIDAS -->
-<section id="bebidas" style="display:none;">
+<section id="bebidas" class="hidden">
   <h2>Bebidas</h2>
   <button class="voltar" onclick="mostrar('cardapio')">⬅ Voltar</button>
 
-  <button class="subbotao" onclick="mostrar('cervejas')">Cervejas</button>
-  <button class="subbotao" onclick="mostrar('refri')">Refrigerantes</button>
+  <button class="subbotao" onclick="mostrar('cervejas')">🍺 Cervejas</button>
+  <button class="subbotao" onclick="mostrar('refri')">🥤 Refrigerantes</button>
 </section>
 
 <!-- CERVEJAS -->
-<section id="cervejas" style="display:none;">
+<section id="cervejas" class="hidden">
   <h2>Cervejas</h2>
   <button class="voltar" onclick="mostrar('bebidas')">⬅ Voltar</button>
 
-  <p>Império lata — R$ 5,00</p>
-  <button class="subbotao" onclick="addCarrinho('Império lata',5)">+ Adicionar</button>
+  <div class="item">
+    <span>Império lata</span>
+    <span>R$ 5,00</span>
+    <button onclick="addCarrinho('Império lata',5)">Adicionar</button>
+  </div>
 
-  <p>Bohemia lata — R$ 5,00</p>
-  <button class="subbotao" onclick="addCarrinho('Bohemia lata',5)">+ Adicionar</button>
+  <div class="item">
+    <span>Bohemia lata</span>
+    <span>R$ 5,00</span>
+    <button onclick="addCarrinho('Bohemia lata',5)">Adicionar</button>
+  </div>
 
-  <p>Skol lata — R$ 5,00</p>
-  <button class="subbotao" onclick="addCarrinho('Skol lata',5)">+ Adicionar</button>
-
-  <p>Eisenbahn lata — R$ 5,00</p>
-  <button class="subbotao" onclick="addCarrinho('Eisenbahn lata',5)">+ Adicionar</button>
-
-  <p>Heineken lata — R$ 8,50</p>
-  <button class="subbotao" onclick="addCarrinho('Heineken lata',8.5)">+ Adicionar</button>
+  <div class="item">
+    <span>Heineken lata</span>
+    <span>R$ 8,50</span>
+    <button onclick="addCarrinho('Heineken lata',8.5)">Adicionar</button>
+  </div>
 </section>
 
 <!-- REFRIGERANTES -->
-<section id="refri" style="display:none;">
+<section id="refri" class="hidden">
   <h2>Refrigerantes</h2>
   <button class="voltar" onclick="mostrar('bebidas')">⬅ Voltar</button>
 
-  <p>Coca-Cola lata — R$ 5,00</p>
-  <button class="subbotao" onclick="addCarrinho('Coca-Cola lata',5)">+ Adicionar</button>
+  <div class="item">
+    <span>Coca-Cola lata</span>
+    <span>R$ 5,00</span>
+    <button onclick="addCarrinho('Coca-Cola lata',5)">Adicionar</button>
+  </div>
 
-  <p>Coca-Cola caçulinha — R$ 5,00</p>
-  <button class="subbotao" onclick="addCarrinho('Coca-Cola caçulinha',5)">+ Adicionar</button>
-
-  <p>Guaraná lata — R$ 5,00</p>
-  <button class="subbotao" onclick="addCarrinho('Guaraná lata',5)">+ Adicionar</button>
-
-  <p>Fanta lata — R$ 5,00</p>
-  <button class="subbotao" onclick="addCarrinho('Fanta lata',5)">+ Adicionar</button>
-
-  <p>Água sem gás — R$ 3,00</p>
-  <button class="subbotao" onclick="addCarrinho('Água sem gás',3)">+ Adicionar</button>
-
-  <p>Água com gás — R$ 3,00</p>
-  <button class="subbotao" onclick="addCarrinho('Água com gás',3)">+ Adicionar</button>
+  <div class="item">
+    <span>Água</span>
+    <span>R$ 3,00</span>
+    <button onclick="addCarrinho('Água',3)">Adicionar</button>
+  </div>
 </section>
 
 <!-- CARRINHO -->
-<section id="carrinho" style="display:none;">
+<section id="carrinho" class="hidden">
   <h2>🛒 Carrinho</h2>
 
-  <label>Mesa:</label><br>
+  <label>Mesa</label>
   <input type="number" id="mesa" placeholder="Ex: 7">
 
   <ul id="listaCarrinho"></ul>
 
-  <h3>Total: R$ <span id="totalValor">0.00</span></h3>
+  <div class="total">
+    Total: R$ <span id="total">0.00</span>
+  </div>
 
-  <button class="subbotao" onclick="finalizarPedido()">FINALIZAR PEDIDO</button>
+  <button class="finalizar" onclick="finalizarPedido()">Enviar pedido no WhatsApp</button>
 </section>
 
-<section id="agenda" style="display:none;">
+<!-- AGENDA -->
+<section id="agenda" class="hidden">
   <h2>Agenda</h2>
-  <p>Shows e eventos em breve.</p>
+  <p>Shows e eventos em breve 🤘</p>
 </section>
 
 </main>
+
+<script src="script.js"></script>
 </body>
 </html>
-</html>
-
-
-
