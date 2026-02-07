@@ -2,132 +2,136 @@
 body{
   margin:0;
   background:#0a0a0a;
-  color:#eaeaea;
-  font-family: "Arial Black", Arial, sans-serif;
+  color:#fff;
+  font-family: Arial, Helvetica, sans-serif;
 }
 
-/* ===== TOPO E LOGO ===== */
+/* TOPO */
 .topo{
   text-align:center;
-  padding:12px;
-  background:#070707;
-  box-shadow: 0 0 10px #7b2cff;
+  padding:20px;
+  background:#050505;
+  box-shadow:0 0 20px #7b2cff;
 }
 
 .topo img{
-  width:160px;
+  width:240px;
 }
 
-/* ===== TÍTULO ===== */
-header{
-  text-align:center;
-  padding:12px;
-  border-bottom:2px solid #7b2cff;
-}
-
-header h1{
-  font-size: 26px;
-  letter-spacing: 1px;
-  text-shadow: 0 0 6px #7b2cff;
-}
-
-/* ===== MENU PRINCIPAL ===== */
+/* MENU */
 nav{
   max-width:520px;
-  margin:12px auto;
-  text-align:center;
+  margin:15px auto;
+  padding:0 10px;
 }
 
 nav button{
   width:100%;
-  background:#6a1fff;
-  color:white;
-  border:2px solid #9d6bff;
-  padding:14px;
-  margin:8px 0;
-  border-radius:14px;
-  font-size:18px;
+  padding:20px;
+  margin:10px 0;
+  font-size:22px;
   font-weight:bold;
-  text-transform:uppercase;
-  box-shadow: 0 0 8px #7b2cff;
-  transition: all 0.2s ease;
+  background:#6a1fff;
+  border:none;
+  border-radius:16px;
+  color:#fff;
+  box-shadow:0 0 12px #7b2cff;
 }
 
-nav button:active{
-  background:#8a3cff;
-  box-shadow: 0 0 15px #9d6bff;
-  transform: scale(0.98);
-}
-
-/* ===== CONTEÚDO ===== */
+/* CONTEÚDO */
 main{
   max-width:520px;
-  margin:0 auto;
-  padding:15px;
+  margin:auto;
+  padding:10px;
 }
 
-/* ===== TELAS (SEÇÕES) ===== */
 section{
   background:#111;
-  padding:16px;
-  border-radius:14px;
-  margin-bottom:12px;
+  padding:20px;
+  border-radius:16px;
+  margin-bottom:15px;
   border:1px solid #7b2cff;
-  box-shadow: 0 0 8px #7b2cff33;
 }
 
-/* ===== BOTÕES INTERNOS ===== */
-.subbotao{
-  display:block;
-  width:100%;
-  background:#1a1a1a;
-  color:white;
-  border:2px solid #7b2cff;
-  padding:14px;
-  margin:10px 0;
-  border-radius:12px;
-  font-size:17px;
-  text-align:left;
-  box-shadow: 0 0 6px #7b2cff;
-  transition: all 0.2s ease;
+.hidden{
+  display:none;
 }
 
-.subbotao:active{
-  background:#2a0f4f;
-  box-shadow: 0 0 12px #9d6bff;
-}
-
-/* ===== BOTÃO VOLTAR ===== */
-.voltar{
-  background:#090909;
-  color:white;
-  border:1px solid #7b2cff;
-  padding:7px 12px;
-  border-radius:8px;
-  margin-bottom:10px;
-  font-size:14px;
-}
-
-/* ===== BOTÃO PEDIR (WHATSAPP) ===== */
-.pedir{
-  display:block;
-  background:#25D366;
-  color:black;
+h2{
   text-align:center;
-  padding:10px;
-  border-radius:10px;
-  text-decoration:none;
-  font-weight:bold;
-  margin-top:8px;
-  box-shadow: 0 0 6px #25D366;
+  font-size:24px;
 }
 
-/* ===== TEXTOS DO CARDÁPIO ===== */
-p{
+/* ITENS */
+.item{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  margin:12px 0;
+}
+
+.item button{
+  padding:10px 14px;
   font-size:16px;
-  margin:6px 0;
+  background:#7b2cff;
+  color:#fff;
+  border:none;
+  border-radius:10px;
 }
 
+/* BOTÕES */
+.subbotao{
+  width:100%;
+  padding:18px;
+  font-size:20px;
+  margin:10px 0;
+  border-radius:14px;
+  background:#1a1a1a;
+  color:#fff;
+  border:2px solid #7b2cff;
+}
 
+.voltar{
+  margin-bottom:15px;
+  background:none;
+  color:#7b2cff;
+  font-size:16px;
+  border:none;
+}
 
+/* CARRINHO */
+input{
+  width:100%;
+  padding:16px;
+  font-size:20px;
+  border-radius:12px;
+  border:none;
+  margin:10px 0;
+}
+
+ul{
+  list-style:none;
+  padding:0;
+}
+
+ul li{
+  margin:6px 0;
+  font-size:18px;
+}
+
+.total{
+  font-size:24px;
+  text-align:center;
+  margin:15px 0;
+}
+
+.finalizar{
+  width:100%;
+  padding:20px;
+  font-size:22px;
+  background:#25D366;
+  border:none;
+  border-radius:16px;
+  font-weight:bold;
+}
 
