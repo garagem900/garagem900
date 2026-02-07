@@ -1,17 +1,87 @@
-/* ===== RESET / BASE ===== */
-*{
-  box-sizing: border-box;
-}
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Garagem 900</title>
+  <link rel="stylesheet" href="style.css">
+</head>
 
+<body>
+
+<!-- TOPO -->
+<div class="topo">
+  <img src="logo.png" alt="Garagem 900 Rock Bar">
+</div>
+
+<!-- MENU PRINCIPAL -->
+<nav id="menuPrincipal">
+  <button onclick="mostrar('menuCardapio')">CARDÁPIO</button>
+  <button onclick="mostrar('agenda')">AGENDA</button>
+</nav>
+
+<main>
+
+<!-- MENU CARDÁPIO -->
+<section id="menuCardapio" class="hidden">
+  <h2>Cardápio</h2>
+  <button class="subbotao" onclick="mostrar('bebidas')">Bebidas</button>
+  <button class="subbotao" onclick="mostrar('porcoes')">Porções</button>
+</section>
+
+<!-- BEBIDAS -->
+<section id="bebidas" class="hidden">
+  <h2>Bebidas</h2>
+  <button class="voltar" onclick="mostrar('menuCardapio')">⬅ Voltar</button>
+
+  <p>Império lata — R$ 5,00</p>
+  <button class="itemBtn" onclick="addCarrinho('Império lata',5)">Adicionar</button>
+
+  <p>Heineken lata — R$ 8,50</p>
+  <button class="itemBtn" onclick="addCarrinho('Heineken lata',8.5)">Adicionar</button>
+</section>
+
+<!-- PORÇÕES -->
+<section id="porcoes" class="hidden">
+  <h2>Porções</h2>
+  <button class="voltar" onclick="mostrar('menuCardapio')">⬅ Voltar</button>
+
+  <p>Batata frita — R$ 18,00</p>
+  <button class="itemBtn" onclick="addCarrinho('Batata frita',18)">Adicionar</button>
+
+  <p>Calabresa — R$ 22,00</p>
+  <button class="itemBtn" onclick="addCarrinho('Calabresa',22)">Adicionar</button>
+</section>
+
+<!-- AGENDA -->
+<section id="agenda" class="hidden">
+  <h2>Agenda</h2>
+  <p>Shows e eventos em breve 🤘</p>
+</section>
+
+</main>
+
+<!-- RODAPÉ FIXO -->
+<footer>
+  <a href="https://wa.me/5517992585697" target="_blank">
+    WhatsApp: 17 99258-5697
+  </a>
+  <span>Av. dos Antunes, 900 – Bebedouro/SP</span>
+</footer>
+
+<script src="script.js"></script>
+</body>
+</html>
+🎨 style.css
 body{
   margin:0;
   background:#0a0a0a;
   color:#fff;
   font-family: Arial, Helvetica, sans-serif;
-  padding-bottom:100px; /* espaço pro rodapé */
+  padding-bottom:90px;
 }
 
-/* ===== TOPO / LOGO ===== */
+/* TOPO */
 .topo{
   text-align:center;
   padding:25px 10px;
@@ -23,13 +93,11 @@ body{
   width:260px;
 }
 
-/* ===== MENU PRINCIPAL ===== */
+/* MENU PRINCIPAL */
 nav{
   max-width:520px;
   margin:20px auto;
   padding:0 15px;
-  position: relative;
-  z-index: 10;
 }
 
 nav button{
@@ -42,8 +110,6 @@ nav button{
   border:none;
   border-radius:16px;
   text-transform:uppercase;
-
-  /* textura underground */
   background:
     repeating-linear-gradient(
       45deg,
@@ -52,17 +118,14 @@ nav button{
       #0f0f0f 10px,
       #0f0f0f 20px
     );
-
   box-shadow:0 0 12px #6a1fff;
 }
 
-/* ===== CONTEÚDO ===== */
+/* CONTEÚDO */
 main{
   max-width:520px;
   margin:auto;
   padding:15px;
-  position: relative;
-  z-index: 5;
 }
 
 section{
@@ -82,7 +145,7 @@ h2{
   font-size:26px;
 }
 
-/* ===== SUBBOTÕES ===== */
+/* SUBBOTÕES */
 .subbotao{
   width:100%;
   padding:20px;
@@ -94,7 +157,7 @@ h2{
   color:#fff;
 }
 
-/* ===== ITENS ===== */
+/* ITENS */
 .itemBtn{
   width:100%;
   padding:14px;
@@ -106,7 +169,7 @@ h2{
   color:#fff;
 }
 
-/* ===== VOLTAR ===== */
+/* VOLTAR */
 .voltar{
   background:none;
   color:#6a1fff;
@@ -115,19 +178,17 @@ h2{
   margin-bottom:10px;
 }
 
-/* ===== RODAPÉ FIXO ===== */
+/* RODAPÉ */
 footer{
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  width: 100%;
+  position:fixed;
+  bottom:0;
+  left:0;
+  width:100%;
   background:#050505;
   border-top:1px solid #6a1fff;
   padding:10px;
   text-align:center;
   font-size:14px;
-
-  pointer-events: none; /* 🔥 não bloqueia cliques */
 }
 
 footer a{
@@ -135,8 +196,6 @@ footer a{
   text-decoration:none;
   display:block;
   font-weight:bold;
-
-  pointer-events: auto; /* só o link clica */
 }
 
 footer span{
