@@ -9,48 +9,91 @@
 
 <body>
 
-<!-- TOPO -->
+<!-- TOPO COM LOGO -->
 <div class="topo">
   <img src="logo.png" alt="Garagem 900 Rock Bar">
 </div>
 
 <!-- MENU PRINCIPAL -->
-<nav id="menuPrincipal">
-  <button onclick="mostrar('menuCardapio')">CARDÁPIO</button>
-  <button onclick="mostrar('agenda')">AGENDA</button>
+<nav>
+  <button onclick="mostrar('cardapio')">🍔 Cardápio</button>
+  <button onclick="mostrar('agenda')">📅 Agenda</button>
+  <button onclick="mostrar('carrinho')">🛒 Carrinho</button>
 </nav>
 
 <main>
 
-<!-- MENU CARDÁPIO -->
-<section id="menuCardapio" class="hidden">
+<!-- CARDÁPIO -->
+<section id="cardapio">
   <h2>Cardápio</h2>
-  <button class="subbotao" onclick="mostrar('bebidas')">Bebidas</button>
-  <button class="subbotao" onclick="mostrar('porcoes')">Porções</button>
+  <button class="subbotao" onclick="mostrar('bebidas')">🍻 Bebidas</button>
 </section>
 
 <!-- BEBIDAS -->
 <section id="bebidas" class="hidden">
   <h2>Bebidas</h2>
-  <button class="voltar" onclick="mostrar('menuCardapio')">⬅ Voltar</button>
+  <button class="voltar" onclick="mostrar('cardapio')">⬅ Voltar</button>
 
-  <p>Império lata — R$ 5,00</p>
-  <button class="itemBtn" onclick="addCarrinho('Império lata',5)">Adicionar</button>
-
-  <p>Heineken lata — R$ 8,50</p>
-  <button class="itemBtn" onclick="addCarrinho('Heineken lata',8.5)">Adicionar</button>
+  <button class="subbotao" onclick="mostrar('cervejas')">🍺 Cervejas</button>
+  <button class="subbotao" onclick="mostrar('refri')">🥤 Refrigerantes</button>
 </section>
 
-<!-- PORÇÕES -->
-<section id="porcoes" class="hidden">
-  <h2>Porções</h2>
-  <button class="voltar" onclick="mostrar('menuCardapio')">⬅ Voltar</button>
+<!-- CERVEJAS -->
+<section id="cervejas" class="hidden">
+  <h2>Cervejas</h2>
+  <button class="voltar" onclick="mostrar('bebidas')">⬅ Voltar</button>
 
-  <p>Batata frita — R$ 18,00</p>
-  <button class="itemBtn" onclick="addCarrinho('Batata frita',18)">Adicionar</button>
+  <div class="item">
+    <span>Império lata</span>
+    <span>R$ 5,00</span>
+    <button onclick="addCarrinho('Império lata',5)">Adicionar</button>
+  </div>
 
-  <p>Calabresa — R$ 22,00</p>
-  <button class="itemBtn" onclick="addCarrinho('Calabresa',22)">Adicionar</button>
+  <div class="item">
+    <span>Bohemia lata</span>
+    <span>R$ 5,00</span>
+    <button onclick="addCarrinho('Bohemia lata',5)">Adicionar</button>
+  </div>
+
+  <div class="item">
+    <span>Heineken lata</span>
+    <span>R$ 8,50</span>
+    <button onclick="addCarrinho('Heineken lata',8.5)">Adicionar</button>
+  </div>
+</section>
+
+<!-- REFRIGERANTES -->
+<section id="refri" class="hidden">
+  <h2>Refrigerantes</h2>
+  <button class="voltar" onclick="mostrar('bebidas')">⬅ Voltar</button>
+
+  <div class="item">
+    <span>Coca-Cola lata</span>
+    <span>R$ 5,00</span>
+    <button onclick="addCarrinho('Coca-Cola lata',5)">Adicionar</button>
+  </div>
+
+  <div class="item">
+    <span>Água</span>
+    <span>R$ 3,00</span>
+    <button onclick="addCarrinho('Água',3)">Adicionar</button>
+  </div>
+</section>
+
+<!-- CARRINHO -->
+<section id="carrinho" class="hidden">
+  <h2>🛒 Carrinho</h2>
+
+  <label>Mesa</label>
+  <input type="number" id="mesa" placeholder="Ex: 7">
+
+  <ul id="listaCarrinho"></ul>
+
+  <div class="total">
+    Total: R$ <span id="total">0.00</span>
+  </div>
+
+  <button class="finalizar" onclick="finalizarPedido()">Enviar pedido no WhatsApp</button>
 </section>
 
 <!-- AGENDA -->
@@ -60,14 +103,6 @@
 </section>
 
 </main>
-
-<!-- RODAPÉ FIXO -->
-<footer>
-  <a href="https://wa.me/5517992585697" target="_blank">
-    WhatsApp: 17 99258-5697
-  </a>
-  <span>Av. dos Antunes, 900 – Bebedouro/SP</span>
-</footer>
 
 <script src="script.js"></script>
 </body>
