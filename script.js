@@ -1,0 +1,16 @@
+function mostrar(id) {
+  document.querySelectorAll("main section").forEach(sec => {
+    sec.classList.add("hidden");
+  });
+
+  const alvo = document.getElementById(id);
+  if (alvo) {
+    alvo.classList.remove("hidden");
+  }
+}
+
+function voltar() {
+  document.querySelectorAll("main section").forEach(sec => {
+    sec.classList.add("hidden");
+  });
+}
