@@ -1,8 +1,10 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt-BR">
 <head>
   <meta charset="UTF-8">
   <title>Garagem 900 Rock Bar</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
   <link rel="stylesheet" href="style.css">
 </head>
 
@@ -10,14 +12,13 @@
 
   <!-- TOPO -->
   <div class="topo">
-    <img src="logo.png" alt="Garagem 900" class="logo">
+    <img src="logo.png" alt="Garagem 900 Rock Bar">
 
-    <button class="btn-carrinho" onclick="mostrar('carrinho')">
-      🛒
-    </button>
+    <!-- BOTÃO CARRINHO -->
+    <button class="btn-carrinho" onclick="mostrar('carrinho')">🛒</button>
   </div>
 
-  <!-- MENU -->
+  <!-- MENU PRINCIPAL -->
   <nav id="menuPrincipal">
     <button onclick="mostrar('menuCardapio')">CARDÁPIO</button>
     <button onclick="mostrar('agenda')">AGENDA</button>
@@ -26,65 +27,96 @@
   <main>
 
     <!-- CARDÁPIO -->
-    <section id="menuCardapio">
+    <section id="menuCardapio" class="hidden">
+      <h2>Cardápio</h2>
       <button class="subbotao" onclick="mostrar('bebidas')">Bebidas</button>
     </section>
 
     <!-- BEBIDAS -->
     <section id="bebidas" class="hidden">
       <h2>Bebidas</h2>
-      <button class="voltar" onclick="voltar()">← Voltar</button>
+      <button class="voltar" onclick="voltar()">⬅ Voltar</button>
 
       <h3>Cervejas</h3>
 
       <div class="item">
-        <span>Império lata – R$ 5,00</span>
+        <span>Império lata — R$ 5,00</span>
         <div class="controle">
-          <button onclick="alterar('imperio_lata', -1)">−</button>
-          <span id="qtd-imperio_lata">0</span>
-          <button onclick="alterar('imperio_lata', 1, 5)">+</button>
+          <button onclick="alterarQtd('Imperio', -1)">−</button>
+          <span id="qtd-Imperio">0</span>
+          <button onclick="alterarQtd('Imperio', 1)">+</button>
+          <button onclick="enviarItem('Império lata', 5, 'Imperio')">ENVIAR</button>
         </div>
       </div>
 
       <div class="item">
-        <span>Boa lata – R$ 5,00</span>
+        <span>Boa lata — R$ 5,00</span>
         <div class="controle">
-          <button onclick="alterar('boa_lata', -1)">−</button>
-          <span id="qtd-boa_lata">0</span>
-          <button onclick="alterar('boa_lata', 1, 5)">+</button>
+          <button onclick="alterarQtd('Boa', -1)">−</button>
+          <span id="qtd-Boa">0</span>
+          <button onclick="alterarQtd('Boa', 1)">+</button>
+          <button onclick="enviarItem('Boa lata', 5, 'Boa')">ENVIAR</button>
         </div>
       </div>
-
-      <h3>Refrigerantes</h3>
 
       <div class="item">
-        <span>Coca-Cola lata – R$ 4,50</span>
+        <span>Skol lata — R$ 5,00</span>
         <div class="controle">
-          <button onclick="alterar('coca_lata', -1)">−</button>
-          <span id="qtd-coca_lata">0</span>
-          <button onclick="alterar('coca_lata', 1, 4.5)">+</button>
+          <button onclick="alterarQtd('Skol', -1)">−</button>
+          <span id="qtd-Skol">0</span>
+          <button onclick="alterarQtd('Skol', 1)">+</button>
+          <button onclick="enviarItem('Skol lata', 5, 'Skol')">ENVIAR</button>
         </div>
       </div>
 
+      <div class="item">
+        <span>Eisenbahn lata — R$ 5,00</span>
+        <div class="controle">
+          <button onclick="alterarQtd('Eisenbahn', -1)">−</button>
+          <span id="qtd-Eisenbahn">0</span>
+          <button onclick="alterarQtd('Eisenbahn', 1)">+</button>
+          <button onclick="enviarItem('Eisenbahn lata', 5, 'Eisenbahn')">ENVIAR</button>
+        </div>
+      </div>
+
+      <div class="item">
+        <span>Heineken lata — R$ 5,00</span>
+        <div class="controle">
+          <button onclick="alterarQtd('Heineken', -1)">−</button>
+          <span id="qtd-Heineken">0</span>
+          <button onclick="alterarQtd('Heineken', 1)">+</button>
+          <button onclick="enviarItem('Heineken lata', 5, 'Heineken')">ENVIAR</button>
+        </div>
+      </div>
     </section>
 
     <!-- CARRINHO -->
     <section id="carrinho" class="hidden">
-      <h2>Carrinho</h2>
-      <button class="voltar" onclick="voltar()">← Voltar</button>
+      <h2>🛒 Carrinho</h2>
+      <button class="voltar" onclick="voltar()">⬅ Voltar</button>
 
       <ul id="listaCarrinho"></ul>
-      <p>Total: R$ <span id="total">0.00</span></p>
+
+      <h3>Total: R$ <span id="total">0.00</span></h3>
+
+      <button class="subbotao" onclick="enviarPedido()">ENVIAR PEDIDO</button>
     </section>
 
     <!-- AGENDA -->
     <section id="agenda" class="hidden">
       <h2>Agenda</h2>
-      <button class="voltar" onclick="voltar()">← Voltar</button>
-      <p>Shows em breve</p>
+      <button class="voltar" onclick="voltar()">⬅ Voltar</button>
+      <p>Shows e eventos em breve</p>
     </section>
 
   </main>
+
+  <footer>
+    <a href="https://wa.me/5517992585697" target="_blank">
+      WhatsApp: 17 99258-5697
+    </a>
+    <span>Av. dos Antunes, 900 – Bebedouro/SP</span>
+  </footer>
 
   <script src="script.js"></script>
 </body>
