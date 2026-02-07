@@ -1,4 +1,31 @@
 document.addEventListener("DOMContentLoaded", () => {
+let mesaAtual = localStorage.getItem("mesaAtual");
+
+const loginMesa = document.getElementById("loginMesa");
+const home = document.getElementById("home");
+
+if (mesaAtual) {
+  loginMesa.classList.add("hidden");
+  home.classList.remove("hidden");
+} else {
+  home.classList.add("hidden");
+}
+
+document.getElementById("btnEntrarMesa").onclick = () => {
+  const mesa = document.getElementById("mesaInput").value;
+
+  if (!mesa) {
+    alert("Digite o número da mesa");
+    return;
+  }
+
+  mesaAtual = mesa;
+  localStorage.setItem("mesaAtual", mesa);
+  localStorage.setItem(`historico_mesa_${mesa}`, "[]");
+
+  loginMesa.classList.add("hidden");
+  home.classList.remove("hidden");
+};
 
   const home = document.getElementById("home");
   const cardapio = document.getElementById("cardapio");
@@ -61,23 +88,35 @@ document.addEventListener("DOMContentLoaded", () => {
     };
 
     enviar.onclick = () => {
-      const nome = item.dataset.nome;
-      const preco = parseFloat(item.dataset.preco);
-      const subtotal = preco * qtd;
+  const nome = item.dataset.nome;
+  const preco = parseFloat(item.dataset.preco);
+  const subtotal = preco * qtd;
 
-      const li = document.createElement("li");
-      li.textContent = `${qtd}x ${nome} — R$ ${subtotal.toFixed(2)}`;
-      listaCarrinho.appendChild(li);
+  const pedido = {
+    nome,
+    qtd,
+    subtotal
+  };
 
-      total += subtotal;
-      itens += qtd;
+  // salva no histórico da mesa
+  const chave = `historico_mesa_${mesaAtual}`;
+  const historico = JSON.parse(localStorage.getItem(chave)) || [];
+  historico.push(pedido);
+  localStorage.setItem(chave, JSON.stringify(historico));
 
-      totalSpan.textContent = total.toFixed(2);
-      cartCount.textContent = itens;
+  const li = document.createElement("li");
+  li.textContent = `${qtd}x ${nome} — R$ ${subtotal.toFixed(2)}`;
+  listaCarrinho.appendChild(li);
 
-      mostrarToast("Adicionado ao carrinho ✔");
-    };
-  });
+  total += subtotal;
+  itens += qtd;
+
+  totalSpan.textContent = total.toFixed(2);
+  cartCount.textContent = itens;
+
+  mostrarToast("Adicionado ao carrinho ✔");
+};
+
 
 });
 
