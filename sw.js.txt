@@ -1,4 +1,5 @@
-const CACHE_NAME = "garagem900-v1";
+const CACHE_NAME = "garagem900-v2";
+
 
 const FILES_TO_CACHE = [
   "./",
@@ -21,3 +22,4 @@ self.addEventListener("fetch", (event) => {
     })
   );
 });
+
