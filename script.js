@@ -8,19 +8,20 @@ document.addEventListener("DOMContentLoaded", () => {
   const btnCardapio = document.getElementById("btnCardapio");
   const btnAgenda = document.getElementById("btnAgenda");
   const btnCarrinho = document.getElementById("btnCarrinho");
+  const btnEnviarPedido = document.getElementById("btnEnviarPedido");
 
   const listaCarrinho = document.getElementById("listaCarrinho");
   const totalSpan = document.getElementById("total");
   const cartCount = document.getElementById("cartCount");
   const toast = document.getElementById("toast");
 
-  const btnEnviarPedido = document.getElementById("btnEnviarPedido");
-
   let total = 0;
   let itens = 0;
 
-  // garante que o carrinho comece fechado
-  carrinho.classList.add("hidden");
+  /* ===== ESTADO INICIAL ===== */
+  carrinho.style.display = "none";
+  cardapio.classList.add("hidden");
+  agenda.classList.add("hidden");
 
   /* ===== NAVEGAÇÃO ===== */
 
@@ -41,14 +42,14 @@ document.addEventListener("DOMContentLoaded", () => {
   };
 
   btnCarrinho.onclick = () => {
-    carrinho.classList.remove("hidden");
+    carrinho.style.display = "flex";
   };
 
   window.fecharCarrinho = () => {
-    carrinho.classList.add("hidden");
+    carrinho.style.display = "none";
   };
 
-  /* ===== ITENS DO CARDÁPIO ===== */
+  /* ===== ITENS ===== */
 
   document.querySelectorAll(".item").forEach(item => {
 
@@ -56,23 +57,19 @@ document.addEventListener("DOMContentLoaded", () => {
     const qtdSpan = item.querySelector(".qtd");
     qtdSpan.textContent = qtd;
 
-    const btnMais = item.querySelector(".mais");
-    const btnMenos = item.querySelector(".menos");
-    const btnEnviar = item.querySelector(".enviar");
-
-    btnMais.onclick = () => {
+    item.querySelector(".mais").onclick = () => {
       qtd++;
       qtdSpan.textContent = qtd;
     };
 
-    btnMenos.onclick = () => {
+    item.querySelector(".menos").onclick = () => {
       if (qtd > 0) {
         qtd--;
         qtdSpan.textContent = qtd;
       }
     };
 
-    btnEnviar.onclick = () => {
+    item.querySelector(".enviar").onclick = () => {
       if (qtd === 0) return;
 
       const nome = item.dataset.nome;
@@ -93,33 +90,28 @@ document.addEventListener("DOMContentLoaded", () => {
       qtdSpan.textContent = qtd;
 
       toast.classList.remove("hidden");
-      setTimeout(() => toast.classList.add("hidden"), 1500);
+      setTimeout(() => toast.classList.add("hidden"), 1200);
     };
   });
 
-  /* ===== WHATSAPP (PROTEGIDO) ===== */
+  /* ===== WHATSAPP ===== */
 
-  if (btnEnviarPedido) {
-    btnEnviarPedido.onclick = () => {
-      if (itens === 0) return;
+  btnEnviarPedido.onclick = () => {
+    if (itens === 0) return;
 
-      let mensagem = "🛒 Pedido - Garagem 900\n\n";
+    let mensagem = "🛒 Pedido - Garagem 900\n\n";
 
-      document.querySelectorAll("#listaCarrinho li").forEach(li => {
-        mensagem += "• " + li.textContent + "\n";
-      });
+    document.querySelectorAll("#listaCarrinho li").forEach(li => {
+      mensagem += "• " + li.textContent + "\n";
+    });
 
-      mensagem += "\n💰 Total: R$ " + total.toFixed(2);
+    mensagem += "\n💰 Total: R$ " + total.toFixed(2);
 
-      const telefone = "5517992585697";
-      const url = "https://wa.me/" + telefone + "?text=" + encodeURIComponent(mensagem);
+    const telefone = "5517992585697";
+    const url = "https://wa.me/" + telefone + "?text=" + encodeURIComponent(mensagem);
 
-      window.open(url, "_blank");
-    };
-  }
-
-});
-
+    window.open(url, "_blank");
+  };
 
 });
 
