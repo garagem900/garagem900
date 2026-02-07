@@ -2,24 +2,27 @@ let carrinho = {};
 let total = 0;
 
 function mostrar(id) {
-  document.querySelectorAll("main section").forEach(sec => {
-    sec.classList.add("hidden");
+  document.querySelectorAll("main, section").forEach(el => {
+    el.style.display = "none";
   });
-  document.getElementById(id).classList.remove("hidden");
+
+  document.getElementById(id).style.display = "block";
 }
 
-function voltar() {
-  document.querySelectorAll("main section").forEach(sec => {
-    sec.classList.add("hidden");
-  });
-}
-
-function addCarrinho(nome, preco) {
+function alterarQtd(nome, delta, preco = 0) {
   if (!carrinho[nome]) {
-    carrinho[nome] = { qtd: 1, preco };
-  } else {
-    carrinho[nome].qtd++;
+    carrinho[nome] = { qtd: 0, preco };
   }
+
+  carrinho[nome].qtd += delta;
+
+  if (carrinho[nome].qtd <= 0) {
+    delete carrinho[nome];
+    document.getElementById(`qtd-${nome}`).textContent = 0;
+  } else {
+    document.getElementById(`qtd-${nome}`).textContent = carrinho[nome].qtd;
+  }
+
   atualizarCarrinho();
 }
 
@@ -29,10 +32,10 @@ function atualizarCarrinho() {
   total = 0;
 
   for (let item in carrinho) {
-    const li = document.createElement("li");
     const subtotal = carrinho[item].qtd * carrinho[item].preco;
     total += subtotal;
 
+    const li = document.createElement("li");
     li.textContent = `${item} x${carrinho[item].qtd} — R$ ${subtotal.toFixed(2)}`;
     lista.appendChild(li);
   }
@@ -40,22 +43,5 @@ function atualizarCarrinho() {
   document.getElementById("total").textContent = total.toFixed(2);
 }
 
-function enviarPedido() {
-  if (total === 0) {
-    alert("Carrinho vazio");
-    return;
-  }
-
-  let msg = "🧾 Pedido - Garagem 900\n\n";
-
-  for (let item in carrinho) {
-    msg += `${item} x${carrinho[item].qtd}\n`;
-  }
-
-  msg += `\n💰 Total: R$ ${total.toFixed(2)}`;
-
-  window.open(
-    "https://wa.me/5517992585697?text=" + encodeURIComponent(msg),
-    "_blank"
-  );
-}
+// inicia na home
+mostrar("home");
