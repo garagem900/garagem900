@@ -1,52 +1,61 @@
-console.log("SCRIPT NOVO CARREGADO");
-
-let carrinho = {};
 let historico = [];
+let carrinho = [];
+let quantidades = {};
 
 function mostrar(id) {
-  document.querySelectorAll("section").forEach(s => {
-    s.classList.add("hidden");
+  document.querySelectorAll("main section").forEach(sec => {
+    sec.classList.add("hidden");
   });
-
   document.getElementById(id).classList.remove("hidden");
+  historico.push(id);
 }
 
 function voltar() {
-  mostrar("menuCardapio");
+  historico.pop();
+  const anterior = historico.pop();
+  if (anterior) mostrar(anterior);
 }
 
-function alterar(item, qtd, preco = 0) {
-  if (!carrinho[item]) {
-    carrinho[item] = { qtd: 0, preco };
-  }
+function alterarQtd(id, valor) {
+  quantidades[id] = (quantidades[id] || 0) + valor;
+  if (quantidades[id] < 0) quantidades[id] = 0;
+  document.getElementById("qtd-" + id).innerText = quantidades[id];
+}
 
-  carrinho[item].qtd += qtd;
+function enviarItem(nome, preco, id) {
+  const qtd = quantidades[id] || 0;
+  if (qtd === 0) return alert("Escolha a quantidade");
 
-  if (carrinho[item].qtd <= 0) {
-    carrinho[item].qtd = 0;
-  }
-
-  document.getElementById("qtd-" + item).innerText = carrinho[item].qtd;
-
+  carrinho.push({ nome, preco, qtd });
+  quantidades[id] = 0;
+  document.getElementById("qtd-" + id).innerText = 0;
   atualizarCarrinho();
 }
 
 function atualizarCarrinho() {
   const lista = document.getElementById("listaCarrinho");
   lista.innerHTML = "";
-
   let total = 0;
 
-  for (let item in carrinho) {
-    if (carrinho[item].qtd > 0) {
-      const subtotal = carrinho[item].qtd * carrinho[item].preco;
-      total += subtotal;
-
-      const li = document.createElement("li");
-      li.textContent = `${item.replace("_", " ")} x${carrinho[item].qtd} — R$ ${subtotal.toFixed(2)}`;
-      lista.appendChild(li);
-    }
-  }
+  carrinho.forEach(item => {
+    const li = document.createElement("li");
+    li.textContent = `${item.qtd}x ${item.nome} — R$ ${(item.qtd * item.preco).toFixed(2)}`;
+    lista.appendChild(li);
+    total += item.qtd * item.preco;
+  });
 
   document.getElementById("total").innerText = total.toFixed(2);
+}
+
+function enviarPedido() {
+  if (carrinho.length === 0) return alert("Carrinho vazio");
+
+  let msg = "📋 Pedido Garagem 900:%0A";
+  carrinho.forEach(item => {
+    msg += `${item.qtd}x ${item.nome}%0A`;
+  });
+
+  msg += `%0ATotal: R$ ${document.getElementById("total").innerText}`;
+
+  window.open(`https://wa.me/5517992585697?text=${msg}`, "_blank");
 }
