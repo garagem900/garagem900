@@ -26,16 +26,22 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   if (btnCardapio) {
-    btnCardapio.addEventListener("click", () => {
-      alert("CARDÁPIO (em construção)");
-    });
-  }
+    btnCardapio.onclick = () => {
+  home.classList.add("hidden");
+  agenda.classList.add("hidden");
+  carrinho.classList.add("hidden");
 
-  if (btnAgenda) {
-    btnAgenda.addEventListener("click", () => {
-      alert("AGENDA (em construção)");
-    });
-  }
+  cardapio.classList.remove("hidden");
+};
+
+btnAgenda.onclick = () => {
+  home.classList.add("hidden");
+  cardapio.classList.add("hidden");
+  carrinho.classList.add("hidden");
+
+  agenda.classList.remove("hidden");
+};
+
 
   console.log("JS carregado sem erros ✅");
 });
