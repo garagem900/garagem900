@@ -178,6 +178,21 @@ footer span {
   background: #2a0f4f;
   box-shadow: 0 0 18px #9d6bff;
 }
+/* BOTÃO ENVIAR */
+.enviar {
+  padding: 10px 16px;
+  border-radius: 10px; /* retângulo arredondado */
+  border: 2px solid #7b2cff;
+  background: transparent;
+  color: #fff;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.enviar:active {
+  background: #2a0f4f;
+}
+
 
 
 
