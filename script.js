@@ -87,6 +87,28 @@ document.addEventListener("DOMContentLoaded", () => {
 
       qtd = 1;
       qtdSpan.textContent = 1;
+      btnEnviarPedido.addEventListener("click", () => {
+
+  if (listaCarrinho.children.length === 0) {
+    alert("Seu carrinho está vazio!");
+    return;
+  }
+
+  let pedidoTexto = "🛒 Pedido Garagem 900\n\n";
+
+  listaCarrinho.querySelectorAll("li").forEach(item => {
+    pedidoTexto += `• ${item.textContent}\n`;
+  });
+
+  pedidoTexto += `\nTotal: R$ ${total.toFixed(2)}`;
+
+  const telefone = "5517992585697"; // WhatsApp do bar
+
+  const url = `https://wa.me/${telefone}?text=${encodeURIComponent(pedidoTexto)}`;
+
+  window.open(url, "_blank");
+});
+
     });
   });
 
