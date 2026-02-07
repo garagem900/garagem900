@@ -117,12 +117,19 @@ footer{
   font-size:14px;
 }
 
-footer a{
-  color:#25D366;
-  text-decoration:none;
-  display:block;
-  font-weight:bold;
+footer{
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  background:#050505;
+  border-top:1px solid #6a1fff;
+  padding:10px;
+  text-align:center;
+  font-size:14px;
+  z-index: 1;   /* camada baixa */
 }
+
 
 footer span{
   display:block;
@@ -132,5 +139,6 @@ footer span{
 
   font-weight:bold;
 }
+
 
 
