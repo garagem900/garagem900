@@ -180,6 +180,15 @@ setTimeout(() => {
   document.getElementById("app").style.display = "block";
 }, 2500);
 
+window.onload = function() {
+  setTimeout(() => {
+    const splash = document.getElementById("splash");
+    const app = document.getElementById("app");
+
+    if (splash) splash.style.display = "none";
+    if (app) app.style.display = "block";
+  }, 2000);
+};
 
 
 
