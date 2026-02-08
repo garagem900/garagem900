@@ -153,6 +153,12 @@ function finishOrder() {
   var url = "https://wa.me/5517992585697?text=" + encodeURIComponent(message);
   window.open(url, "_blank");
 }
+setTimeout(function() {
+  var splash = document.getElementById("splash");
+  if (splash) {
+    splash.style.display = "none";
+  }
+}, 2000);
 
 
 
