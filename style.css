@@ -1,97 +1,80 @@
-body {
-  margin:0;
-  font-family: Arial;
-  background:url("textura.png");
-  background-size:cover;
-  color:white;
-  text-align:center;
+body{
+margin:0;
+font-family:Arial;
+background:black url("textura.png");
+color:white;
+text-align:center;
 }
 
-.hidden { display:none; }
+.hidden{display:none;}
 
-button {
-  width:90%;
-  padding:15px;
-  margin:10px auto;
-  background:#ff0033;
-  border:none;
-  border-radius:12px;
-  color:white;
-  font-size:18px;
-  box-shadow:0 0 10px red;
+button{
+background:#ff0033;
+border:none;
+padding:12px 20px;
+margin:10px;
+border-radius:8px;
+color:white;
+font-size:16px;
 }
 
-.voltar {
-  background:#444;
+.logo{
+width:200px;
+margin-top:20px;
 }
 
-header img {
-  width:160px;
-  margin:10px;
+#splash{
+position:fixed;
+width:100%;
+height:100%;
+background:black;
+display:flex;
+align-items:center;
+justify-content:center;
 }
 
-/* Splash */
-#splash {
-  position:fixed;
-  width:100%;
-  height:100%;
-  background:black;
-  display:flex;
-  justify-content:center;
-  align-items:center;
-}
-.splash-logo {
-  width:70%;
-  animation:pulse 2s infinite;
-}
-@keyframes pulse {
-  from{transform:scale(0.8);opacity:0.6;}
-  to{transform:scale(1);opacity:1;}
+.logo-splash{
+width:70%;
+animation:pulse 2s infinite;
 }
 
-/* Produtos */
-#produtos div {
-  background:rgba(0,0,0,0.7);
-  margin:10px;
-  padding:10px;
-  border-radius:12px;
+@keyframes pulse{
+0%{transform:scale(1);}
+50%{transform:scale(1.1);}
+100%{transform:scale(1);}
 }
 
-/* Carrinho */
-#cart-icon {
-  position:fixed;
-  bottom:80px;
-  right:15px;
-  background:red;
-  padding:15px;
-  border-radius:50%;
+#produtos div{
+background:#111;
+margin:10px;
+padding:10px;
+border-radius:10px;
+display:flex;
+justify-content:space-between;
+align-items:center;
 }
 
-#carrinho, #tipo-pedido {
-  position:fixed;
-  bottom:140px;
-  left:5%;
-  width:90%;
-  background:#111;
-  padding:15px;
-  border-radius:15px;
+#carrinho{
+position:fixed;
+bottom:0;
+background:#111;
+width:100%;
+padding:15px;
 }
 
-/* Footer */
-footer {
-  position:fixed;
-  bottom:0;
-  width:100%;
-  background:black;
-  padding:5px;
-}
-footer a {
-  color:red;
-  text-decoration:none;
-  font-size:18px;
+#carrinho-btn{
+position:fixed;
+top:10px;
+right:10px;
+background:red;
+padding:10px;
+border-radius:50%;
 }
 
-
+footer{
+margin-top:20px;
+font-size:14px;
+}
 
 
 
