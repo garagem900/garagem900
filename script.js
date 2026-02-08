@@ -29,32 +29,44 @@ function saveUser() {
   const nome = document.getElementById("nome").value;
   const telefone = document.getElementById("telefone").value;
 
-  if (!nome || !telefone) return alert("Preencha tudo!");
+  if (!nome || !telefone) return alert("Preencha todos os campos");
 
   user = { nome, telefone };
   localStorage.setItem("user", JSON.stringify(user));
   document.getElementById("registerModal").style.display = "none";
 }
 
+function openEditUser() {
+  document.getElementById("registerModal").style.display = "flex";
+}
+
 function showCategory(cat) {
   productsDiv.innerHTML = "";
-  productsData[cat].forEach((p, i) => {
+  productsData[cat].forEach(p => {
     productsDiv.innerHTML += `
       <div class="product">
         <h3>${p.name}</h3>
         <p>R$ ${p.price}</p>
-        <button onclick="addToCart('${p.name}', ${p.price})">+</button>
-        <button onclick="removeFromCart('${p.name}')">-</button>
+        <div class="controls">
+          <button onclick="removeFromCart('${p.name}')">-</button>
+          <span>${getQty(p.name)}</span>
+          <button onclick="addToCart('${p.name}', ${p.price})">+</button>
+        </div>
       </div>
     `;
   });
+}
+
+function getQty(name) {
+  const item = cart.find(i => i.name === name);
+  return item ? item.qty : 0;
 }
 
 function addToCart(name, price) {
   const item = cart.find(i => i.name === name);
   if (item) item.qty++;
   else cart.push({ name, price, qty: 1 });
-  updateCartCount();
+  updateUI();
 }
 
 function removeFromCart(name) {
@@ -62,21 +74,21 @@ function removeFromCart(name) {
   if (!item) return;
   item.qty--;
   if (item.qty <= 0) cart = cart.filter(i => i.name !== name);
-  updateCartCount();
+  updateUI();
 }
 
-function updateCartCount() {
-  let total = cart.reduce((sum, i) => sum + i.qty, 0);
-  document.getElementById("cartCount").innerText = total;
+function updateUI() {
+  let totalQty = cart.reduce((s, i) => s + i.qty, 0);
+  document.getElementById("cartCount").innerText = totalQty;
 }
 
-cartBtn.onclick = () => openCart();
+cartBtn.onclick = openCart;
 
 function openCart() {
   const cartItems = document.getElementById("cartItems");
   cartItems.innerHTML = "";
-
   let total = 0;
+
   cart.forEach(i => {
     total += i.price * i.qty;
     cartItems.innerHTML += `<p>${i.name} (${i.qty}x) - R$ ${i.price * i.qty}</p>`;
@@ -130,7 +142,7 @@ function finalizarPedido() {
   });
 
   cart = [];
-  updateCartCount();
+  updateUI();
   closeCart();
 }
 
