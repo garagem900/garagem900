@@ -39,7 +39,7 @@ window.onload = function(){
 function verificarCadastro(){
   if(localStorage.getItem("nome")){
     document.getElementById("app").style.display="block";
-  }else{
+  } else {
     document.getElementById("cadastro").style.display="block";
   }
 }
@@ -48,7 +48,6 @@ function salvarCadastro(){
   localStorage.setItem("nome", document.getElementById("nome").value);
   localStorage.setItem("endereco", document.getElementById("endereco").value);
   localStorage.setItem("telefone", document.getElementById("telefone").value);
-
   document.getElementById("cadastro").style.display="none";
   document.getElementById("app").style.display="block";
 }
@@ -75,26 +74,35 @@ function voltarCardapio(){
 
 function mostrarProdutos(cat){
   document.getElementById("categorias").style.display="none";
-
-  const produtosDiv = document.getElementById("produtos");
-  produtosDiv.innerHTML="";
-  produtosDiv.classList.remove("hidden");
+  const div = document.getElementById("produtos");
+  div.innerHTML="";
+  div.classList.remove("hidden");
 
   produtos[cat].forEach((item,i)=>{
-    produtosDiv.innerHTML+=`
+    div.innerHTML+=`
     <div>
       ${item.nome} - R$ ${item.preco.toFixed(2)}
-      <button onclick="addItem('${cat}',${i})">Adicionar</button>
-    </div>
-    `;
+      <div class="qty">
+        <button onclick="diminuir('${cat}',${i})">-</button>
+        <button onclick="aumentar('${cat}',${i})">+</button>
+      </div>
+    </div>`;
   });
 
-  produtosDiv.innerHTML+=`<button onclick="voltarCardapio()">VOLTAR</button>`;
+  div.innerHTML+=`<button onclick="voltarCardapio()">VOLTAR</button>`;
 }
 
-function addItem(cat,i){
+function aumentar(cat,i){
   carrinho.push(produtos[cat][i]);
   atualizarCarrinho();
+}
+
+function diminuir(cat,i){
+  let index = carrinho.findIndex(p=>p.nome===produtos[cat][i].nome);
+  if(index>-1){
+    carrinho.splice(index,1);
+    atualizarCarrinho();
+  }
 }
 
 function toggleCarrinho(){
@@ -111,8 +119,8 @@ function atualizarCarrinho(){
 
   carrinho.forEach((item,index)=>{
     lista.innerHTML+=`
-    <li>${item.nome} - R$ ${item.preco.toFixed(2)}
-    <button onclick="removerItem(${index})">❌</button></li>`;
+      <li>${item.nome} - R$ ${item.preco.toFixed(2)}
+      <button onclick="removerItem(${index})">❌</button></li>`;
     total+=item.preco;
   });
 
@@ -125,20 +133,32 @@ function removerItem(index){
   atualizarCarrinho();
 }
 
-function finalizarPedido(){
+function mostrarTipoPedido(){
+  document.getElementById("tipo-pedido").classList.toggle("hidden");
+}
+
+function enviarPedido(tipo){
   let nome=localStorage.getItem("nome");
   let endereco=localStorage.getItem("endereco");
   let telefone=localStorage.getItem("telefone");
 
   let texto="Pedido Garagem 900:%0A";
+
   carrinho.forEach(i=>{
     texto+=`${i.nome} - R$ ${i.preco.toFixed(2)}%0A`;
   });
 
-  texto+=`%0ACliente: ${nome}%0ATel: ${telefone}%0AEndereço: ${endereco}`;
+  texto+=`%0ATipo: ${tipo.toUpperCase()}`;
+  texto+=`%0ACliente: ${nome}`;
+  texto+=`%0ATel: ${telefone}`;
+
+  if(tipo==="delivery"){
+    texto+=`%0AEndereço: ${endereco}`;
+  }
 
   window.open(`https://wa.me/5517992585697?text=${texto}`);
 }
+
 
 
 
