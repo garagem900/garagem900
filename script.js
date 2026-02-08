@@ -107,10 +107,6 @@ function addItem(cat,i){
   atualizarCarrinho();
 }
 
-function toggleCarrinho(){
-  document.getElementById("carrinho").classList.toggle("hidden");
-}
-
 function atualizarCarrinho(){
   const lista = document.getElementById("lista-carrinho");
   const totalSpan = document.getElementById("total");
@@ -119,14 +115,24 @@ function atualizarCarrinho(){
   lista.innerHTML = "";
   let total = 0;
 
-  carrinho.forEach(item=>{
-    lista.innerHTML += `<li>${item.nome} - R$ ${item.preco.toFixed(2)}</li>`;
+  carrinho.forEach((item, index) => {
+    lista.innerHTML += `
+      <li>
+        ${item.nome} - R$ ${item.preco.toFixed(2)}
+        <button onclick="removerItem(${index})">❌</button>
+      </li>
+    `;
     total += item.preco;
   });
 
-  totalSpan.textContent = total.toFixed(2);
-  count.textContent = carrinho.length;
+  totalSpan.innerText = total.toFixed(2);
+  count.innerText = carrinho.length;
+  function removerItem(index){
+  carrinho.splice(index,1);
+  atualizarCarrinho();
+
 }
+
 
 /* TIPO PEDIDO */
 function mostrarTipoPedido(){
