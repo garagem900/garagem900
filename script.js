@@ -159,6 +159,12 @@ setTimeout(function() {
     splash.style.display = "none";
   }
 }, 2000);
+setTimeout(function() {
+  var splash = document.getElementById("splash");
+  if (splash) {
+    splash.style.display = "none";
+  }
+}, 2500);
 
 
 
