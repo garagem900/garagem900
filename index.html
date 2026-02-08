@@ -1,20 +1,26 @@
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
-  <meta charset="UTF-8">
-  <title>Bar Rock</title>
-  <link rel="stylesheet" href="style.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Bar Rock</title>
+
+<link rel="manifest" href="manifest.json">
+<link rel="stylesheet" href="style.css">
+
 </head>
 <body>
 
 <!-- Splash Screen -->
 <div id="splash">
-  <img src="logo.png" alt="Logo">
+  <img src="logo.png" class="splash-logo">
 </div>
 
 <div id="app" class="hidden">
 
-<h2>🍺 Bar Rock</h2>
+<header>
+  <img src="logo.png" class="menu-logo">
+</header>
 
 <div id="top-buttons">
   <button onclick="mostrarBebidas()">BEBIDAS</button>
@@ -43,9 +49,15 @@
 </div>
 
 <script src="script.js"></script>
+
+<script>
+if ("serviceWorker" in navigator) {
+  navigator.serviceWorker.register("service-worker.js");
+}
+</script>
+
 </body>
 </html>
-
 
 
 
