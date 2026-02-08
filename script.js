@@ -16,6 +16,24 @@ const productsDiv = document.getElementById("products");
 const cartItemsDiv = document.getElementById("cartItems");
 const cartCount = document.getElementById("cartCount");
 
+window.onload = function() {
+
+  // Splash screen
+  setTimeout(function() {
+    var splash = document.getElementById("splash");
+    if (splash) {
+      splash.style.display = "none";
+    }
+  }, 2500);
+
+  // Popup cadastro
+  if (!localStorage.getItem("user")) {
+    document.getElementById("popup").style.display = "flex";
+  }
+
+  showCategory("bebidas");
+};
+
 function toggleAddress() {
   var type = document.getElementById("orderType").value;
   var address = document.getElementById("address");
@@ -38,13 +56,6 @@ function saveUser() {
   localStorage.setItem("user", JSON.stringify(user));
   document.getElementById("popup").style.display = "none";
 }
-
-window.onload = function() {
-  if (!localStorage.getItem("user")) {
-    document.getElementById("popup").style.display = "flex";
-  }
-  showCategory("bebidas");
-};
 
 function showCategory(cat) {
   currentCategory = cat;
@@ -99,7 +110,6 @@ function removeFromCart(name) {
   for (var i = 0; i < cart.length; i++) {
     if (cart[i].name === name) {
       cart[i].qty--;
-
       if (cart[i].qty <= 0) {
         cart.splice(i, 1);
       }
@@ -153,18 +163,6 @@ function finishOrder() {
   var url = "https://wa.me/5517992585697?text=" + encodeURIComponent(message);
   window.open(url, "_blank");
 }
-setTimeout(function() {
-  var splash = document.getElementById("splash");
-  if (splash) {
-    splash.style.display = "none";
-  }
-}, 2000);
-setTimeout(function() {
-  var splash = document.getElementById("splash");
-  if (splash) {
-    splash.style.display = "none";
-  }
-}, 2500);
 
 
 
