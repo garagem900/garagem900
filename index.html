@@ -3,26 +3,27 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Bar Rock</title>
+<title>Garagem 900</title>
 
 <link rel="manifest" href="manifest.json">
 <link rel="stylesheet" href="style.css">
-
 </head>
+
 <body>
 
-<!-- Splash Screen -->
+<!-- SPLASH -->
 <div id="splash">
   <img src="logo.png" class="splash-logo">
 </div>
 
+<!-- APP -->
 <div id="app" class="hidden">
 
 <header>
   <img src="logo.png" class="menu-logo">
 </header>
 
-<div id="top-buttons">
+<div id="main-buttons">
   <button onclick="mostrarBebidas()">BEBIDAS</button>
   <button onclick="mostrarPorcoes()">PORÇÕES</button>
 </div>
@@ -36,10 +37,11 @@
 
 <div id="produtos"></div>
 
+<!-- Carrinho -->
 <div id="cart-icon" onclick="toggleCarrinho()">🛒 <span id="cart-count">0</span></div>
 
 <div id="carrinho" class="hidden">
-  <h3>Seu Pedido</h3>
+  <h2>Seu Pedido</h2>
   <ul id="lista-carrinho"></ul>
   <p>Total: R$ <span id="total">0.00</span></p>
   <button onclick="finalizarPedido()">FINALIZAR PEDIDO</button>
