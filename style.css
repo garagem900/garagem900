@@ -12,7 +12,7 @@ button{
 background:#ff0033;
 border:none;
 padding:12px 20px;
-margin:8px;
+margin:6px;
 border-radius:10px;
 color:white;
 font-size:16px;
@@ -57,7 +57,13 @@ align-items:center;
 
 .qty{
 display:flex;
+align-items:center;
 gap:5px;
+}
+
+.qty span{
+min-width:20px;
+display:inline-block;
 }
 
 #carrinho{
@@ -77,11 +83,16 @@ padding:10px;
 border-radius:50%;
 }
 
-footer{
-margin-top:20px;
-font-size:14px;
+.footer-blur{
+position:fixed;
+bottom:0;
+width:100%;
+background:rgba(0,0,0,0.7);
+backdrop-filter: blur(5px);
 padding:10px;
+font-size:14px;
 }
+
 
 
 
