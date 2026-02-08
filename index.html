@@ -56,14 +56,16 @@
   <p>Total: R$ <span id="total">0</span></p>
 
   <button onclick="mostrarTipoPedido()">FINALIZAR PEDIDO</button>
-  <button onclick="toggleCarrinho()">Fechar</button>
+  <button onclick="toggleCarrinho()">VOLTAR</button>
 
   <div id="tipo-pedido" class="hidden">
     <button onclick="enviarPedido('balcao')">BALCÃO</button>
     <button onclick="enviarPedido('mesa')">MESA</button>
     <button onclick="enviarPedido('delivery')">DELIVERY</button>
+    <button onclick="mostrarTipoPedido()">VOLTAR</button>
   </div>
 </div>
+
 
 <footer class="footer-blur">
   WhatsApp: 17 99258-5697 <br>
@@ -75,6 +77,7 @@
 <script src="script.js"></script>
 </body>
 </html>
+
 
 
 
