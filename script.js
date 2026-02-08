@@ -31,103 +31,128 @@ const produtos = {
 
 let carrinho = [];
 
-window.onload=()=>{
-  setTimeout(()=>{
-    document.getElementById("splash").style.display="none";
+/* SPLASH */
+window.onload = () => {
+  setTimeout(() => {
+    document.getElementById("splash").style.display = "none";
+
     if(localStorage.getItem("cliente")){
       document.getElementById("app").classList.remove("hidden");
     } else {
       document.getElementById("cadastro").classList.remove("hidden");
     }
-  },2000);
-}
+  }, 2000);
+};
 
+/* CADASTRO */
 function salvarCadastro(){
-  const cliente={
-    nome:nome.value,
-    endereco:endereco.value,
-    telefone:telefone.value
-  }
-  localStorage.setItem("cliente",JSON.stringify(cliente));
-  cadastro.classList.add("hidden");
-  app.classList.remove("hidden");
+  const cliente = {
+    nome: document.getElementById("nome").value,
+    endereco: document.getElementById("endereco").value,
+    telefone: document.getElementById("telefone").value
+  };
+
+  localStorage.setItem("cliente", JSON.stringify(cliente));
+  document.getElementById("cadastro").classList.add("hidden");
+  document.getElementById("app").classList.remove("hidden");
 }
 
+/* TELAS */
 function mostrarCardapio(){
-  menu-inicial.classList.add("hidden");
-  cardapio.classList.remove("hidden");
+  document.getElementById("menu-inicial").classList.add("hidden");
+  document.getElementById("cardapio").classList.remove("hidden");
 }
 
 function voltarMenu(){
-  cardapio.classList.add("hidden");
-  menu-inicial.classList.remove("hidden");
+  document.getElementById("cardapio").classList.add("hidden");
+  document.getElementById("menu-inicial").classList.remove("hidden");
 }
 
 function mostrarBebidas(){
-  cardapio.classList.add("hidden");
-  categorias.classList.remove("hidden");
+  document.getElementById("cardapio").classList.add("hidden");
+  document.getElementById("categorias").classList.remove("hidden");
 }
 
 function voltarCardapio(){
-  categorias.classList.add("hidden");
-  cardapio.classList.remove("hidden");
+  document.getElementById("categorias").classList.add("hidden");
+  document.getElementById("cardapio").classList.remove("hidden");
 }
 
 function mostrarCategoria(cat){
-  categorias.classList.add("hidden");
-  produtosDiv=document.getElementById("produtos");
+  document.getElementById("categorias").classList.add("hidden");
+
+  const produtosDiv = document.getElementById("produtos");
   produtosDiv.classList.remove("hidden");
-  produtosDiv.innerHTML=`<button class="voltar" onclick="voltarCategorias()">⬅ VOLTAR</button>`;
+  produtosDiv.innerHTML = `<button onclick="voltarCategorias()">⬅ VOLTAR</button>`;
 
   produtos[cat].forEach((item,i)=>{
-    produtosDiv.innerHTML+=`
-    <div>
-      <strong>${item.nome}</strong><br>
-      R$ ${item.preco.toFixed(2)}<br>
-      <button onclick="addItem('${cat}',${i})">ADICIONAR</button>
-    </div>`;
+    produtosDiv.innerHTML += `
+      <div>
+        <strong>${item.nome}</strong><br>
+        R$ ${item.preco.toFixed(2)}<br>
+        <button onclick="addItem('${cat}',${i})">ADICIONAR</button>
+      </div>
+    `;
   });
 }
 
 function voltarCategorias(){
-  produtosDiv.classList.add("hidden");
-  categorias.classList.remove("hidden");
+  document.getElementById("produtos").classList.add("hidden");
+  document.getElementById("categorias").classList.remove("hidden");
 }
 
+/* CARRINHO */
 function addItem(cat,i){
   carrinho.push(produtos[cat][i]);
   atualizarCarrinho();
 }
 
 function toggleCarrinho(){
-  carrinhoDiv.classList.toggle("hidden");
+  document.getElementById("carrinho").classList.toggle("hidden");
 }
 
 function atualizarCarrinho(){
-  lista-carrinho.innerHTML="";
-  let total=0;
+  const lista = document.getElementById("lista-carrinho");
+  const totalSpan = document.getElementById("total");
+  const count = document.getElementById("cart-count");
+
+  lista.innerHTML = "";
+  let total = 0;
+
   carrinho.forEach(item=>{
-    lista-carrinho.innerHTML+=`<li>${item.nome} - R$ ${item.preco}</li>`;
-    total+=item.preco;
+    lista.innerHTML += `<li>${item.nome} - R$ ${item.preco.toFixed(2)}</li>`;
+    total += item.preco;
   });
-  total.textContent=total.toFixed(2);
-  cart-count.textContent=carrinho.length;
+
+  totalSpan.textContent = total.toFixed(2);
+  count.textContent = carrinho.length;
 }
 
+/* TIPO PEDIDO */
 function mostrarTipoPedido(){
-  tipo-pedido.classList.remove("hidden");
+  document.getElementById("tipo-pedido").classList.remove("hidden");
 }
 
 function fecharTipoPedido(){
-  tipo-pedido.classList.add("hidden");
+  document.getElementById("tipo-pedido").classList.add("hidden");
 }
 
 function montarMensagem(tipo,extra=""){
-  const cliente=JSON.parse(localStorage.getItem("cliente"));
-  let msg=`Pedido ${tipo}%0ACliente: ${cliente.nome}%0A`;
-  if(tipo=="DELIVERY") msg+=`Endereço: ${cliente.endereco}%0A`;
-  if(extra) msg+=extra+"%0A";
-  carrinho.forEach(i=>msg+=`${i.nome} - R$${i.preco}%0A`);
+  const cliente = JSON.parse(localStorage.getItem("cliente"));
+  let msg = `Pedido ${tipo}%0ACliente: ${cliente.nome}%0A`;
+
+  if(tipo==="DELIVERY"){
+    msg += `Endereço: ${cliente.endereco}%0A`;
+  }
+
+  if(extra){
+    msg += extra + "%0A";
+  }
+
+  carrinho.forEach(i=>{
+    msg += `${i.nome} - R$${i.preco}%0A`;
+  });
+
   return msg;
 }
 
@@ -136,7 +161,7 @@ function pedidoBalcao(){
 }
 
 function pedidoMesa(){
-  let mesa=prompt("Número da mesa:");
+  let mesa = prompt("Número da mesa:");
   window.open(`https://wa.me/${whatsapp}?text=${montarMensagem("MESA","Mesa: "+mesa)}`);
 }
 
