@@ -17,12 +17,18 @@ const cartItemsDiv = document.getElementById("cartItems");
 const cartCount = document.getElementById("cartCount");
 
 function toggleAddress() {
-  const type = document.getElementById("orderType").value;
-  document.getElementById("address").style.display = type === "Delivery" ? "block" : "none";
+  var type = document.getElementById("orderType").value;
+  var address = document.getElementById("address");
+
+  if (type === "Delivery") {
+    address.style.display = "block";
+  } else {
+    address.style.display = "none";
+  }
 }
 
 function saveUser() {
-  const user = {
+  var user = {
     name: document.getElementById("name").value,
     phone: document.getElementById("phone").value,
     type: document.getElementById("orderType").value,
@@ -33,7 +39,7 @@ function saveUser() {
   document.getElementById("popup").style.display = "none";
 }
 
-window.onload = () => {
+window.onload = function() {
   if (!localStorage.getItem("user")) {
     document.getElementById("popup").style.display = "flex";
   }
@@ -44,42 +50,61 @@ function showCategory(cat) {
   currentCategory = cat;
   productsDiv.innerHTML = "";
 
-  productsData[cat].forEach(p => {
-    productsDiv.innerHTML += `
-      <div class="product">
-        <h3>${p.name}</h3>
-        <p>R$ ${p.price}</p>
-        <div class="controls">
-          <button onclick="removeFromCart('${p.name}')">-</button>
-          <span>${getQty(p.name)}</span>
-          <button onclick="addToCart('${p.name}', ${p.price})">+</button>
-        </div>
-      </div>
-    `;
-  });
+  var list = productsData[cat];
+
+  for (var i = 0; i < list.length; i++) {
+    var p = list[i];
+
+    productsDiv.innerHTML +=
+      '<div class="product">' +
+        '<h3>' + p.name + '</h3>' +
+        '<p>R$ ' + p.price + '</p>' +
+        '<div class="controls">' +
+          '<button onclick="removeFromCart(\'' + p.name + '\')">-</button>' +
+          '<span>' + getQty(p.name) + '</span>' +
+          '<button onclick="addToCart(\'' + p.name + '\',' + p.price + ')">+</button>' +
+        '</div>' +
+      '</div>';
+  }
 }
 
 function getQty(name) {
-  const item = cart.find(i => i.name === name);
-  return item ? item.qty : 0;
+  for (var i = 0; i < cart.length; i++) {
+    if (cart[i].name === name) {
+      return cart[i].qty;
+    }
+  }
+  return 0;
 }
 
 function addToCart(name, price) {
-  const item = cart.find(i => i.name === name);
-  if (item) item.qty++;
-  else cart.push({ name, price, qty: 1 });
+  var found = false;
+
+  for (var i = 0; i < cart.length; i++) {
+    if (cart[i].name === name) {
+      cart[i].qty++;
+      found = true;
+    }
+  }
+
+  if (!found) {
+    cart.push({ name: name, price: price, qty: 1 });
+  }
 
   updateUI();
   showCategory(currentCategory);
 }
 
 function removeFromCart(name) {
-  const item = cart.find(i => i.name === name);
-  if (!item) return;
+  for (var i = 0; i < cart.length; i++) {
+    if (cart[i].name === name) {
+      cart[i].qty--;
 
-  item.qty--;
-  if (item.qty <= 0) {
-    cart = cart.filter(i => i.name !== name);
+      if (cart[i].qty <= 0) {
+        cart.splice(i, 1);
+      }
+      break;
+    }
   }
 
   updateUI();
@@ -88,39 +113,44 @@ function removeFromCart(name) {
 
 function updateUI() {
   cartItemsDiv.innerHTML = "";
-  let total = 0;
-  let count = 0;
+  var total = 0;
+  var count = 0;
 
-  cart.forEach(item => {
+  for (var i = 0; i < cart.length; i++) {
+    var item = cart[i];
     total += item.price * item.qty;
     count += item.qty;
 
-    cartItemsDiv.innerHTML += `
-      <p>${item.qty}x ${item.name} - R$ ${item.price * item.qty}</p>
-    `;
-  });
+    cartItemsDiv.innerHTML +=
+      "<p>" + item.qty + "x " + item.name + " - R$ " + (item.price * item.qty) + "</p>";
+  }
 
-  cartItemsDiv.innerHTML += `<strong>Total: R$ ${total}</strong>`;
+  cartItemsDiv.innerHTML += "<strong>Total: R$ " + total + "</strong>";
   cartCount.innerText = count;
 }
 
 function finishOrder() {
-  const user = JSON.parse(localStorage.getItem("user"));
-  if (!user) return alert("Cadastre-se primeiro!");
+  var user = JSON.parse(localStorage.getItem("user"));
+  if (!user) {
+    alert("Cadastre-se primeiro!");
+    return;
+  }
 
-  let message = `Pedido de ${user.name}\nTelefone: ${user.phone}\nTipo: ${user.type}\n`;
+  var message = "Pedido de " + user.name + "\n";
+  message += "Telefone: " + user.phone + "\n";
+  message += "Tipo: " + user.type + "\n";
 
   if (user.type === "Delivery") {
-    message += `Endereço: ${user.address}\n`;
+    message += "Endereço: " + user.address + "\n";
   }
 
   message += "\nPedido:\n";
 
-  cart.forEach(i => {
-    message += `${i.qty}x ${i.name}\n`;
-  });
+  for (var i = 0; i < cart.length; i++) {
+    message += cart[i].qty + "x " + cart[i].name + "\n";
+  }
 
-  const url = `https://wa.me/5517992585697?text=${encodeURIComponent(message)}`;
+  var url = "https://wa.me/5517992585697?text=" + encodeURIComponent(message);
   window.open(url, "_blank");
 }
 
