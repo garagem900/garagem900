@@ -1,167 +1,114 @@
 let cart = [];
-let currentCategory = "bebidas";
 
-const productsData = {
-  bebidas: [
-    { name: "Cerveja", price: 8 },
-    { name: "Refrigerante", price: 6 }
+const products = {
+  cervejas: [
+    {name:"Império lata", price:5.00},
+    {name:"Boa lata", price:5.00},
+    {name:"Eisenbahn lata", price:6.00},
+    {name:"Heineken lata", price:8.00}
   ],
-  porcoes: [
-    { name: "Batata frita", price: 25 },
-    { name: "Calabresa", price: 30 }
-  ]
+  refrigerantes: [
+    {name:"Coca-Cola lata", price:4.50},
+    {name:"Coca-Cola (casulinha)", price:3.50},
+    {name:"Guaraná lata", price:4.50},
+    {name:"Fanta lata", price:4.50},
+    {name:"Água sem gás", price:3.00},
+    {name:"Água com gás", price:3.50}
+  ],
+  batidas: [
+    {name:"Caipirinha", price:8.00},
+    {name:"Kiwi", price:8.00},
+    {name:"Morango", price:8.00},
+    {name:"Maracujá", price:8.00}
+  ],
+  doses: [
+    {name:"Velho Barreiro", price:3.00},
+    {name:"Ipyoca", price:3.50},
+    {name:"Canelinha", price:3.00},
+    {name:"Coquinho", price:3.00}
+  ],
+  porcoes: []
 };
-
-const productsDiv = document.getElementById("products");
-const cartItemsDiv = document.getElementById("cartItems");
-const cartCount = document.getElementById("cartCount");
 
 window.onload = function() {
 
-  // Splash screen
-  setTimeout(function() {
-    var splash = document.getElementById("splash");
-    if (splash) {
-      splash.style.display = "none";
-    }
-  }, 2500);
+  setTimeout(function(){
+    document.getElementById("splash").style.display = "none";
+  },2000);
 
-  // Popup cadastro
-  if (!localStorage.getItem("user")) {
-    document.getElementById("popup").style.display = "flex";
+  if(!localStorage.getItem("user")){
+    document.getElementById("popup").style.display="flex";
   }
 
-  showCategory("bebidas");
+  showCategory("cervejas");
 };
 
-function toggleAddress() {
-  var type = document.getElementById("orderType").value;
-  var address = document.getElementById("address");
-
-  if (type === "Delivery") {
-    address.style.display = "block";
-  } else {
-    address.style.display = "none";
-  }
+function toggleEndereco(){
+  let tipo = document.getElementById("tipoPedido").value;
+  document.getElementById("endereco").style.display = tipo=="delivery" ? "block" : "none";
 }
 
-function saveUser() {
-  var user = {
-    name: document.getElementById("name").value,
-    phone: document.getElementById("phone").value,
-    type: document.getElementById("orderType").value,
-    address: document.getElementById("address").value
+function salvarCadastro(){
+  let user = {
+    nome: nome.value,
+    telefone: telefone.value,
+    tipo: tipoPedido.value,
+    endereco: endereco.value
   };
-
   localStorage.setItem("user", JSON.stringify(user));
-  document.getElementById("popup").style.display = "none";
+  document.getElementById("popup").style.display="none";
 }
 
-function showCategory(cat) {
-  currentCategory = cat;
-  productsDiv.innerHTML = "";
+function showCategory(cat){
+  let container = document.getElementById("products");
+  container.innerHTML="";
 
-  var list = productsData[cat];
-
-  for (var i = 0; i < list.length; i++) {
-    var p = list[i];
-
-    productsDiv.innerHTML +=
-      '<div class="product">' +
-        '<h3>' + p.name + '</h3>' +
-        '<p>R$ ' + p.price + '</p>' +
-        '<div class="controls">' +
-          '<button onclick="removeFromCart(\'' + p.name + '\')">-</button>' +
-          '<span>' + getQty(p.name) + '</span>' +
-          '<button onclick="addToCart(\'' + p.name + '\',' + p.price + ')">+</button>' +
-        '</div>' +
-      '</div>';
-  }
-}
-
-function getQty(name) {
-  for (var i = 0; i < cart.length; i++) {
-    if (cart[i].name === name) {
-      return cart[i].qty;
-    }
-  }
-  return 0;
-}
-
-function addToCart(name, price) {
-  var found = false;
-
-  for (var i = 0; i < cart.length; i++) {
-    if (cart[i].name === name) {
-      cart[i].qty++;
-      found = true;
-    }
-  }
-
-  if (!found) {
-    cart.push({ name: name, price: price, qty: 1 });
-  }
-
-  updateUI();
-  showCategory(currentCategory);
-}
-
-function removeFromCart(name) {
-  for (var i = 0; i < cart.length; i++) {
-    if (cart[i].name === name) {
-      cart[i].qty--;
-      if (cart[i].qty <= 0) {
-        cart.splice(i, 1);
-      }
-      break;
-    }
-  }
-
-  updateUI();
-  showCategory(currentCategory);
-}
-
-function updateUI() {
-  cartItemsDiv.innerHTML = "";
-  var total = 0;
-  var count = 0;
-
-  for (var i = 0; i < cart.length; i++) {
-    var item = cart[i];
-    total += item.price * item.qty;
-    count += item.qty;
-
-    cartItemsDiv.innerHTML +=
-      "<p>" + item.qty + "x " + item.name + " - R$ " + (item.price * item.qty) + "</p>";
-  }
-
-  cartItemsDiv.innerHTML += "<strong>Total: R$ " + total + "</strong>";
-  cartCount.innerText = count;
-}
-
-function finishOrder() {
-  var user = JSON.parse(localStorage.getItem("user"));
-  if (!user) {
-    alert("Cadastre-se primeiro!");
+  if(products[cat].length === 0){
+    container.innerHTML = "<p style='text-align:center'>Em breve...</p>";
     return;
   }
 
-  var message = "Pedido de " + user.name + "\n";
-  message += "Telefone: " + user.phone + "\n";
-  message += "Tipo: " + user.type + "\n";
+  products[cat].forEach((p)=>{
+    let div = document.createElement("div");
+    div.className="product";
+    div.innerHTML=`
+      <h3>${p.name}</h3>
+      <p>R$ ${p.price.toFixed(2)}</p>
+      <div class="controls">
+        <button onclick="addItem('${p.name}',${p.price})">+</button>
+      </div>
+    `;
+    container.appendChild(div);
+  });
+}
 
-  if (user.type === "Delivery") {
-    message += "Endereço: " + user.address + "\n";
+function addItem(name,price){
+  cart.push({name,price});
+  updateCart();
+}
+
+function updateCart(){
+  document.getElementById("cartCount").innerText = cart.length;
+}
+
+function finalizarPedido(){
+  let user = JSON.parse(localStorage.getItem("user"));
+  if(cart.length==0){
+    alert("Carrinho vazio");
+    return;
   }
 
-  message += "\nPedido:\n";
+  let texto = `Pedido de ${user.nome}%0A`;
+  texto += `Telefone: ${user.telefone}%0A`;
+  texto += `Tipo: ${user.tipo}%0A`;
+  if(user.tipo=="delivery") texto+=`Endereço: ${user.endereco}%0A`;
 
-  for (var i = 0; i < cart.length; i++) {
-    message += cart[i].qty + "x " + cart[i].name + "\n";
-  }
+  cart.forEach(i=>{
+    texto += `- ${i.name} R$${i.price.toFixed(2)}%0A`;
+  });
 
-  var url = "https://wa.me/5517992585697?text=" + encodeURIComponent(message);
-  window.open(url, "_blank");
+  let url = `https://wa.me/5517992585697?text=${texto}`;
+  window.open(url,"_blank");
 }
 
 
