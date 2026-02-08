@@ -1,106 +1,66 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8" />
-  <title>Garagem 900 Rock Bar</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
-  <!-- PWA -->
-  <link rel="manifest" href="manifest.json" />
-  <meta name="theme-color" content="#000000">
-
-  <!-- CSS -->
-  <link rel="stylesheet" href="style.css" />
+  <meta charset="UTF-8">
+  <title>Garagem 900</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-  <!-- TOPO -->
-  <header class="topo">
-    <img src="logo.png" alt="Garagem 900 Rock Bar">
+<header>
+  <h1>Garagem 900</h1>
+  <div id="cartBtn">🛒 <span id="cartCount">0</span></div>
+</header>
 
-    <button id="btnCarrinho" class="btn-carrinho">
-      🛒 <span id="cartCount">0</span>
-    </button>
-  </header>
+<main>
 
-  <!-- HOME -->
-  <nav id="home">
-    <button id="btnCardapio">CARDÁPIO</button>
-    <button id="btnAgenda">AGENDA</button>
-  </nav>
-
-  <main>
-
-    <!-- CARDÁPIO -->
-    <section id="cardapio" class="hidden">
-      <h2>Cervejas</h2>
-
-      <div class="item" data-nome="Império Lata" data-preco="5">
-        <div class="info">
-          <span class="nome">Império Lata</span>
-          <span class="preco">R$ 5,00</span>
-        </div>
-        <div class="controle">
-          <button class="menos">-</button>
-          <span class="qtd">0</span>
-          <button class="mais">+</button>
-          <button class="enviar">ENVIAR</button>
-        </div>
-      </div>
-
-      <div class="item" data-nome="Heineken Lata" data-preco="7">
-        <div class="info">
-          <span class="nome">Heineken Lata</span>
-          <span class="preco">R$ 7,00</span>
-        </div>
-        <div class="controle">
-          <button class="menos">-</button>
-          <span class="qtd">0</span>
-          <button class="mais">+</button>
-          <button class="enviar">ENVIAR</button>
-        </div>
-      </div>
-
-      <button class="voltar">⬅ Voltar</button>
-    </section>
-
-    <!-- AGENDA -->
-    <section id="agenda" class="hidden">
-      <h2>Agenda</h2>
-      <p>Shows e eventos em breve.</p>
-      <button class="voltar">⬅ Voltar</button>
-    </section>
-
-  </main>
-
-  <!-- CARRINHO -->
-<div id="carrinho" class="carrinho hidden">
-  <h2>🛒 Seu pedido</h2>
-
-  <ul id="listaCarrinho"></ul>
-
-  <p><strong>Total:</strong> R$ <span id="total">0.00</span></p>
-
-  <button id="btnFinalizar">FINALIZAR PEDIDO</button>
-  <button id="btnFecharCarrinho">Fechar</button>
+<div id="categories">
+  <button onclick="showCategory('bebidas')">Bebidas</button>
+  <button onclick="showCategory('churros')">Churros</button>
+  <button onclick="showCategory('porcoes')">Porções</button>
 </div>
 
+<div id="products"></div>
 
-  <!-- TOAST -->
-  <div id="toast" class="toast hidden">Adicionado ao carrinho ✔</div>
+</main>
 
-  <!-- RODAPÉ -->
-  <footer>
-    <a href="https://wa.me/5517992585697" target="_blank">
-      WhatsApp: 17 99258-5697
-    </a>
-    <span>Av. dos Antunes, 900 – Bebedouro/SP</span>
-  </footer>
+<!-- Cadastro -->
+<div id="registerModal" class="modal">
+  <div class="modal-content">
+    <h2>Cadastro</h2>
+    <input id="nome" placeholder="Nome">
+    <input id="telefone" placeholder="Telefone">
+    <button onclick="saveUser()">Salvar</button>
+  </div>
+</div>
 
-  <!-- JS -->
-  <script src="script.js"></script>
+<!-- Carrinho -->
+<div id="cartModal" class="modal">
+  <div class="modal-content">
+    <h2>Seu Pedido</h2>
+    <div id="cartItems"></div>
+    <h3 id="total"></h3>
+
+    <h4>Tipo de pedido:</h4>
+    <select id="tipoPedido" onchange="toggleLocal()">
+      <option value="">Selecione</option>
+      <option value="Mesa">Mesa</option>
+      <option value="Balcão">Balcão</option>
+      <option value="Delivery">Delivery</option>
+    </select>
+
+    <input id="local" placeholder="Número da mesa ou endereço">
+
+    <button onclick="finalizarPedido()">Finalizar Pedido</button>
+    <button onclick="closeCart()">Fechar</button>
+  </div>
+</div>
+
+<script src="script.js"></script>
 </body>
 </html>
+
 
 
 
