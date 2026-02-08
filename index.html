@@ -1,61 +1,52 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="pt-br">
 <head>
-  <meta charset="UTF-8">
-  <title>Bar App</title>
-  <link rel="stylesheet" href="style.css">
+<meta charset="UTF-8">
+<title>Bar Rock</title>
+<link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-<!-- SPLASH SCREEN -->
 <div id="splash">
   <img src="logo.png" id="splashLogo">
   <p>Carregando...</p>
 </div>
 
-<!-- POPUP CADASTRO -->
 <div id="popup" class="popup">
-  <div class="popup-content">
-    <h2>Bem-vindo 🍻</h2>
+  <h2>Cadastro</h2>
+  <input id="nome" placeholder="Seu nome">
+  <input id="telefone" placeholder="Telefone">
 
-    <input id="name" placeholder="Seu nome">
-    <input id="phone" placeholder="Telefone">
+  <select id="tipoPedido" onchange="toggleEndereco()">
+    <option value="mesa">Mesa / Balcão</option>
+    <option value="delivery">Delivery</option>
+  </select>
 
-    <select id="orderType" onchange="toggleAddress()">
-      <option value="">Tipo de pedido</option>
-      <option value="Mesa">Mesa</option>
-      <option value="Balcão">Balcão</option>
-      <option value="Delivery">Delivery</option>
-    </select>
+  <input id="endereco" placeholder="Endereço" style="display:none">
 
-    <input id="address" placeholder="Endereço (Delivery)" style="display:none">
-
-    <button onclick="saveUser()">Entrar</button>
-  </div>
+  <button onclick="salvarCadastro()">Entrar</button>
 </div>
 
 <header>
-  <h1>🍺 Meu Bar</h1>
+  <h1>🍺 Bar Rock</h1>
   <div id="cartIcon">🛒 <span id="cartCount">0</span></div>
 </header>
 
 <nav>
-  <button onclick="showCategory('bebidas')">Bebidas</button>
+  <button onclick="showCategory('cervejas')">Cervejas</button>
+  <button onclick="showCategory('refrigerantes')">Refrigerantes</button>
+  <button onclick="showCategory('batidas')">Batidas</button>
+  <button onclick="showCategory('doses')">Doses</button>
   <button onclick="showCategory('porcoes')">Porções</button>
 </nav>
 
 <div id="products"></div>
 
-<div id="cart">
-  <h2>Carrinho</h2>
-  <div id="cartItems"></div>
-  <button onclick="finishOrder()">Finalizar Pedido</button>
-</div>
+<button id="finalizar" onclick="finalizarPedido()">Finalizar Pedido</button>
 
 <script src="script.js"></script>
 </body>
 </html>
-
 
 
 
