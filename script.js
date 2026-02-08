@@ -33,35 +33,35 @@ window.onload = () => {
   setTimeout(() => {
     document.getElementById("splash").style.display = "none";
     document.getElementById("app").classList.remove("hidden");
-  }, 2500);
+  }, 2000);
 };
 
 function mostrarBebidas() {
   document.getElementById("categorias").classList.remove("hidden");
-  document.getElementById("produtos").innerHTML="";
+  document.getElementById("produtos").innerHTML = "";
 }
 
 function mostrarPorcoes() {
-  alert("Porções em breve.");
+  alert("Porções em breve!");
 }
 
 function mostrarCategoria(cat) {
   const div = document.getElementById("produtos");
-  div.innerHTML="";
+  div.innerHTML = "";
 
-  produtos[cat].forEach((item,i)=>{
+  produtos[cat].forEach((item, index) => {
     div.innerHTML += `
       <div>
-        <strong>${item.nome}</strong><br>
-        R$ ${item.preco.toFixed(2)}<br><br>
-        <button onclick="adicionar('${cat}',${i})">Adicionar</button>
+        <h3>${item.nome}</h3>
+        <p>R$ ${item.preco.toFixed(2)}</p>
+        <button onclick="adicionar('${cat}',${index})">Adicionar</button>
       </div>
     `;
   });
 }
 
-function adicionar(cat,i){
-  carrinho.push(produtos[cat][i]);
+function adicionar(cat,index){
+  carrinho.push(produtos[cat][index]);
   atualizarCarrinho();
 }
 
@@ -70,25 +70,25 @@ function toggleCarrinho(){
 }
 
 function atualizarCarrinho(){
-  const lista=document.getElementById("lista-carrinho");
-  const totalSpan=document.getElementById("total");
-  const count=document.getElementById("cart-count");
+  const lista = document.getElementById("lista-carrinho");
+  const totalSpan = document.getElementById("total");
+  const count = document.getElementById("cart-count");
 
-  lista.innerHTML="";
-  let total=0;
+  lista.innerHTML = "";
+  let total = 0;
 
   carrinho.forEach(item=>{
-    lista.innerHTML+=`<li>${item.nome} - R$ ${item.preco.toFixed(2)}</li>`;
-    total+=item.preco;
+    lista.innerHTML += `<li>${item.nome} - R$ ${item.preco.toFixed(2)}</li>`;
+    total += item.preco;
   });
 
-  totalSpan.textContent=total.toFixed(2);
-  count.textContent=carrinho.length;
+  totalSpan.textContent = total.toFixed(2);
+  count.textContent = carrinho.length;
 }
 
 function finalizarPedido(){
-  if(carrinho.length==0){
-    alert("Carrinho vazio");
+  if(carrinho.length===0){
+    alert("Carrinho vazio!");
     return;
   }
   alert("Pedido enviado!");
@@ -96,7 +96,6 @@ function finalizarPedido(){
   atualizarCarrinho();
   toggleCarrinho();
 }
-
 
 
 
