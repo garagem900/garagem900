@@ -175,6 +175,10 @@ function pedidoDelivery(){
   window.open(`https://wa.me/${whatsapp}?text=${montarMensagem("DELIVERY")}`);
 }
 
+setTimeout(() => {
+  document.getElementById("splash").style.display = "none";
+  document.getElementById("app").style.display = "block";
+}, 2500);
 
 
 
