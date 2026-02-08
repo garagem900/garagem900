@@ -45,36 +45,38 @@ function verificarCadastro(){
 }
 
 function salvarCadastro(){
-  localStorage.setItem("nome",nome.value);
-  localStorage.setItem("endereco",endereco.value);
-  localStorage.setItem("telefone",telefone.value);
-  cadastro.style.display="none";
-  app.style.display="block";
+  localStorage.setItem("nome", document.getElementById("nome").value);
+  localStorage.setItem("endereco", document.getElementById("endereco").value);
+  localStorage.setItem("telefone", document.getElementById("telefone").value);
+
+  document.getElementById("cadastro").style.display="none";
+  document.getElementById("app").style.display="block";
 }
 
 function abrirCardapio(){
-  menu-principal.style.display="none";
-  menu-cardapio.style.display="block";
+  document.getElementById("menu-principal").style.display="none";
+  document.getElementById("menu-cardapio").style.display="block";
 }
 
 function abrirBebidas(){
-  menu-cardapio.style.display="none";
-  categorias.style.display="block";
+  document.getElementById("menu-cardapio").style.display="none";
+  document.getElementById("categorias").style.display="block";
 }
 
 function voltarMenu(){
-  menu-cardapio.style.display="none";
-  menu-principal.style.display="block";
+  document.getElementById("menu-cardapio").style.display="none";
+  document.getElementById("menu-principal").style.display="block";
 }
 
 function voltarCardapio(){
-  categorias.style.display="none";
-  menu-cardapio.style.display="block";
+  document.getElementById("categorias").style.display="none";
+  document.getElementById("menu-cardapio").style.display="block";
 }
 
 function mostrarProdutos(cat){
-  categorias.style.display="none";
-  produtosDiv = document.getElementById("produtos");
+  document.getElementById("categorias").style.display="none";
+
+  const produtosDiv = document.getElementById("produtos");
   produtosDiv.innerHTML="";
   produtosDiv.classList.remove("hidden");
 
@@ -96,8 +98,7 @@ function addItem(cat,i){
 }
 
 function toggleCarrinho(){
-  carrinhoDiv = document.getElementById("carrinho");
-  carrinhoDiv.classList.toggle("hidden");
+  document.getElementById("carrinho").classList.toggle("hidden");
 }
 
 function atualizarCarrinho(){
@@ -138,6 +139,7 @@ function finalizarPedido(){
 
   window.open(`https://wa.me/5517992585697?text=${texto}`);
 }
+
 
 
 
