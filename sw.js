@@ -1,5 +1,4 @@
-const CACHE_NAME = "garagem900-v3";
-
+const CACHE_NAME = "garagem900-v1";
 const urlsToCache = [
   "./",
   "./index.html",
@@ -10,6 +9,7 @@ const urlsToCache = [
 ];
 
 self.addEventListener("install", event => {
+  self.skipWaiting();
   event.waitUntil(
     caches.open(CACHE_NAME).then(cache => cache.addAll(urlsToCache))
   );
@@ -20,13 +20,12 @@ self.addEventListener("activate", event => {
     caches.keys().then(keys => {
       return Promise.all(
         keys.map(key => {
-          if (key !== CACHE_NAME) {
-            return caches.delete(key);
-          }
+          if (key !== CACHE_NAME) return caches.delete(key);
         })
       );
     })
   );
+  self.clients.claim();
 });
 
 self.addEventListener("fetch", event => {
@@ -34,4 +33,5 @@ self.addEventListener("fetch", event => {
     fetch(event.request).catch(() => caches.match(event.request))
   );
 });
+
 
