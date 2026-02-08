@@ -5,7 +5,6 @@
 <title>Garagem 900</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="stylesheet" href="style.css">
-<link rel="manifest" href="manifest.json">
 </head>
 
 <body>
@@ -55,8 +54,14 @@
   <h3>Seu Pedido</h3>
   <ul id="lista-carrinho"></ul>
   <p>Total: R$ <span id="total">0</span></p>
-  <button onclick="finalizarPedido()">FINALIZAR PEDIDO</button>
+  <button onclick="mostrarTipoPedido()">FINALIZAR PEDIDO</button>
   <button onclick="toggleCarrinho()">Fechar</button>
+
+  <div id="tipo-pedido" class="hidden">
+    <button onclick="enviarPedido('balcao')">BALCÃO</button>
+    <button onclick="enviarPedido('mesa')">MESA</button>
+    <button onclick="enviarPedido('delivery')">DELIVERY</button>
+  </div>
 </div>
 
 <footer>
@@ -69,7 +74,6 @@
 <script src="script.js"></script>
 </body>
 </html>
-
 
 
 
