@@ -2,45 +2,39 @@ let cart = [];
 
 const products = {
   cervejas: [
-    {name:"Império lata", price:5.00},
-    {name:"Boa lata", price:5.00},
-    {name:"Eisenbahn lata", price:6.00},
-    {name:"Heineken lata", price:8.00}
+    {name:"Império lata", price:5},
+    {name:"Boa lata", price:5},
+    {name:"Eisenbahn lata", price:6},
+    {name:"Heineken lata", price:8}
   ],
   refrigerantes: [
-    {name:"Coca-Cola lata", price:4.50},
-    {name:"Coca-Cola (casulinha)", price:3.50},
-    {name:"Guaraná lata", price:4.50},
-    {name:"Fanta lata", price:4.50},
-    {name:"Água sem gás", price:3.00},
-    {name:"Água com gás", price:3.50}
+    {name:"Coca-Cola lata", price:4.5},
+    {name:"Coca-Cola (casulinha)", price:3.5},
+    {name:"Guaraná lata", price:4.5},
+    {name:"Fanta lata", price:4.5},
+    {name:"Água sem gás", price:3},
+    {name:"Água com gás", price:3.5}
   ],
   batidas: [
-    {name:"Caipirinha", price:8.00},
-    {name:"Kiwi", price:8.00},
-    {name:"Morango", price:8.00},
-    {name:"Maracujá", price:8.00}
+    {name:"Caipirinha", price:8},
+    {name:"Kiwi", price:8},
+    {name:"Morango", price:8},
+    {name:"Maracujá", price:8}
   ],
   doses: [
-    {name:"Velho Barreiro", price:3.00},
-    {name:"Ipyoca", price:3.50},
-    {name:"Canelinha", price:3.00},
-    {name:"Coquinho", price:3.00}
-  ],
-  porcoes: []
+    {name:"Velho Barreiro", price:3},
+    {name:"Ipyoca", price:3.5},
+    {name:"Canelinha", price:3},
+    {name:"Coquinho", price:3}
+  ]
 };
 
-window.onload = function() {
-
-  setTimeout(function(){
-    document.getElementById("splash").style.display = "none";
-  },2000);
+window.onload = function(){
+  setTimeout(()=>{ document.getElementById("splash").style.display="none"; },2000);
 
   if(!localStorage.getItem("user")){
     document.getElementById("popup").style.display="flex";
   }
-
-  showCategory("cervejas");
 };
 
 function toggleEndereco(){
@@ -59,24 +53,33 @@ function salvarCadastro(){
   document.getElementById("popup").style.display="none";
 }
 
+function openBebidas(){
+  document.getElementById("mainMenu").style.display="none";
+  document.getElementById("bebidasMenu").style.display="flex";
+  document.getElementById("products").innerHTML="";
+}
+
+function backMain(){
+  document.getElementById("bebidasMenu").style.display="none";
+  document.getElementById("mainMenu").style.display="flex";
+  document.getElementById("products").innerHTML="";
+}
+
+function showPorcoes(){
+  document.getElementById("products").innerHTML="<p style='text-align:center'>Porções em breve...</p>";
+}
+
 function showCategory(cat){
   let container = document.getElementById("products");
   container.innerHTML="";
 
-  if(products[cat].length === 0){
-    container.innerHTML = "<p style='text-align:center'>Em breve...</p>";
-    return;
-  }
-
-  products[cat].forEach((p)=>{
+  products[cat].forEach(p=>{
     let div = document.createElement("div");
     div.className="product";
     div.innerHTML=`
       <h3>${p.name}</h3>
       <p>R$ ${p.price.toFixed(2)}</p>
-      <div class="controls">
-        <button onclick="addItem('${p.name}',${p.price})">+</button>
-      </div>
+      <button onclick="addItem('${p.name}',${p.price})">+</button>
     `;
     container.appendChild(div);
   });
@@ -89,6 +92,21 @@ function addItem(name,price){
 
 function updateCart(){
   document.getElementById("cartCount").innerText = cart.length;
+}
+
+function openCart(){
+  let list = document.getElementById("cartItems");
+  list.innerHTML="";
+
+  cart.forEach(i=>{
+    list.innerHTML += `<p>${i.name} - R$ ${i.price.toFixed(2)}</p>`;
+  });
+
+  document.getElementById("cartModal").style.display="flex";
+}
+
+function closeCart(){
+  document.getElementById("cartModal").style.display="none";
 }
 
 function finalizarPedido(){
@@ -107,8 +125,7 @@ function finalizarPedido(){
     texto += `- ${i.name} R$${i.price.toFixed(2)}%0A`;
   });
 
-  let url = `https://wa.me/5517992585697?text=${texto}`;
-  window.open(url,"_blank");
+  window.open(`https://wa.me/5517992585697?text=${texto}`);
 }
 
 
