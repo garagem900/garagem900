@@ -4,16 +4,22 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Garagem 900</title>
-
-<link rel="manifest" href="manifest.json">
 <link rel="stylesheet" href="style.css">
 </head>
-
 <body>
 
 <!-- SPLASH -->
 <div id="splash">
   <img src="logo.png" class="splash-logo">
+</div>
+
+<!-- CADASTRO -->
+<div id="cadastro" class="hidden">
+  <h2>Bem-vindo</h2>
+  <input id="nome" placeholder="Nome">
+  <input id="endereco" placeholder="Endereço">
+  <input id="telefone" placeholder="Telefone">
+  <button onclick="salvarCadastro()">ENTRAR</button>
 </div>
 
 <!-- APP -->
@@ -23,43 +29,62 @@
   <img src="logo.png" class="menu-logo">
 </header>
 
-<div id="main-buttons">
-  <button onclick="mostrarBebidas()">BEBIDAS</button>
-  <button onclick="mostrarPorcoes()">PORÇÕES</button>
+<!-- MENU INICIAL -->
+<div id="menu-inicial">
+  <button onclick="mostrarCardapio()">CARDÁPIO</button>
+  <button onclick="alert('Agenda em breve')">AGENDA</button>
 </div>
 
+<!-- CARDAPIO -->
+<div id="cardapio" class="hidden">
+  <button class="voltar" onclick="voltarMenu()">⬅ VOLTAR</button>
+  <button onclick="mostrarBebidas()">BEBIDAS</button>
+  <button onclick="alert('Porções em breve')">PORÇÕES</button>
+</div>
+
+<!-- CATEGORIAS -->
 <div id="categorias" class="hidden">
+  <button class="voltar" onclick="voltarCardapio()">⬅ VOLTAR</button>
   <button onclick="mostrarCategoria('cervejas')">CERVEJAS</button>
   <button onclick="mostrarCategoria('refrigerantes')">REFRIGERANTES</button>
   <button onclick="mostrarCategoria('batidas')">BATIDAS</button>
   <button onclick="mostrarCategoria('doses')">DOSES</button>
 </div>
 
-<div id="produtos"></div>
+<!-- PRODUTOS -->
+<div id="produtos" class="hidden"></div>
 
-<!-- Carrinho -->
+<!-- CARRINHO -->
 <div id="cart-icon" onclick="toggleCarrinho()">🛒 <span id="cart-count">0</span></div>
 
 <div id="carrinho" class="hidden">
-  <h2>Seu Pedido</h2>
+  <h3>Seu Pedido</h3>
   <ul id="lista-carrinho"></ul>
   <p>Total: R$ <span id="total">0.00</span></p>
-  <button onclick="finalizarPedido()">FINALIZAR PEDIDO</button>
+  <button onclick="mostrarTipoPedido()">ENVIAR PEDIDO</button>
   <button onclick="toggleCarrinho()">Fechar</button>
 </div>
+
+<!-- TIPO PEDIDO -->
+<div id="tipo-pedido" class="hidden">
+  <h3>Como deseja receber?</h3>
+  <button onclick="pedidoBalcao()">BALCÃO</button>
+  <button onclick="pedidoMesa()">MESA</button>
+  <button onclick="pedidoDelivery()">DELIVERY</button>
+  <button onclick="fecharTipoPedido()">Voltar</button>
+</div>
+
+<footer>
+  <a href="https://wa.me/5517992585697">WhatsApp</a>
+  <p>Avenida dos Antunes, 900 - Bebedouro/SP</p>
+</footer>
 
 </div>
 
 <script src="script.js"></script>
-
-<script>
-if ("serviceWorker" in navigator) {
-  navigator.serviceWorker.register("service-worker.js");
-}
-</script>
-
 </body>
 </html>
+
 
 
 
