@@ -1,131 +1,102 @@
-let cart = [];
-
-const products = {
+const produtos = {
   cervejas: [
-    {name:"Império lata", price:5},
-    {name:"Boa lata", price:5},
-    {name:"Eisenbahn lata", price:6},
-    {name:"Heineken lata", price:8}
+    {nome: "Império Lata", preco: 5},
+    {nome: "Boa Lata", preco: 5},
+    {nome: "Eisenbahn Lata", preco: 6},
+    {nome: "Heineken Lata", preco: 8}
   ],
   refrigerantes: [
-    {name:"Coca-Cola lata", price:4.5},
-    {name:"Coca-Cola (casulinha)", price:3.5},
-    {name:"Guaraná lata", price:4.5},
-    {name:"Fanta lata", price:4.5},
-    {name:"Água sem gás", price:3},
-    {name:"Água com gás", price:3.5}
+    {nome: "Coca-Cola Lata", preco: 4.5},
+    {nome: "Coca-Cola Caçulinha", preco: 3.5},
+    {nome: "Guaraná Lata", preco: 4.5},
+    {nome: "Fanta Lata", preco: 4.5},
+    {nome: "Água sem gás", preco: 3},
+    {nome: "Água com gás", preco: 3.5}
   ],
   batidas: [
-    {name:"Caipirinha", price:8},
-    {name:"Kiwi", price:8},
-    {name:"Morango", price:8},
-    {name:"Maracujá", price:8}
+    {nome: "Caipirinha", preco: 8},
+    {nome: "Kiwi", preco: 8},
+    {nome: "Morango", preco: 8},
+    {nome: "Maracujá", preco: 8}
   ],
   doses: [
-    {name:"Velho Barreiro", price:3},
-    {name:"Ipyoca", price:3.5},
-    {name:"Canelinha", price:3},
-    {name:"Coquinho", price:3}
+    {nome: "Velho Barreiro", preco: 3},
+    {nome: "Ipyoca", preco: 3.5},
+    {nome: "Canelinha", preco: 3},
+    {nome: "Coquinho", preco: 3}
   ]
 };
 
-window.onload = function(){
-  setTimeout(()=>{ document.getElementById("splash").style.display="none"; },2000);
+let carrinho = [];
 
-  if(!localStorage.getItem("user")){
-    document.getElementById("popup").style.display="flex";
-  }
+window.onload = () => {
+  setTimeout(() => {
+    document.getElementById("splash").style.display = "none";
+    document.getElementById("app").classList.remove("hidden");
+  }, 2000);
 };
 
-function toggleEndereco(){
-  let tipo = document.getElementById("tipoPedido").value;
-  document.getElementById("endereco").style.display = tipo=="delivery" ? "block" : "none";
+function mostrarBebidas() {
+  document.getElementById("categorias").classList.remove("hidden");
+  document.getElementById("produtos").innerHTML = "";
 }
 
-function salvarCadastro(){
-  let user = {
-    nome: nome.value,
-    telefone: telefone.value,
-    tipo: tipoPedido.value,
-    endereco: endereco.value
-  };
-  localStorage.setItem("user", JSON.stringify(user));
-  document.getElementById("popup").style.display="none";
+function mostrarPorcoes() {
+  alert("Porções serão adicionadas depois.");
 }
 
-function openBebidas(){
-  document.getElementById("mainMenu").style.display="none";
-  document.getElementById("bebidasMenu").style.display="flex";
-  document.getElementById("products").innerHTML="";
-}
+function mostrarCategoria(cat) {
+  const div = document.getElementById("produtos");
+  div.innerHTML = "";
 
-function backMain(){
-  document.getElementById("bebidasMenu").style.display="none";
-  document.getElementById("mainMenu").style.display="flex";
-  document.getElementById("products").innerHTML="";
-}
-
-function showPorcoes(){
-  document.getElementById("products").innerHTML="<p style='text-align:center'>Porções em breve...</p>";
-}
-
-function showCategory(cat){
-  let container = document.getElementById("products");
-  container.innerHTML="";
-
-  products[cat].forEach(p=>{
-    let div = document.createElement("div");
-    div.className="product";
-    div.innerHTML=`
-      <h3>${p.name}</h3>
-      <p>R$ ${p.price.toFixed(2)}</p>
-      <button onclick="addItem('${p.name}',${p.price})">+</button>
+  produtos[cat].forEach((item, index) => {
+    const el = document.createElement("div");
+    el.innerHTML = `
+      <strong>${item.nome}</strong><br>
+      R$ ${item.preco.toFixed(2)}<br>
+      <button onclick="adicionar('${cat}', ${index})">+</button>
     `;
-    container.appendChild(div);
+    div.appendChild(el);
   });
 }
 
-function addItem(name,price){
-  cart.push({name,price});
-  updateCart();
+function adicionar(cat, index) {
+  carrinho.push(produtos[cat][index]);
+  atualizarCarrinho();
 }
 
-function updateCart(){
-  document.getElementById("cartCount").innerText = cart.length;
+function toggleCarrinho() {
+  document.getElementById("carrinho").classList.toggle("hidden");
 }
 
-function openCart(){
-  let list = document.getElementById("cartItems");
-  list.innerHTML="";
+function atualizarCarrinho() {
+  const lista = document.getElementById("lista-carrinho");
+  const totalSpan = document.getElementById("total");
+  const count = document.getElementById("cart-count");
 
-  cart.forEach(i=>{
-    list.innerHTML += `<p>${i.name} - R$ ${i.price.toFixed(2)}</p>`;
+  lista.innerHTML = "";
+  let total = 0;
+
+  carrinho.forEach(item => {
+    const li = document.createElement("li");
+    li.textContent = `${item.nome} - R$ ${item.preco.toFixed(2)}`;
+    lista.appendChild(li);
+    total += item.preco;
   });
 
-  document.getElementById("cartModal").style.display="flex";
+  totalSpan.textContent = total.toFixed(2);
+  count.textContent = carrinho.length;
 }
 
-function closeCart(){
-  document.getElementById("cartModal").style.display="none";
-}
-
-function finalizarPedido(){
-  let user = JSON.parse(localStorage.getItem("user"));
-  if(cart.length==0){
-    alert("Carrinho vazio");
+function finalizarPedido() {
+  if (carrinho.length === 0) {
+    alert("Carrinho vazio!");
     return;
   }
-
-  let texto = `Pedido de ${user.nome}%0A`;
-  texto += `Telefone: ${user.telefone}%0A`;
-  texto += `Tipo: ${user.tipo}%0A`;
-  if(user.tipo=="delivery") texto+=`Endereço: ${user.endereco}%0A`;
-
-  cart.forEach(i=>{
-    texto += `- ${i.name} R$${i.price.toFixed(2)}%0A`;
-  });
-
-  window.open(`https://wa.me/5517992585697?text=${texto}`);
+  alert("Pedido enviado com sucesso!");
+  carrinho = [];
+  atualizarCarrinho();
+  toggleCarrinho();
 }
 
 
