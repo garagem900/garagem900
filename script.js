@@ -1,4 +1,5 @@
 let carrinho = [];
+let quantidades = {};
 
 const produtos = {
   cervejas:[
@@ -45,9 +46,19 @@ function verificarCadastro(){
 }
 
 function salvarCadastro(){
-  localStorage.setItem("nome", document.getElementById("nome").value);
-  localStorage.setItem("endereco", document.getElementById("endereco").value);
-  localStorage.setItem("telefone", document.getElementById("telefone").value);
+  let nome=document.getElementById("nome").value;
+  let endereco=document.getElementById("endereco").value;
+  let telefone=document.getElementById("telefone").value;
+
+  if(nome=="" || endereco=="" || telefone==""){
+    alert("Você precisa se cadastrar para entrar.");
+    return;
+  }
+
+  localStorage.setItem("nome",nome);
+  localStorage.setItem("endereco",endereco);
+  localStorage.setItem("telefone",telefone);
+
   document.getElementById("cadastro").style.display="none";
   document.getElementById("app").style.display="block";
 }
@@ -68,23 +79,28 @@ function voltarMenu(){
 }
 
 function voltarCardapio(){
-  document.getElementById("categorias").style.display="none";
-  document.getElementById("menu-cardapio").style.display="block";
+  document.getElementById("produtos").classList.add("hidden");
+  document.getElementById("categorias").style.display="block";
 }
 
 function mostrarProdutos(cat){
   document.getElementById("categorias").style.display="none";
-  const div = document.getElementById("produtos");
+  const div=document.getElementById("produtos");
   div.innerHTML="";
   div.classList.remove("hidden");
 
   produtos[cat].forEach((item,i)=>{
+    let key = cat+i;
+    quantidades[key]=0;
+
     div.innerHTML+=`
     <div>
       ${item.nome} - R$ ${item.preco.toFixed(2)}
       <div class="qty">
-        <button onclick="diminuir('${cat}',${i})">-</button>
-        <button onclick="aumentar('${cat}',${i})">+</button>
+        <button onclick="menos('${key}')">-</button>
+        <span id="qtd-${key}">0</span>
+        <button onclick="mais('${key}')">+</button>
+        <button onclick="adicionar('${cat}',${i},'${key}')">ADICIONAR</button>
       </div>
     </div>`;
   });
@@ -92,17 +108,25 @@ function mostrarProdutos(cat){
   div.innerHTML+=`<button onclick="voltarCardapio()">VOLTAR</button>`;
 }
 
-function aumentar(cat,i){
-  carrinho.push(produtos[cat][i]);
-  atualizarCarrinho();
+function mais(key){
+  quantidades[key]++;
+  document.getElementById("qtd-"+key).innerText=quantidades[key];
 }
 
-function diminuir(cat,i){
-  let index = carrinho.findIndex(p=>p.nome===produtos[cat][i].nome);
-  if(index>-1){
-    carrinho.splice(index,1);
-    atualizarCarrinho();
+function menos(key){
+  if(quantidades[key]>0){
+    quantidades[key]--;
+    document.getElementById("qtd-"+key).innerText=quantidades[key];
   }
+}
+
+function adicionar(cat,i,key){
+  for(let x=0;x<quantidades[key];x++){
+    carrinho.push(produtos[cat][i]);
+  }
+  quantidades[key]=0;
+  document.getElementById("qtd-"+key).innerText=0;
+  atualizarCarrinho();
 }
 
 function toggleCarrinho(){
@@ -119,8 +143,8 @@ function atualizarCarrinho(){
 
   carrinho.forEach((item,index)=>{
     lista.innerHTML+=`
-      <li>${item.nome} - R$ ${item.preco.toFixed(2)}
-      <button onclick="removerItem(${index})">❌</button></li>`;
+    <li>${item.nome} - R$ ${item.preco.toFixed(2)}
+    <button onclick="removerItem(${index})">❌</button></li>`;
     total+=item.preco;
   });
 
