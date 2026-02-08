@@ -68,11 +68,14 @@ display:inline-block;
 
 #carrinho{
 position:fixed;
-bottom:0;
+bottom:60px; /* sobe acima do rodapé */
 background:#111;
 width:100%;
 padding:15px;
+max-height:50vh;
+overflow-y:auto;
 }
+
 
 #carrinho-btn{
 position:fixed;
@@ -87,11 +90,19 @@ border-radius:50%;
 position:fixed;
 bottom:0;
 width:100%;
-background:rgba(0,0,0,0.7);
-backdrop-filter: blur(5px);
+background:rgba(0,0,0,0.8);
+backdrop-filter: blur(6px);
 padding:10px;
 font-size:14px;
+color:white;
+z-index:999;
 }
+
+.footer-blur span{
+color:#25D366;
+font-weight:bold;
+}
+
 
 
 
