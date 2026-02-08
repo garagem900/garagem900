@@ -1,4 +1,4 @@
-const whatsapp = "5517992585697";
+let carrinho = [];
 
 const produtos = {
   cervejas:[
@@ -8,12 +8,12 @@ const produtos = {
     {nome:"Heineken Lata",preco:8}
   ],
   refrigerantes:[
-    {nome:"Coca-Cola Lata",preco:4.5},
-    {nome:"Coca-Cola Caçulinha",preco:3.5},
-    {nome:"Guaraná Lata",preco:4.5},
-    {nome:"Fanta Lata",preco:4.5},
-    {nome:"Água sem gás",preco:3},
-    {nome:"Água com gás",preco:3.5}
+    {nome:"Coca lata",preco:4.5},
+    {nome:"Coca caçulinha",preco:3.5},
+    {nome:"Guaraná",preco:4.5},
+    {nome:"Fanta",preco:4.5},
+    {nome:"Água s/gás",preco:3},
+    {nome:"Água c/gás",preco:3.5}
   ],
   batidas:[
     {nome:"Caipirinha",preco:8},
@@ -29,166 +29,115 @@ const produtos = {
   ]
 };
 
-let carrinho = [];
-
-/* SPLASH */
-window.onload = () => {
-  setTimeout(() => {
-    document.getElementById("splash").style.display = "none";
-
-    if(localStorage.getItem("cliente")){
-      document.getElementById("app").classList.remove("hidden");
-    } else {
-      document.getElementById("cadastro").classList.remove("hidden");
-    }
-  }, 2000);
+window.onload = function(){
+  setTimeout(()=>{
+    document.getElementById("splash").style.display="none";
+    verificarCadastro();
+  },2000);
 };
 
-/* CADASTRO */
-function salvarCadastro(){
-  const cliente = {
-    nome: document.getElementById("nome").value,
-    endereco: document.getElementById("endereco").value,
-    telefone: document.getElementById("telefone").value
-  };
-
-  localStorage.setItem("cliente", JSON.stringify(cliente));
-  document.getElementById("cadastro").classList.add("hidden");
-  document.getElementById("app").classList.remove("hidden");
+function verificarCadastro(){
+  if(localStorage.getItem("nome")){
+    document.getElementById("app").style.display="block";
+  }else{
+    document.getElementById("cadastro").style.display="block";
+  }
 }
 
-/* TELAS */
-function mostrarCardapio(){
-  document.getElementById("menu-inicial").classList.add("hidden");
-  document.getElementById("cardapio").classList.remove("hidden");
+function salvarCadastro(){
+  localStorage.setItem("nome",nome.value);
+  localStorage.setItem("endereco",endereco.value);
+  localStorage.setItem("telefone",telefone.value);
+  cadastro.style.display="none";
+  app.style.display="block";
+}
+
+function abrirCardapio(){
+  menu-principal.style.display="none";
+  menu-cardapio.style.display="block";
+}
+
+function abrirBebidas(){
+  menu-cardapio.style.display="none";
+  categorias.style.display="block";
 }
 
 function voltarMenu(){
-  document.getElementById("cardapio").classList.add("hidden");
-  document.getElementById("menu-inicial").classList.remove("hidden");
-}
-
-function mostrarBebidas(){
-  document.getElementById("cardapio").classList.add("hidden");
-  document.getElementById("categorias").classList.remove("hidden");
+  menu-cardapio.style.display="none";
+  menu-principal.style.display="block";
 }
 
 function voltarCardapio(){
-  document.getElementById("categorias").classList.add("hidden");
-  document.getElementById("cardapio").classList.remove("hidden");
+  categorias.style.display="none";
+  menu-cardapio.style.display="block";
 }
 
-function mostrarCategoria(cat){
-  document.getElementById("categorias").classList.add("hidden");
-
-  const produtosDiv = document.getElementById("produtos");
+function mostrarProdutos(cat){
+  categorias.style.display="none";
+  produtosDiv = document.getElementById("produtos");
+  produtosDiv.innerHTML="";
   produtosDiv.classList.remove("hidden");
-  produtosDiv.innerHTML = `<button onclick="voltarCategorias()">⬅ VOLTAR</button>`;
 
   produtos[cat].forEach((item,i)=>{
-    produtosDiv.innerHTML += `
-      <div>
-        <strong>${item.nome}</strong><br>
-        R$ ${item.preco.toFixed(2)}<br>
-        <button onclick="addItem('${cat}',${i})">ADICIONAR</button>
-      </div>
+    produtosDiv.innerHTML+=`
+    <div>
+      ${item.nome} - R$ ${item.preco.toFixed(2)}
+      <button onclick="addItem('${cat}',${i})">Adicionar</button>
+    </div>
     `;
   });
+
+  produtosDiv.innerHTML+=`<button onclick="voltarCardapio()">VOLTAR</button>`;
 }
 
-function voltarCategorias(){
-  document.getElementById("produtos").classList.add("hidden");
-  document.getElementById("categorias").classList.remove("hidden");
-}
-
-/* CARRINHO */
 function addItem(cat,i){
   carrinho.push(produtos[cat][i]);
   atualizarCarrinho();
 }
 
+function toggleCarrinho(){
+  carrinhoDiv = document.getElementById("carrinho");
+  carrinhoDiv.classList.toggle("hidden");
+}
+
 function atualizarCarrinho(){
-  const lista = document.getElementById("lista-carrinho");
-  const totalSpan = document.getElementById("total");
-  const count = document.getElementById("cart-count");
+  const lista=document.getElementById("lista-carrinho");
+  const totalSpan=document.getElementById("total");
+  const count=document.getElementById("cart-count");
 
-  lista.innerHTML = "";
-  let total = 0;
+  lista.innerHTML="";
+  let total=0;
 
-  carrinho.forEach((item, index) => {
-    lista.innerHTML += `
-      <li>
-        ${item.nome} - R$ ${item.preco.toFixed(2)}
-        <button onclick="removerItem(${index})">❌</button>
-      </li>
-    `;
-    total += item.preco;
+  carrinho.forEach((item,index)=>{
+    lista.innerHTML+=`
+    <li>${item.nome} - R$ ${item.preco.toFixed(2)}
+    <button onclick="removerItem(${index})">❌</button></li>`;
+    total+=item.preco;
   });
 
-  totalSpan.innerText = total.toFixed(2);
-  count.innerText = carrinho.length;
-  function removerItem(index){
+  totalSpan.innerText=total.toFixed(2);
+  count.innerText=carrinho.length;
+}
+
+function removerItem(index){
   carrinho.splice(index,1);
   atualizarCarrinho();
-
 }
 
+function finalizarPedido(){
+  let nome=localStorage.getItem("nome");
+  let endereco=localStorage.getItem("endereco");
+  let telefone=localStorage.getItem("telefone");
 
-/* TIPO PEDIDO */
-function mostrarTipoPedido(){
-  document.getElementById("tipo-pedido").classList.remove("hidden");
-}
-
-function fecharTipoPedido(){
-  document.getElementById("tipo-pedido").classList.add("hidden");
-}
-
-function montarMensagem(tipo,extra=""){
-  const cliente = JSON.parse(localStorage.getItem("cliente"));
-  let msg = `Pedido ${tipo}%0ACliente: ${cliente.nome}%0A`;
-
-  if(tipo==="DELIVERY"){
-    msg += `Endereço: ${cliente.endereco}%0A`;
-  }
-
-  if(extra){
-    msg += extra + "%0A";
-  }
-
+  let texto="Pedido Garagem 900:%0A";
   carrinho.forEach(i=>{
-    msg += `${i.nome} - R$${i.preco}%0A`;
+    texto+=`${i.nome} - R$ ${i.preco.toFixed(2)}%0A`;
   });
 
-  return msg;
+  texto+=`%0ACliente: ${nome}%0ATel: ${telefone}%0AEndereço: ${endereco}`;
+
+  window.open(`https://wa.me/5517992585697?text=${texto}`);
 }
-
-function pedidoBalcao(){
-  window.open(`https://wa.me/${whatsapp}?text=${montarMensagem("BALCÃO")}`);
-}
-
-function pedidoMesa(){
-  let mesa = prompt("Número da mesa:");
-  window.open(`https://wa.me/${whatsapp}?text=${montarMensagem("MESA","Mesa: "+mesa)}`);
-}
-
-function pedidoDelivery(){
-  window.open(`https://wa.me/${whatsapp}?text=${montarMensagem("DELIVERY")}`);
-}
-
-setTimeout(() => {
-  document.getElementById("splash").style.display = "none";
-  document.getElementById("app").style.display = "block";
-}, 2500);
-
-window.onload = function() {
-  setTimeout(() => {
-    const splash = document.getElementById("splash");
-    const app = document.getElementById("app");
-
-    if (splash) splash.style.display = "none";
-    if (app) app.style.display = "block";
-  }, 2000);
-};
 
 
 
