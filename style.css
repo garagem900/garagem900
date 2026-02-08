@@ -1,55 +1,15 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
 body {
+  background: url("textura.png");
+  background-size: cover;
   font-family: Arial, sans-serif;
-  background: black;
   color: white;
   text-align: center;
-}
-
-.hidden {
-  display: none;
-}
-
-button {
-  background: #ff0033;
-  border: none;
-  padding: 12px 20px;
-  margin: 5px;
-  color: white;
-  font-size: 16px;
-  border-radius: 8px;
-  box-shadow: 0 0 10px red;
-  cursor: pointer;
-}
-
-button:hover {
-  box-shadow: 0 0 20px red;
-}
-
-#produtos div {
-  border: 1px solid red;
-  margin: 10px;
-  padding: 10px;
-  border-radius: 8px;
-}
-
-#cart-icon {
-  position: fixed;
-  top: 10px;
-  right: 10px;
-  background: red;
-  padding: 10px;
-  border-radius: 50%;
-  cursor: pointer;
-}
-
-#carrinho {
-  position: fixed;
-  top: 60px;
-  right: 10px;
-  background: #111;
-  padding: 15px;
-  border-radius: 10px;
-  width: 300px;
 }
 
 /* Splash */
@@ -61,10 +21,74 @@ button:hover {
   display: flex;
   justify-content: center;
   align-items: center;
+  z-index: 9999;
 }
 
-#splash img {
-  width: 200px;
+.splash-logo {
+  width: 70%;
+  max-width: 300px;
+  animation: zoom 2s ease-in-out infinite alternate;
+}
+
+@keyframes zoom {
+  from { transform: scale(0.8); opacity: 0.7; }
+  to { transform: scale(1); opacity: 1; }
+}
+
+.hidden {
+  display: none;
+}
+
+/* Header */
+header {
+  margin-top: 10px;
+}
+
+.menu-logo {
+  width: 150px;
+}
+
+/* Botões */
+button {
+  background: #ff0033;
+  border: none;
+  padding: 15px;
+  margin: 5px;
+  color: white;
+  font-size: 18px;
+  border-radius: 12px;
+  width: 90%;
+  box-shadow: 0 0 15px red;
+}
+
+/* Produtos */
+#produtos div {
+  background: rgba(0,0,0,0.7);
+  margin: 10px;
+  padding: 10px;
+  border-radius: 12px;
+}
+
+/* Carrinho */
+#cart-icon {
+  position: fixed;
+  top: 10px;
+  right: 10px;
+  background: red;
+  padding: 10px;
+  border-radius: 50%;
+  font-size: 18px;
+}
+
+#carrinho {
+  position: fixed;
+  top: 60px;
+  right: 10px;
+  background: #111;
+  padding: 15px;
+  border-radius: 15px;
+  width: 90%;
+  max-width: 350px;
 }
 
 
