@@ -12,14 +12,14 @@ button{
 background:#ff0033;
 border:none;
 padding:12px 20px;
-margin:10px;
-border-radius:8px;
+margin:8px;
+border-radius:10px;
 color:white;
 font-size:16px;
 }
 
 .logo{
-width:200px;
+width:180px;
 margin-top:20px;
 }
 
@@ -31,6 +31,7 @@ background:black;
 display:flex;
 align-items:center;
 justify-content:center;
+z-index:999;
 }
 
 .logo-splash{
@@ -54,6 +55,11 @@ justify-content:space-between;
 align-items:center;
 }
 
+.qty{
+display:flex;
+gap:5px;
+}
+
 #carrinho{
 position:fixed;
 bottom:0;
@@ -74,8 +80,8 @@ border-radius:50%;
 footer{
 margin-top:20px;
 font-size:14px;
+padding:10px;
 }
-
 
 
 
